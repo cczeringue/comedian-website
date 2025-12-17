@@ -1,0 +1,10 @@
+To add your hero image:
+
+1. Save your image file (the one with you on the pink background) 
+   as "hero-image.jpg" in this directory: /Users/calebz/comedian-website/
+
+2. Supported formats: .jpg, .jpeg, .png
+
+3. The image will automatically display on the right side of the hero section
+
+If your image has a different name, let me know and I'll update the code!
