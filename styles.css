@@ -368,10 +368,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-buttons {
     display: flex;
-    gap: 1rem;
-    justify-content: flex-start;
+    gap: 1.5rem;
+    justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .btn {
@@ -553,6 +553,38 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 3px solid white;
     transform: rotate(45deg);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Trust Bar (As Seen On) */
+.trust-bar {
+    background: var(--bg-darker);
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 5;
+}
+
+.trust-label {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.trust-bar .press-logos {
+    margin-bottom: 0;
+}
+
+.trust-bar .press-logo-img {
+    max-height: 40px;
+    opacity: 0.6;
+}
+
+.trust-bar .press-logo:hover .press-logo-img {
+    opacity: 1;
 }
 
 /* Stats Section */
@@ -1485,6 +1517,36 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     box-shadow: var(--shadow-xl);
     border: 4px solid var(--accent-color);
+}
+
+.venues-title {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.venues-grid-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.venues-grid-list span {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.venues-grid-list span:hover {
+    border-color: var(--primary-color);
+    color: white;
+    background: rgba(255, 107, 53, 0.1);
 }
 
 /* Newsletter Section */
