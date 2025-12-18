@@ -102,35 +102,100 @@ if (newsletterForm) {
 // Booking form submission
 const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
+        const formMessage = document.getElementById('form-message');
+        const submitButton = bookingForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        
+        // Get form data
         const formData = new FormData(bookingForm);
-        const data = Object.fromEntries(formData);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            location: formData.get('location'),
+            message: formData.get('message')
+        };
         
-        // Here you would send the booking request to your backend
-        // For now, we'll create a mailto link
-        const subject = encodeURIComponent(`Booking Request - ${data['event-type']}`);
-        const body = encodeURIComponent(`
-Name: ${data.name}
-Email: ${data.email}
-Phone: ${data.phone || 'N/A'}
-Event Type: ${data['event-type']}
-Date: ${data.date || 'TBD'}
-Venue: ${data.venue || 'TBD'}
-
-Message:
-${data.message || 'No message provided'}
-        `);
+        // Show sending state
+        formMessage.style.display = 'block';
+        formMessage.className = 'form-message sending';
+        formMessage.textContent = 'Sending your booking request...';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
         
-        window.location.href = `mailto:booking@calebzeringue.com?subject=${subject}&body=${body}`;
-        
-        // Or use a form service like Formspree, Netlify Forms, etc.
-        // fetch('/api/booking', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
-        // });
+        try {
+            // Option 1: Web3Forms (Recommended - Easy setup, email hidden)
+            // Get your access key from https://web3forms.com
+            // Replace YOUR_ACCESS_KEY_HERE with your actual access key
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: 'YOUR_ACCESS_KEY_HERE', // Replace with your Web3Forms access key
+                    subject: `Booking Request from ${data.name}`,
+                    from_name: data.name,
+                    from_email: data.email,
+                    name: data.name,
+                    email: data.email,
+                    location: data.location,
+                    message: data.message,
+                    // Web3Forms will send to the email you configure in their dashboard
+                })
+            });
+            
+            // Option 2: Use your own serverless function (uncomment below)
+            /*
+            const response = await fetch('/api/send-booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            */
+            
+            // Option 3: Use Formspree (uncomment and replace YOUR_FORM_ID)
+            /*
+            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            */
+            
+            const result = await response.json();
+            
+            // Web3Forms returns success in result.success
+            // Formspree returns 200 status on success
+            // Serverless function returns result.success
+            if (response.ok && (result.success || response.status === 200)) {
+                // Success
+                formMessage.className = 'form-message success';
+                formMessage.textContent = 'Thank you! Your booking request has been sent. I\'ll get back to you soon.';
+                bookingForm.reset();
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            } else {
+                throw new Error(result.message || result.error || 'Failed to send booking request');
+            }
+        } catch (error) {
+            // Error handling
+            console.error('Error submitting booking form:', error);
+            formMessage.className = 'form-message error';
+            formMessage.textContent = 'Sorry, there was an error sending your request. Please try again or contact me directly.';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     });
 }
 
@@ -359,4 +424,120 @@ document.querySelectorAll('.btn, .social-link').forEach(button => {
         trackEvent('engagement', 'click', label);
     });
 });
+
+// Media Interviews Carousel
+const initMediaCarousel = () => {
+    const carousel = document.getElementById('mediaCarousel');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const dotsContainer = document.getElementById('carouselDots');
+    
+    if (!carousel || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+    
+    // Calculate slide width (50% for 2 visible items)
+    const getSlideWidth = () => {
+        const container = carousel.parentElement;
+        return (container.offsetWidth - 120) / 2; // Subtract padding
+    };
+    
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+    
+    const updateCarousel = () => {
+        const slideWidth = getSlideWidth();
+        const gap = 32; // 2rem gap
+        const translateX = currentIndex * (slideWidth + gap);
+        carousel.style.transform = `translateX(-${translateX}px)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Update button states
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= totalSlides - 2;
+    };
+    
+    const goToSlide = (index) => {
+        if (index < 0 || index > totalSlides - 2) return;
+        currentIndex = index;
+        updateCarousel();
+    };
+    
+    const nextSlide = () => {
+        if (currentIndex < totalSlides - 2) {
+            currentIndex++;
+            updateCarousel();
+        }
+    };
+    
+    const prevSlide = () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    };
+    
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateCarousel, 250);
+    });
+    
+    // Initialize
+    updateCarousel();
+    
+    // Keyboard navigation
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+};
+
+// Truncate text to a specific character count
+const truncateText = () => {
+    const elements = document.querySelectorAll('.interview-preview, .interview-additional');
+    const limit = 175;
+
+    elements.forEach(element => {
+        // Store original text if needed later (optional)
+        if (!element.getAttribute('data-original-text')) {
+            element.setAttribute('data-original-text', element.textContent.trim());
+        }
+        
+        const text = element.getAttribute('data-original-text');
+        if (text.length > limit) {
+            element.textContent = text.slice(0, limit).trim() + '...';
+        }
+    });
+};
+
+// Initialize carousel and truncation when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initMediaCarousel();
+        truncateText();
+    });
+} else {
+    initMediaCarousel();
+    truncateText();
+}
 

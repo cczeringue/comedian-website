@@ -7,6 +7,7 @@
     <meta name="keywords" content="comedian, stand-up comedy, comedy shows, booking comedian, comedy videos">
     <title>Caleb Zeringue - Comedian | Stand-Up Comedy Shows & Booking</title>
     <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="preload" as="image" href="hero-image.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -25,7 +26,7 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
                 </li>
-                <li><a href="#contact" class="nav-link nav-cta">Book Caleb Now</a></li>
+                <li><a href="#contact" class="nav-link nav-cta">Book me</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -39,14 +40,14 @@
     <section id="home" class="hero">
         <div class="hero-background"></div>
         <div class="hero-image-container">
-            <img src="hero-image.jpg" alt="Caleb Zeringue" class="hero-image" loading="eager">
+            <img src="hero-image.jpg" alt="Caleb Zeringue" class="hero-image" fetchpriority="high" loading="eager">
         </div>
         <div class="hero-content">
             <h1 class="hero-title">
                 Like Meringue with a Z!
             </h1>
             
-            <p class="hero-bio">Comic, writer, producer, co-creator of Luigi the Musical | Southern ⚜ boy and <em>general</em> gay 💁‍♂️ | Featured in NYTimes, NYC Queer Comedy Finals, Edinburgh Fringe, LGBTLolFest and Sniffies.</p>
+            <p class="hero-bio">Comic, writer, original executive producer, co-creator of <a href="https://luigithemusical.info/" target="_blank" rel="noopener noreferrer">Luigi the Musical</a> | Southern ⚜ boy 💁‍♂️ | Featured in NYTimes, NYC Queer Comedy Finals, Edinburgh Fringe, LGBTLolFest and Sniffies.</p>
         </div>
         <div class="scroll-indicator">
             <span>Scroll</span>
@@ -63,7 +64,94 @@
                 <!-- Shows will be dynamically loaded from Bandsintown API -->
             </div>
             <div class="text-center">
-                <a href="#contact" class="btn btn-primary">Book Me for Your Event</a>
+                <a href="#contact" class="btn btn-primary">Book me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section id="press" class="press">
+        <div class="container">
+            <h2 class="section-title">Press & Features</h2>
+            <p class="section-subtitle">As seen in</p>
+            <div class="press-logos">
+                <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="press-logo">
+                    <img src="logos/nytimes-logo.png" alt="The New York Times" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <span class="press-logo-text-label">The New York Times</span>
+                </a>
+                <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" rel="noopener noreferrer" class="press-logo">
+                    <img src="logos/hollywood-reporter-logo.png" alt="The Hollywood Reporter" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <span class="press-logo-text-label">The Hollywood Reporter</span>
+                </a>
+                <a href="https://www.the-independent.com/news/world/americas/luigi-mangione-unitedhealthcare-musical-premier-san-francisco-b2770019.html" target="_blank" rel="noopener noreferrer" class="press-logo">
+                    <img src="logos/independent-logo.png" alt="The Independent" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <span class="press-logo-text-label">The Independent</span>
+                </a>
+                <a href="https://www.foxnews.com/media/luigi-mangione-musical-opening-san-francisco" target="_blank" rel="noopener noreferrer" class="press-logo">
+                    <img src="logos/fox-news-logo.png" alt="FOX News" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <span class="press-logo-text-label">FOX News</span>
+                </a>
+                <a href="https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en" target="_blank" rel="noopener noreferrer" class="press-logo">
+                    <img src="logos/cnn-logo.png" alt="CNN" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <span class="press-logo-text-label">CNN</span>
+                </a>
+                <a href="https://thehill.com" target="_blank" rel="noopener noreferrer" class="press-logo">
+                    <img src="logos/the-hill-logo.png" alt="The Hill" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <span class="press-logo-text-label">The Hill</span>
+                </a>
+            </div>
+            
+            <!-- Media Interviews Carousel -->
+            <div class="media-interviews-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="mediaCarousel">
+                        <div class="interview-card carousel-slide">
+                            <div class="interview-header">
+                                <div class="interview-source">
+                                    <img src="logos/npr-logo.svg" alt="NPR" class="interview-logo" onerror="this.onerror=null; this.src='logos/npr-logo.png';">
+                                </div>
+                                <h3 class="interview-title">A musical about Luigi Mangione sells out theaters — and raises eyebrows</h3>
+                            </div>
+                            <p class="interview-preview">The UnitedHealthcare CEO's alleged killer was in the same Brooklyn jail as Diddy and Sam Bankman-Fried. A satirical comedy about their jailhouse vibe is selling out theaters — and raising eyebrows.</p>
+                            <div class="interview-embed">
+                                <iframe src="https://www.npr.org/player/embed/nx-s1-5507977-e1/nx-s1-9445207" width="100%" height="200" frameborder="0" scrolling="no" title="NPR embedded audio player"></iframe>
+                            </div>
+                            <a href="https://www.npr.org/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Listen</a>
+                        </div>
+                        <div class="interview-card carousel-slide">
+                            <div class="interview-header">
+                                <div class="interview-source">
+                                    <img src="logos/cnn-logo-card.png" alt="CNN" class="interview-logo">
+                                </div>
+                                <h3 class="interview-title">Luigi the Musical' creators say the play is not what you expect</h3>
+                            </div>
+                            <p class="interview-preview">A musical satire about Luigi Manion, Sam Bankman-Fried, and Diddy Combs locked up together in a Brooklyn prison, explores violence in society.</p>
+                            <div class="interview-embed tiktok-embed-container">
+                                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cnn/video/7515576120205462830" data-video-id="7515576120205462830" style="max-width: 100%; min-width: 325px;">
+                                    <section>
+                                        <a target="_blank" href="https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en" title="@cnn">@cnn</a>
+                                    </section>
+                                </blockquote>
+                            </div>
+                            <a href="https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Watch</a>
+                        </div>
+                        <div class="interview-card carousel-slide">
+                            <div class="interview-header">
+                                <div class="interview-source">
+                                    <img src="logos/broadway-world-logo.png" alt="Broadway World" class="interview-logo">
+                                </div>
+                                <h3 class="interview-title">How LUIGI THE MUSICAL Is Pushing the Boundaries of Musical Theatre</h3>
+                            </div>
+                            <a href="https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813" target="_blank" rel="noopener noreferrer" class="interview-quote-image">
+                                <img src="logos/broadway-world-quote.jpg" alt="Caleb Zeringue quote about musicals and current events" class="quote-image" onerror="this.onerror=null; this.src='logos/broadway-world-quote.png';">
+                            </a>
+                            <a href="https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Read it</a>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous slide">‹</button>
+                    <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next slide">›</button>
+                </div>
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
         </div>
     </section>
@@ -71,9 +159,39 @@
     <!-- Videos Section -->
     <section id="videos" class="videos">
         <div class="container">
-            <h2 class="section-title">Latest Videos</h2>
-            <p class="section-subtitle">Watch my latest comedy clips and follow for more!</p>
+            <h2 class="section-title">Standing Up for those sitting down.</h2>
+            <p class="section-subtitle">since 1990</p>
             
+            <!-- Featured Videos -->
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe 
+                            src="https://www.youtube.com/embed/JxfOLrBs6A0?start=11" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                        </iframe>
+                    </div>
+                    <h4>My tight 5</h4>
+                    <p>I wish that's what he said 🫤.</p>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe 
+                            src="https://www.youtube.com/embed/gwEjvz4pZW4?start=12" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                        </iframe>
+                    </div>
+                    <h4>Opening for Lady Bushra</h4>
+                    <p>Hosting for BBC Comic <a href="https://www.instagram.com/lady.bushra/" target="_blank" rel="noopener noreferrer">Lady Bushra</a></p>
+                </div>
+            </div>
+
             <!-- Social Media Feeds -->
             <div class="social-feeds">
                 <div class="feed-section">
@@ -85,75 +203,12 @@
                 <div class="feed-section">
                     <h3>TikTok Feed</h3>
                     <div class="tiktok-feed" id="tiktokFeed">
-                        <!-- TikTok feed will be embedded here -->
-                        <div class="feed-placeholder">
-                            <p>Add your TikTok feed embed code here</p>
-                            <p class="small-text">Use TikTok's embed API or a service like EmbedSocial</p>
-                        </div>
+                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@calebmeringue" data-unique-id="calebmeringue" data-embed-type="creator" style="max-width: 100%; min-width: 325px;">
+                            <section>
+                                <a target="_blank" href="https://www.tiktok.com/@calebmeringue?refer=creator_embed">@calebmeringue</a>
+                            </section>
+                        </blockquote>
                     </div>
-                </div>
-            </div>
-
-            <!-- Featured Videos -->
-            <div class="videos-grid">
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <div class="play-button"></div>
-                    </div>
-                    <h4>Video Title</h4>
-                    <p>Short description of the video content</p>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <div class="play-button"></div>
-                    </div>
-                    <h4>Video Title</h4>
-                    <p>Short description of the video content</p>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <div class="play-button"></div>
-                    </div>
-                    <h4>Video Title</h4>
-                    <p>Short description of the video content</p>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <a href="https://instagram.com/yourusername" target="_blank" class="btn btn-primary">Follow on Instagram</a>
-                <a href="https://tiktok.com/@yourusername" target="_blank" class="btn btn-secondary">Follow on TikTok</a>
-                </div>
-        </div>
-    </section>
-
-    <!-- Press Section -->
-    <section id="press" class="press">
-        <div class="container">
-            <h2 class="section-title">Press & Features</h2>
-            <p class="section-subtitle">As seen in</p>
-            <div class="press-logos">
-                <div class="press-logo">NYTimes</div>
-                <div class="press-logo">CNN</div>
-                <div class="press-logo">The Independent</div>
-                <div class="press-logo">FOX News</div>
-                <div class="press-logo">Playbill</div>
-                <div class="press-logo">Hollywood Reporter</div>
-            </div>
-            <div class="testimonials">
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Absolutely hilarious! One of the best comedy shows I've seen this year."</p>
-                    <p class="testimonial-author">— Event Organizer, NYC</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Brought the house down! Our audience loved every minute."</p>
-                    <p class="testimonial-author">— Venue Manager, LA</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Professional, funny, and easy to work with. Highly recommend!"</p>
-                    <p class="testimonial-author">— Festival Director, Chicago</p>
                 </div>
             </div>
         </div>
@@ -165,9 +220,11 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2 class="section-title">About Me</h2>
-                    <p>I'm a stand-up comedian who's been making audiences laugh across the country. With a unique perspective and relatable humor, I bring fresh energy to every stage.</p>
-                    <p>My comedy has been featured on major platforms, and I've performed at venues ranging from intimate clubs to large festivals. Whether it's observational humor, storytelling, or sharp wit, I bring my A-game to every show.</p>
-                    <p>When I'm not on stage, you can find me creating content for Instagram and TikTok, where I share daily laughs and behind-the-scenes moments from my comedy journey.</p>
+                    <p>Caleb is a stand-up comic, writer, and producer.</p>
+                    <p>As a stand-up, he's been lucky enough to feature for <strong>THE HILARIOUS</strong> Jenny Zigrino (featured on Dropout.TV, Sirius XM) and opened for the gorgeous and wildly-witty BBC shortlisted comic, Lady Buhsra.</p>
+                    <p>He co-created, co-stars and is currently executive producing <a href="https://luigithemusical.info/" target="_blank" rel="noopener noreferrer">Luigi the Musical</a>, a viral dark comedy and scaled the show to over 3,000 tickets sold, to Edinburg Fringe and international press coverage.</p>
+                    <p>He's lived in 16 states, but mostly grew up in the South, where he was too scared to share his dreams of performing. Now he's making up for lost time, joining the comedy scene as a finalist in the NYC Queer Comedy Festival, a featured comic in LGBTLol Fest, and performing at venues like Cobb's Comedy Club, The Stand, Gotham Comedy Club, ColdTowne Theater and venues across Edinburgh Fringe.</p>
+                    <p>Caleb recently discovered that Type B personalities exist, which—let's be honest—is a very Type A thing to do. He's working on that. He was also told he's a polymath, to which he replied "but I'm bad at math..."</p>
                     <div class="about-highlights">
                         <div class="highlight-item">
                             <strong>NYC Queer Comedy Festival</strong> - Finalist
@@ -178,10 +235,17 @@
                         <div class="highlight-item">
                             <strong>LGBTLolFest</strong> - Featured Comic
                         </div>
+                        <div class="highlight-item">
+                            <strong>Featured for Jenny Zigrino</strong>
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Opener for BBC Comic Lady Bushra</strong>
+                        </div>
                     </div>
                 </div>
                 <div class="about-image">
-                    <div class="image-placeholder">
+                    <img src="about-photo.jpg" alt="Caleb Zeringue" class="about-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
                         <p>Your Photo Here</p>
                     </div>
                 </div>
@@ -198,7 +262,6 @@
                 <input type="email" placeholder="Enter your email" required>
                 <button type="submit" class="btn btn-primary">Subscribe</button>
             </form>
-            <p class="newsletter-note">Join thousands of fans getting the latest updates</p>
         </div>
     </section>
 
@@ -206,37 +269,66 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Book Me</h2>
-            <p class="section-subtitle">Let's create an unforgettable comedy experience</p>
+            <p class="section-subtitle">or else</p>
+            
+            <div class="booking-form">
+                <h3>Book me</h3>
+                <form id="bookingForm" class="booking-form-element">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" placeholder="City, State or Venue" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell me about your event..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+                    <div id="form-message" class="form-message" style="display: none;"></div>
+                </form>
+            </div>
+
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>Booking Information</h3>
                     <p>Available for:</p>
                     <ul>
-                        <li>✓ Comedy Clubs</li>
-                        <li>✓ Corporate Events</li>
-                        <li>✓ Festivals</li>
-                        <li>✓ Private Parties</li>
-                        <li>✓ Virtual Shows</li>
+                        <li>✓ Comedy clubs</li>
+                        <li>✓ Corporate events</li>
+                        <li>✓ Seances</li>
+                        <li>✓ Bank heists</li>
+                        <li>✓ Long windy talks</li>
                     </ul>
-                    <div class="contact-details">
-                        <p><strong>Email:</strong> <a href="mailto:booking@calebzeringue.com">booking@calebzeringue.com</a></p>
-                        <p><strong>Phone:</strong> <a href="tel:+1234567890">(123) 456-7890</a></p>
-                    </div>
                     <div class="social-links-contact">
-                        <a href="https://instagram.com/yourusername" target="_blank" class="social-icon instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/caleb.meringue/" target="_blank" class="social-icon instagram" aria-label="Instagram">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                </svg>
-                            </a>
-                        </div>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@calebmeringue" target="_blank" class="social-icon tiktok" aria-label="TikTok">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                            </svg>
+                        </a>
                     </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 Caleb Zeringue. All rights reserved.</p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Caleb Zeringue. All rights reserved.</p>
+    </div>
     
         <script src="script.js"></script>
         <script async src="//www.instagram.com/embed.js"></script>
+        <script async src="https://www.tiktok.com/embed.js"></script>
     </body>
     </html>
