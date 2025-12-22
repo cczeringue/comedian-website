@@ -10,12 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --linktree-pink: #e64a79;
-            --linktree-dark-pink: #cc3d68;
+            /* Precise match for the pink in your photo */
+            --linktree-pink: #df607e; 
+            --linktree-dark-pink: #c44a66;
         }
         body {
-            background: var(--linktree-pink);
-            background: linear-gradient(180deg, var(--linktree-pink) 0%, var(--linktree-dark-pink) 100%);
+            background-color: var(--linktree-pink);
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -23,35 +23,52 @@
             padding: 0;
             margin: 0;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
         .links-container {
             width: 100%;
             max-width: 500px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--linktree-pink) 0%, var(--linktree-dark-pink) 100%);
             text-align: center;
             position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.2);
         }
         .hero-header {
             width: 100%;
             position: relative;
-            line-height: 0;
+            aspect-ratio: 4/5;
+            overflow: hidden;
         }
         .hero-header img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
             display: block;
         }
+        /* The "Magic Blend" Gradient */
         .hero-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center 30%, transparent 0%, transparent 40%, var(--linktree-pink) 85%);
+            pointer-events: none;
+        }
+        /* Bottom fade to transition to buttons */
+        .hero-header::before {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 40%;
+            height: 150px;
             background: linear-gradient(to bottom, transparent, var(--linktree-pink));
+            z-index: 1;
         }
         .profile-info {
-            padding: 0 2rem;
-            margin-top: -20px;
+            padding: 0 1.5rem 2rem;
+            margin-top: -60px; /* Pull text up into the soft blend area */
             position: relative;
             z-index: 2;
         }
