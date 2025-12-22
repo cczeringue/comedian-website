@@ -44,3 +44,4 @@ This serverless function handles booking form submissions and sends emails witho
 - Consider adding rate limiting to prevent spam
 - Add reCAPTCHA for additional spam protection
 
+

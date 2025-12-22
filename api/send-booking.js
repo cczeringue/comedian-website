@@ -24,10 +24,10 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     try {
-        const { name, email, location, message } = req.body;
+        const { name, email, subject, message } = req.body;
 
         // Validate required fields
-        if (!name || !email || !location) {
+        if (!name || !email) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 

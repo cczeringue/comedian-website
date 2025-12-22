@@ -114,7 +114,7 @@ if (bookingForm) {
         const data = {
             name: formData.get('name'),
             email: formData.get('email'),
-            location: formData.get('location'),
+            subject: formData.get('subject'),
             message: formData.get('message')
         };
         
@@ -136,12 +136,12 @@ if (bookingForm) {
                 },
                 body: JSON.stringify({
                     access_key: 'YOUR_ACCESS_KEY_HERE', // Replace with your Web3Forms access key
-                    subject: `Booking Request from ${data.name}`,
+                    subject: data.subject || `Booking Request from ${data.name}`,
                     from_name: data.name,
                     from_email: data.email,
                     name: data.name,
                     email: data.email,
-                    location: data.location,
+                    subject_field: data.subject,
                     message: data.message,
                     // Web3Forms will send to the email you configure in their dashboard
                 })
