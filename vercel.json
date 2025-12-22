@@ -22,7 +22,11 @@
       "use": "@vercel/static"
     },
     {
-      "src": "hero-image.jpg",
+      "src": "hero-desktop.jpg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "hero-mobile.jpg",
       "use": "@vercel/static"
     },
     {

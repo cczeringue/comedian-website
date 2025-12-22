@@ -7,7 +7,7 @@
     <meta name="keywords" content="comedian, stand-up comedy, comedy shows, booking comedian, comedy videos">
     <title>Caleb Zeringue - Comedian | Stand-Up Comedy Shows & Booking</title>
     <link rel="stylesheet" href="styles.css?v=7">
-    <link rel="preload" as="image" href="hero-image.jpg">
+    <link rel="preload" as="image" href="hero-desktop.jpg" imagesrcset="hero-mobile.jpg 800w, hero-desktop.jpg 2000w" imagesizes="100vw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -40,7 +40,10 @@
     <section id="home" class="hero">
         <div class="hero-background"></div>
         <div class="hero-image-container">
-            <img src="hero-image.jpg" alt="Caleb Zeringue" class="hero-image" fetchpriority="high" loading="eager">
+            <picture>
+                <source media="(max-width: 800px)" srcset="hero-mobile.jpg">
+                <img src="hero-desktop.jpg" alt="Caleb Zeringue" class="hero-image" fetchpriority="high" loading="eager">
+            </picture>
         </div>
         <div class="hero-content">
             <h1 class="hero-title">
