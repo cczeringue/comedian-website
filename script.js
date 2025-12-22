@@ -340,7 +340,7 @@ function renderEvents(events, container) {
     if (!events || events.length === 0) {
         container.innerHTML = `
             <div class="no-shows">
-                <p>No upcoming shows scheduled at this time.</p>
+                <p>Happy Holidays! Enjoying a break, 2026 dates coming soon.</p>
                 <p class="small-text">Check back soon or <a href="#contact">book me for your event</a>!</p>
             </div>
         `;
