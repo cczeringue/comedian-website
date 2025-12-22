@@ -10,6 +10,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "links.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "script.js",
       "use": "@vercel/static"
     },
@@ -34,6 +38,10 @@
     {
       "src": "/api/send-booking",
       "dest": "api/send-booking.js"
+    },
+    {
+      "src": "/links",
+      "dest": "/links.html"
     },
     {
       "src": "/(.*)",
