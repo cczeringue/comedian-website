@@ -104,6 +104,60 @@
         .back-to-site a:hover {
             color: white;
         }
+        
+        /* Mirror shows adjustments */
+        .no-shows {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .no-shows p {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .small-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .shows-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 1rem;
+        }
+        .show-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .show-date {
+            background: var(--primary-color);
+            padding: 0.75rem;
+            border-radius: 8px;
+            min-width: 70px;
+            text-align: center;
+        }
+        .date-day { font-size: 1.5rem; font-weight: 800; display: block; line-height: 1; }
+        .date-month { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
+        .show-info h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .show-location { font-size: 0.9rem; color: var(--text-light); }
+        .btn-outline {
+            margin-left: auto;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -121,7 +175,15 @@
             </a>
         </div>
 
-        <a href="https://www.calebzeringue.com/#shows" class="link-button featured">Upcoming shows</a>
+        <div class="shows-mirrored">
+            <h2 class="links-section-title">Upcoming shows</h2>
+            <div class="shows-grid" id="showsGrid">
+                <!-- Shows will be dynamically loaded from Bandsintown API -->
+            </div>
+            <div class="text-center" style="margin-top: 1rem;">
+                <a href="https://www.calebzeringue.com/#contact" class="link-button featured">Book me</a>
+            </div>
+        </div>
 
         <h2 class="links-section-title">📺 Watch or Listen to me gab</h2>
         <a href="https://podcasts.apple.com/us/podcast/troubled-waters/id1451416744" target="_blank" class="link-button">Troubled Waters: Women vs. Women</a>
@@ -141,6 +203,8 @@
             <a href="https://www.calebzeringue.com">← Back to calebzeringue.com</a>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 

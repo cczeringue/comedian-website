@@ -421,7 +421,7 @@ function trackEvent(category, action, label) {
 document.querySelectorAll('.btn, .social-link').forEach(button => {
     button.addEventListener('click', () => {
         const label = button.textContent.trim() || button.getAttribute('aria-label');
-        trackEvent('engagement', 'click', label);
+        if (label) trackEvent('engagement', 'click', label);
     });
 });
 
