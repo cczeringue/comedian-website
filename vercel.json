@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/send-booking.js",
+      "src": "api/*.js",
       "use": "@vercel/node"
     },
     {
@@ -15,6 +15,10 @@
     },
     {
       "src": "script.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "links-shows.js",
       "use": "@vercel/static"
     },
     {
@@ -40,6 +44,18 @@
   ],
   "routes": [
     {
+      "src": "/api/shows",
+      "dest": "api/shows.js"
+    },
+    {
+      "src": "/api/add-show",
+      "dest": "api/add-show.js"
+    },
+    {
+      "src": "/api/delete-show",
+      "dest": "api/delete-show.js"
+    },
+    {
       "src": "/api/send-booking",
       "dest": "api/send-booking.js"
     },
@@ -53,4 +69,3 @@
     }
   ]
 }
-
