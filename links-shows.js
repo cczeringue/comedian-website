@@ -15,10 +15,6 @@ const HARDCODED_SHOWS = [
   // Add more shows here in the same format
 ];
 
-const SHOWS_API_URL = '/api/shows';
-const BANDSINTOWN_APP_ID = '7d484c532710ba981af4e93708fee931';
-const ARTIST_NAME = 'Caleb Zeringue';
-
 // Format date for show cards (e.g., "15 MAR")
 function formatShowDate(dateString) {
   if (!dateString) return { day: 'TBA', month: '' };
@@ -68,44 +64,6 @@ function createShowCardForLinks(show) {
   return card;
 }
 
-// Load shows from our custom API
-async function loadCustomShows() {
-  try {
-    const response = await fetch(SHOWS_API_URL);
-    if (!response.ok) throw new Error('API request failed');
-    const data = await response.json();
-    return data.shows || [];
-  } catch (error) {
-    console.log('Custom shows API not available:', error);
-    return null;
-  }
-}
-
-// Load shows from Bandsintown as fallback
-async function loadBandsintownShows() {
-  try {
-    const apiUrl = `https://rest.bandsintown.com/artists/${encodeURIComponent(ARTIST_NAME)}/events?app_id=${BANDSINTOWN_APP_ID}&date=upcoming`;
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error('Bandsintown request failed');
-    const events = await response.json();
-
-    // Convert to our format
-    return events.map(event => ({
-      id: `bit_${event.id}`,
-      name: event.venue?.name || 'Show',
-      date: event.datetime,
-      venue: event.venue?.name,
-      city: event.venue?.city,
-      url: event.offers?.[0]?.url || '#',
-      ticketUrl: event.offers?.[0]?.url || '#',
-      platform: 'bandsintown'
-    }));
-  } catch (error) {
-    console.log('Bandsintown API not available:', error);
-    return [];
-  }
-}
-
 // Main loader function
 async function loadShows() {
   const showsGrid = document.getElementById('showsGrid');
@@ -117,21 +75,10 @@ async function loadShows() {
   try {
     let shows = [];
 
-    // 1. Check for hardcoded shows first
+    // Use only hardcoded shows (no Bandsintown or API)
     if (HARDCODED_SHOWS && HARDCODED_SHOWS.length > 0) {
-      // Filter to only upcoming shows
       const now = new Date();
       shows = HARDCODED_SHOWS.filter(show => new Date(show.date) >= now);
-    }
-
-    // 2. If no hardcoded shows, try custom API
-    if (shows.length === 0) {
-      shows = await loadCustomShows();
-    }
-
-    // 3. If still no shows, try Bandsintown as fallback
-    if (!shows || shows.length === 0) {
-      shows = await loadBandsintownShows();
     }
 
     // Render shows
