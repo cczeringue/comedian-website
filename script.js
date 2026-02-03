@@ -230,10 +230,20 @@ function loadTikTokFeed() {
     }
 }
 
-// Google Sheets Integration for Shows
-// Replace this URL with your Google Sheet's CSV export URL
-// Format: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0
-const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/102513dGhZ4PWXJxR-DnLOPGmQMrOxuz3x3j2_hhHoIc/export?format=csv&gid=0';
+// Hardcoded Shows - Easy to Manage
+// 🎯 ADD YOUR SHOWS HERE:
+const HARDCODED_SHOWS = [
+  {
+    id: 'bits-beats-feb-2026',
+    title: 'Bits & Beats: Comedy and Disco!',
+    date: '2026-02-12T19:00:00-08:00', // 7:00 PM PT
+    venue: '995 Market St, 6th Fl, San Francisco',
+    ticketUrl: 'https://partiful.com/e/MMU9dzYqlZ5KedusCOqm',
+    time: '7:00 PM',
+    soldOut: false
+  }
+  // Add more shows here in the same format
+];
 
 // Format date for show cards (e.g., "15 MAR")
 function formatShowDate(dateString) {
@@ -286,50 +296,8 @@ function createShowCard(show) {
     return card;
 }
 
-// Parse CSV data from Google Sheets
-function parseCSV(csv) {
-    const lines = csv.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-    const shows = [];
-    
-    for (let i = 1; i < lines.length; i++) {
-        const line = lines[i];
-        if (!line.trim()) continue; // Skip empty lines
-        
-        // Simple CSV parser that handles quoted fields
-        const values = [];
-        let currentValue = '';
-        let inQuotes = false;
-        
-        for (let j = 0; j < line.length; j++) {
-            const char = line[j];
-            
-            if (char === '"') {
-                inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-                values.push(currentValue.trim());
-                currentValue = '';
-            } else {
-                currentValue += char;
-            }
-        }
-        values.push(currentValue.trim()); // Push last value
-        
-        // Create show object
-        if (values[0]) { // Skip if no title
-            const show = {};
-            headers.forEach((header, index) => {
-                show[header] = values[index] || '';
-            });
-            shows.push(show);
-        }
-    }
-    
-    return shows;
-}
-
-// Fetch shows from Google Sheets
-async function loadGoogleSheetsShows() {
+// Load shows from hardcoded array
+function loadHardcodedShows() {
     const showsGrid = document.getElementById('showsGrid');
     if (!showsGrid) return;
     
@@ -337,25 +305,11 @@ async function loadGoogleSheetsShows() {
     showsGrid.innerHTML = '<div class="loading-shows">Loading shows...</div>';
     
     try {
-        // Check if URL is configured
-        if (GOOGLE_SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
-            throw new Error('Google Sheet URL not configured');
-        }
-        
-        const response = await fetch(GOOGLE_SHEET_CSV_URL);
-        
-        if (!response.ok) {
-            throw new Error('Failed to fetch shows from Google Sheets');
-        }
-        
-        const csvData = await response.text();
-        const shows = parseCSV(csvData);
-        
         // Filter out past shows and sort by date
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         
-        const upcomingShows = shows.filter(show => {
+        const upcomingShows = HARDCODED_SHOWS.filter(show => {
             const showDate = new Date(show.date);
             return showDate >= today;
         }).sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -363,7 +317,7 @@ async function loadGoogleSheetsShows() {
         renderShows(upcomingShows, showsGrid);
         
     } catch (error) {
-        console.error('Error loading shows from Google Sheets:', error);
+        console.error('Error loading shows:', error);
         showsGrid.innerHTML = `
             <div class="no-shows">
                 <p>Unable to load upcoming shows at this time.</p>
@@ -408,7 +362,7 @@ function renderShows(shows, container) {
 window.addEventListener('DOMContentLoaded', () => {
     loadInstagramFeed();
     loadTikTokFeed();
-    loadGoogleSheetsShows(); // Changed from loadBandsintownEvents
+    loadHardcodedShows(); // Loads shows from HARDCODED_SHOWS array
 });
 
 // Add fade-in animation on scroll
