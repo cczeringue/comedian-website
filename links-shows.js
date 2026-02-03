@@ -1,5 +1,19 @@
 // Shows loader for links page
-// Fetches from custom shows API (with Bandsintown fallback)
+// Hardcoded shows for easy management
+
+// 🎯 ADD YOUR SHOWS HERE:
+const HARDCODED_SHOWS = [
+  {
+    id: 'bits-beats-feb-2026',
+    name: 'Bits & Beats: Comedy and Disco!',
+    date: '2026-02-12T19:00:00-08:00', // 7:00 PM PT
+    venue: '995 Market St, 6th Fl',
+    city: 'San Francisco',
+    ticketUrl: 'https://partiful.com/e/MMU9dzYqlZ5KedusCOqm',
+    platform: 'partiful'
+  }
+  // Add more shows here in the same format
+];
 
 const SHOWS_API_URL = '/api/shows';
 const BANDSINTOWN_APP_ID = '7d484c532710ba981af4e93708fee931';
@@ -101,10 +115,21 @@ async function loadShows() {
   showsGrid.innerHTML = '<div class="loading-shows" style="color: white; opacity: 0.7; padding: 1rem;">Loading shows...</div>';
 
   try {
-    // Try custom API first
-    let shows = await loadCustomShows();
+    let shows = [];
 
-    // If custom API returns null (not configured) or empty, try Bandsintown
+    // 1. Check for hardcoded shows first
+    if (HARDCODED_SHOWS && HARDCODED_SHOWS.length > 0) {
+      // Filter to only upcoming shows
+      const now = new Date();
+      shows = HARDCODED_SHOWS.filter(show => new Date(show.date) >= now);
+    }
+
+    // 2. If no hardcoded shows, try custom API
+    if (shows.length === 0) {
+      shows = await loadCustomShows();
+    }
+
+    // 3. If still no shows, try Bandsintown as fallback
     if (!shows || shows.length === 0) {
       shows = await loadBandsintownShows();
     }
