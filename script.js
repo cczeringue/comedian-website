@@ -230,9 +230,10 @@ function loadTikTokFeed() {
     }
 }
 
-// Bandsintown API Integration
-const BANDSINTOWN_APP_ID = '7d484c532710ba981af4e93708fee931';
-const ARTIST_NAME = 'Caleb Zeringue'; // Try artist name first, fallback to ID if needed
+// Google Sheets Integration for Shows
+// Replace this URL with your Google Sheet's CSV export URL
+// Format: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0
+const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/102513dGhZ4PWXJxR-DnLOPGmQMrOxuz3x3j2_hhHoIc/export?format=csv&gid=0';
 
 // Format date for show cards (e.g., "15 MAR")
 function formatShowDate(dateString) {
@@ -242,9 +243,14 @@ function formatShowDate(dateString) {
     return { day, month };
 }
 
-// Format time from datetime string
-function formatShowTime(dateString) {
-    const date = new Date(dateString);
+// Format time from datetime string or time string
+function formatShowTime(timeString) {
+    // If it's already in "7:00 PM" format, return it
+    if (timeString && timeString.includes('PM') || timeString.includes('AM')) {
+        return timeString;
+    }
+    // Otherwise parse as date
+    const date = new Date(timeString);
     return date.toLocaleTimeString('en-US', { 
         hour: 'numeric', 
         minute: '2-digit',
@@ -252,24 +258,12 @@ function formatShowTime(dateString) {
     });
 }
 
-// Format location string
-function formatLocation(venue) {
-    const parts = [];
-    if (venue.city) parts.push(venue.city);
-    if (venue.region) parts.push(venue.region);
-    if (venue.country && venue.country !== 'United States') parts.push(venue.country);
-    return parts.join(', ');
-}
-
-// Create show card HTML element
-function createShowCard(event) {
-    const { day, month } = formatShowDate(event.datetime);
-    const time = formatShowTime(event.datetime);
-    const location = formatLocation(event.venue);
-    const ticketUrl = event.offers && event.offers.length > 0 && event.offers[0].url 
-        ? event.offers[0].url 
-        : '#contact';
-    const isSoldOut = event.offers && event.offers.length > 0 && event.offers[0].status === 'sold out';
+// Create show card HTML element (updated for Google Sheets format)
+function createShowCard(show) {
+    const { day, month } = formatShowDate(show.date);
+    const time = show.time || '';
+    const ticketUrl = show.ticketUrl || '#contact';
+    const isSoldOut = show.soldOut === 'TRUE' || show.soldOut === true;
     
     const card = document.createElement('div');
     card.className = 'show-card';
@@ -279,9 +273,9 @@ function createShowCard(event) {
             <span class="date-month">${month}</span>
         </div>
         <div class="show-info">
-            <h3>${event.venue.name || 'Venue TBA'}</h3>
-            <p class="show-location">📍 ${location || 'Location TBA'}</p>
-            <p class="show-time">${time}</p>
+            <h3>${show.title || 'Show TBA'}</h3>
+            <p class="show-location">📍 ${show.venue || 'Location TBA'}</p>
+            ${time ? `<p class="show-time">${time}</p>` : ''}
         </div>
         <a href="${ticketUrl}" 
            class="btn btn-outline" 
@@ -292,8 +286,50 @@ function createShowCard(event) {
     return card;
 }
 
-// Fetch events from Bandsintown API
-async function loadBandsintownEvents() {
+// Parse CSV data from Google Sheets
+function parseCSV(csv) {
+    const lines = csv.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+    const shows = [];
+    
+    for (let i = 1; i < lines.length; i++) {
+        const line = lines[i];
+        if (!line.trim()) continue; // Skip empty lines
+        
+        // Simple CSV parser that handles quoted fields
+        const values = [];
+        let currentValue = '';
+        let inQuotes = false;
+        
+        for (let j = 0; j < line.length; j++) {
+            const char = line[j];
+            
+            if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                values.push(currentValue.trim());
+                currentValue = '';
+            } else {
+                currentValue += char;
+            }
+        }
+        values.push(currentValue.trim()); // Push last value
+        
+        // Create show object
+        if (values[0]) { // Skip if no title
+            const show = {};
+            headers.forEach((header, index) => {
+                show[header] = values[index] || '';
+            });
+            shows.push(show);
+        }
+    }
+    
+    return shows;
+}
+
+// Fetch shows from Google Sheets
+async function loadGoogleSheetsShows() {
     const showsGrid = document.getElementById('showsGrid');
     if (!showsGrid) return;
     
@@ -301,43 +337,45 @@ async function loadBandsintownEvents() {
     showsGrid.innerHTML = '<div class="loading-shows">Loading shows...</div>';
     
     try {
-        // Try with artist name first
-        let apiUrl = `https://rest.bandsintown.com/artists/${encodeURIComponent(ARTIST_NAME)}/events?app_id=${BANDSINTOWN_APP_ID}&date=upcoming`;
-        
-        const response = await fetch(apiUrl);
-        
-        if (!response.ok) {
-            // If artist name doesn't work, try with the ID from widget
-            if (response.status === 404) {
-                apiUrl = `https://rest.bandsintown.com/artists/id_15606262/events?app_id=${BANDSINTOWN_APP_ID}&date=upcoming`;
-                const retryResponse = await fetch(apiUrl);
-                if (!retryResponse.ok) {
-                    throw new Error('Failed to fetch events');
-                }
-                const events = await retryResponse.json();
-                renderEvents(events, showsGrid);
-                return;
-            }
-            throw new Error('Failed to fetch events');
+        // Check if URL is configured
+        if (GOOGLE_SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
+            throw new Error('Google Sheet URL not configured');
         }
         
-        const events = await response.json();
-        renderEvents(events, showsGrid);
+        const response = await fetch(GOOGLE_SHEET_CSV_URL);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch shows from Google Sheets');
+        }
+        
+        const csvData = await response.text();
+        const shows = parseCSV(csvData);
+        
+        // Filter out past shows and sort by date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const upcomingShows = shows.filter(show => {
+            const showDate = new Date(show.date);
+            return showDate >= today;
+        }).sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        renderShows(upcomingShows, showsGrid);
         
     } catch (error) {
-        console.error('Error loading Bandsintown events:', error);
+        console.error('Error loading shows from Google Sheets:', error);
         showsGrid.innerHTML = `
             <div class="no-shows">
                 <p>Unable to load upcoming shows at this time.</p>
-                <p class="small-text">Check back soon or <a href="#contact">contact us</a> for booking information.</p>
+                <p class="small-text">Check back soon or <a href="#contact">contact me</a> for booking information.</p>
             </div>
         `;
     }
 }
 
-// Render events to the shows grid
-function renderEvents(events, container) {
-    if (!events || events.length === 0) {
+// Render shows to the shows grid
+function renderShows(shows, container) {
+    if (!shows || shows.length === 0) {
         container.innerHTML = `
             <div class="no-shows">
                 <p>Happy Holidays! Enjoying a break, 2026 dates coming soon.</p>
@@ -351,8 +389,8 @@ function renderEvents(events, container) {
     container.innerHTML = '';
     
     // Create and append show cards
-    events.forEach(event => {
-        const card = createShowCard(event);
+    shows.forEach(show => {
+        const card = createShowCard(show);
         container.appendChild(card);
     });
     
@@ -370,7 +408,7 @@ function renderEvents(events, container) {
 window.addEventListener('DOMContentLoaded', () => {
     loadInstagramFeed();
     loadTikTokFeed();
-    loadBandsintownEvents();
+    loadGoogleSheetsShows(); // Changed from loadBandsintownEvents
 });
 
 // Add fade-in animation on scroll

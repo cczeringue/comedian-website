@@ -2,6 +2,8 @@
 
 A modern, mobile-first website designed to maximize Instagram and TikTok followers while increasing comedy bookings.
 
+**🚀 NEW: Instant Show Management via iPhone!** Add shows from your phone in seconds using iOS Shortcuts + Google Sheets. [See setup guide →](README_SHOWS_SYSTEM.md)
+
 ## Features
 
 ### 🎯 Social Media Optimization
@@ -14,6 +16,7 @@ A modern, mobile-first website designed to maximize Instagram and TikTok followe
 - **Clear Call-to-Actions**: Multiple booking buttons throughout the site
 - **Easy Contact Form**: Streamlined booking request form
 - **Upcoming Shows Section**: Showcase your schedule prominently
+- **Instant Show Updates**: Add shows from your iPhone in seconds ([Setup Guide](README_SHOWS_SYSTEM.md))
 - **Testimonials**: Social proof to build trust with bookers
 
 ### 🎨 Modern Design
@@ -28,6 +31,35 @@ A modern, mobile-first website designed to maximize Instagram and TikTok followe
 - **Newsletter Integration**: Email capture for audience building
 
 ## Setup Instructions
+
+### 0. Set Up Show Management (Optional but Recommended) 📱
+
+**Add shows to your website instantly from your iPhone!**
+
+The website now supports instant show updates via iOS Shortcuts + Google Sheets. This means you can add shows from anywhere without touching code or waiting for deploys.
+
+📖 **[Complete Setup Guide](README_SHOWS_SYSTEM.md)** - Full instructions (~20 min setup)
+
+Quick overview:
+1. Create a Google Sheet with your shows
+2. Update `script.js` with your Sheet's CSV URL
+3. Build iOS Shortcut to add shows from your phone
+4. Share any event link → fills form → show appears instantly on website!
+
+**Benefits:**
+- ⚡ Instant updates (1-2 seconds)
+- 📱 Add from your phone (no computer needed)
+- 🔗 Works with any event platform (Eventbrite, Dice, Universe, etc.)
+- ✅ No deploys needed
+
+**Documentation:**
+- [README_SHOWS_SYSTEM.md](README_SHOWS_SYSTEM.md) - Complete overview
+- [SHOWS_SETUP_GUIDE.md](SHOWS_SETUP_GUIDE.md) - Detailed setup walkthrough
+- [IOS_SHORTCUT_GUIDE.md](IOS_SHORTCUT_GUIDE.md) - Build the iOS Shortcut
+- [GOOGLE_SHEET_FORMAT.md](GOOGLE_SHEET_FORMAT.md) - Sheet format reference
+- [QUICK_START_SHOWS.md](QUICK_START_SHOWS.md) - Daily use quick reference
+
+---
 
 ### 1. Customize Your Information
 
