@@ -3,9 +3,11 @@ const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 
-// Navbar scroll effect
+// Navbar scroll effect — reveal brand when hero name scrolls out of view
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    const heroName = document.querySelector('.hero-name');
+    const threshold = heroName ? heroName.offsetTop + heroName.offsetHeight : 200;
+    if (window.scrollY > threshold) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
@@ -77,27 +79,6 @@ const statsObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.stat-item').forEach(stat => {
     statsObserver.observe(stat);
 });
-
-// Newsletter form submission
-const newsletterForm = document.getElementById('newsletterForm');
-if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = newsletterForm.querySelector('input[type="email"]').value;
-        
-        // Here you would integrate with your email service (e.g., Mailchimp, ConvertKit)
-        // For now, we'll just show an alert
-        alert(`Thanks for subscribing! We'll send updates to ${email}`);
-        newsletterForm.reset();
-        
-        // Example: Send to your backend or email service
-        // fetch('/api/newsletter', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ email })
-        // });
-    });
-}
 
 // Booking form submission
 const bookingForm = document.getElementById('bookingForm');
@@ -365,7 +346,7 @@ window.addEventListener('DOMContentLoaded', () => {
     loadHardcodedShows(); // Loads shows from HARDCODED_SHOWS array
 });
 
-// Add fade-in animation on scroll
+// Add fade-in animation on scroll for cards
 const fadeElements = document.querySelectorAll('.show-card, .video-card, .testimonial-card');
 const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -381,6 +362,22 @@ fadeElements.forEach(element => {
     element.style.transform = 'translateY(20px)';
     element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     fadeObserver.observe(element);
+});
+
+// Scroll-triggered fade-in for section-level content
+const sectionFadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll(
+    '.section-title, .section-subtitle, .about-content, .videos-grid, .social-feeds, .media-interviews-carousel, .booking-form, .contact-content, .trust-bar .press-logos'
+).forEach(el => {
+    el.classList.add('fade-in-section');
+    sectionFadeObserver.observe(el);
 });
 
 // Parallax effect removed - using standard scroll behavior
