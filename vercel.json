@@ -44,6 +44,10 @@
     {
       "src": "titty-monster-thumbnail.png",
       "use": "@vercel/static"
+    },
+    {
+      "src": "hero-backstage.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [

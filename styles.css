@@ -193,15 +193,45 @@ p {
 .hero-image-container {
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 85vh;
     overflow: hidden;
 }
 
-.hero-image {
+.hero-img-split {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hero-img-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.hero-img-left {
+    width: 55%;
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+}
+
+.hero-img-left img {
     object-position: center 15%;
+}
+
+.hero-img-right {
+    width: 55%;
+    margin-left: -10%;
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.hero-img-right img {
+    object-position: center 20%;
 }
 
 .hero-wave-bottom {
@@ -235,16 +265,18 @@ p {
 }
 
 .hero-title {
+    font-family: 'Lilita One', 'Inter', cursive;
     font-size: clamp(2.5rem, 9.5vw, 9rem);
-    font-weight: 900;
+    font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--text-primary);
     margin: 0;
     white-space: nowrap;
     width: 100%;
     text-align: center;
+    text-shadow: 4px 4px 0 var(--accent-orange);
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
@@ -517,16 +549,19 @@ p {
 
 .trust-bar .press-logos {
     margin-bottom: 0;
+    gap: 2rem;
 }
 
 .trust-bar .press-logo-img {
-    max-height: 40px;
+    max-height: 35px;
+    max-width: 140px;
     opacity: 0.6;
 }
 
 .trust-bar .press-logo:hover .press-logo-img {
     opacity: 1;
 }
+
 
 /* Stats Section */
 .stats {
@@ -938,6 +973,17 @@ p {
 .press-logo[href*="independent"] .press-logo-img {
     max-height: 75px;
     max-width: 220px;
+}
+
+/* NPR multi-color logo: greyscale by default, full color on hover */
+.npr-logo-img {
+    filter: grayscale(100%) brightness(1.4) !important;
+    opacity: 0.5 !important;
+}
+
+.press-logo-npr:hover .npr-logo-img {
+    filter: none !important;
+    opacity: 1 !important;
 }
 
 .press-logo:hover .press-logo-img {
@@ -1779,7 +1825,18 @@ p {
     }
 
     .hero-image-container {
-        height: 80vh;
+        height: 60vh;
+    }
+
+    .hero-img-left {
+        width: 52%;
+        clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+    }
+
+    .hero-img-right {
+        width: 56%;
+        margin-left: -8%;
+        clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
     }
 
     .hero-wave-bottom svg {

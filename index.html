@@ -6,11 +6,12 @@
     <meta name="description" content="Professional comedian - Stand-up comedy shows, videos, and booking information. Follow on Instagram and TikTok for the latest comedy content.">
     <meta name="keywords" content="comedian, stand-up comedy, comedy shows, booking comedian, comedy videos">
     <title>Caleb Zeringue - Comedian | Stand-Up Comedy Shows & Booking</title>
-    <link rel="stylesheet" href="styles.css?v=13">
+    <link rel="stylesheet" href="styles.css?v=17">
     <link rel="preload" as="image" href="hero-desktop.jpg" imagesrcset="hero-mobile.jpg 1200w, hero-desktop.jpg 2000w" imagesizes="100vw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lilita+One&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="hero-backstage.png">
 </head>
 <body>
     <!-- Shows Banner -->
@@ -47,17 +48,23 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-image-container">
-            <picture>
-                <source media="(max-width: 600px)" srcset="hero-mobile.jpg">
-                <source media="(min-width: 601px)" srcset="hero-desktop.jpg">
-                <img src="hero-desktop.jpg" alt="Caleb Zeringue" class="hero-image" fetchpriority="high" loading="eager">
-            </picture>
+            <div class="hero-img-split">
+                <div class="hero-img-wrap hero-img-left">
+                    <picture>
+                        <source media="(max-width: 600px)" srcset="hero-mobile.jpg">
+                        <source media="(min-width: 601px)" srcset="hero-desktop.jpg">
+                        <img src="hero-desktop.jpg" alt="Caleb Zeringue performing" fetchpriority="high" loading="eager">
+                    </picture>
+                </div>
+                <div class="hero-img-wrap hero-img-right">
+                    <img src="hero-backstage.png" alt="Caleb Zeringue backstage" fetchpriority="high" loading="eager">
+                </div>
+            </div>
             <div class="hero-wave-bottom">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="var(--bg-dark)"></path>
                 </svg>
             </div>
-            <!-- Social pill floats over the bottom of the image -->
             <div class="social-bar">
                 <div class="social-bar-inner">
                     <a href="https://www.instagram.com/caleb.meringue/" target="_blank" aria-label="Instagram">
@@ -114,6 +121,10 @@
                 <a href="https://thehill.com" target="_blank" rel="noopener noreferrer" class="press-logo">
                     <img src="logos/the-hill-logo.png" alt="The Hill" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">The Hill</span>
+                </a>
+                <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" rel="noopener noreferrer" class="press-logo press-logo-npr">
+                    <img src="logos/npr-logo.svg" alt="NPR" class="press-logo-img npr-logo-img" width="105" height="35">
+                    <span class="press-logo-text-label">NPR</span>
                 </a>
             </div>
         </div>
