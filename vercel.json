@@ -40,6 +40,10 @@
     {
       "src": "logos/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "titty-monster-thumbnail.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
