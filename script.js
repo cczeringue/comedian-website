@@ -4,13 +4,33 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 
 // Navbar scroll effect — reveal brand when hero name scrolls out of view
+// Mobile sticky CTA — show when scrolled past hero
 window.addEventListener('scroll', () => {
     const heroName = document.querySelector('.hero-name');
+    const heroSection = document.querySelector('.hero');
     const threshold = heroName ? heroName.offsetTop + heroName.offsetHeight : 200;
+    const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 400;
     if (window.scrollY > threshold) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+    }
+    const mobileSticky = document.getElementById('mobileStickyCta');
+    if (mobileSticky && window.innerWidth <= 768) {
+        if (window.scrollY > heroBottom) {
+            mobileSticky.classList.add('visible');
+        } else {
+            mobileSticky.classList.remove('visible');
+        }
+    } else if (mobileSticky) {
+        mobileSticky.classList.remove('visible');
+    }
+});
+
+window.addEventListener('resize', () => {
+    const mobileSticky = document.getElementById('mobileStickyCta');
+    if (mobileSticky && window.innerWidth > 768) {
+        mobileSticky.classList.remove('visible');
     }
 });
 
