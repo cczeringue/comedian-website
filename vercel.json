@@ -48,6 +48,18 @@
     {
       "src": "hero-backstage.png",
       "use": "@vercel/static"
+    },
+    {
+      "src": "og-image.jpg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "favicon.svg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
