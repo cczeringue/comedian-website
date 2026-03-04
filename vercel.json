@@ -60,6 +60,10 @@
     {
       "src": "apple-touch-icon.png",
       "use": "@vercel/static"
+    },
+    {
+      "src": "drillmaster-card.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [

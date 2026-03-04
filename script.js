@@ -5,18 +5,22 @@ const navMenu = document.getElementById('navMenu');
 
 // Navbar scroll effect — reveal brand when hero name scrolls out of view
 // Mobile sticky CTA — show when scrolled past hero
-window.addEventListener('scroll', () => {
-    const heroName = document.querySelector('.hero-name');
+const handleScroll = () => {
+    const stickyHeader = document.getElementById('sticky-header');
     const heroSection = document.querySelector('.hero');
-    const threshold = heroName ? heroName.offsetTop + heroName.offsetHeight : 200;
+    
+    // Trigger shrink effect almost immediately
+    const threshold = 50;
+    
     const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 400;
+
     if (window.scrollY > threshold) {
-        navbar.classList.add('scrolled');
+        stickyHeader.classList.add('scrolled');
     } else {
-        navbar.classList.remove('scrolled');
+        stickyHeader.classList.remove('scrolled');
     }
     const mobileSticky = document.getElementById('mobileStickyCta');
-    if (mobileSticky && window.innerWidth <= 768) {
+    if (mobileSticky && window.innerWidth <= 1024) {
         if (window.scrollY > heroBottom) {
             mobileSticky.classList.add('visible');
         } else {
@@ -25,11 +29,38 @@ window.addEventListener('scroll', () => {
     } else if (mobileSticky) {
         mobileSticky.classList.remove('visible');
     }
-});
+};
+
+window.addEventListener('scroll', handleScroll);
+// Also run on load to set initial state
+    window.addEventListener('DOMContentLoaded', handleScroll);
+
+    // 3D Tilt Effect
+    const cards = document.querySelectorAll('.video-card, .show-card, .special-card, .featured-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+            const rotateY = ((x - centerX) / centerX) * 5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    });
 
 window.addEventListener('resize', () => {
     const mobileSticky = document.getElementById('mobileStickyCta');
-    if (mobileSticky && window.innerWidth > 768) {
+    if (mobileSticky && window.innerWidth > 1024) {
         mobileSticky.classList.remove('visible');
     }
 });
