@@ -36,7 +36,7 @@ window.addEventListener('scroll', handleScroll);
     window.addEventListener('DOMContentLoaded', handleScroll);
 
     // 3D Tilt Effect
-    const cards = document.querySelectorAll('.video-card, .show-card, .special-card, .featured-card');
+    const cards = document.querySelectorAll('.video-card, .show-card, .special-card, .featured-card, .project-card');
 
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -76,6 +76,29 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
+    });
+});
+
+// Press section tabs (Luigi the Musical | The Drill Master)
+document.querySelectorAll('.press-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-press-tab');
+        if (!target) return;
+        document.querySelectorAll('.press-tab').forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.press-panel').forEach(panel => {
+            panel.classList.remove('active');
+            panel.hidden = true;
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const panel = document.getElementById('press-panel-' + target);
+        if (panel) {
+            panel.classList.add('active');
+            panel.hidden = false;
+        }
     });
 });
 
