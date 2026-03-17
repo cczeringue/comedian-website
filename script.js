@@ -190,7 +190,7 @@ if (bookingForm) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    access_key: 'YOUR_ACCESS_KEY_HERE', // Replace with your Web3Forms access key
+                    access_key: '7e877764-b77e-4963-aa66-269f5dc26ed2',
                     subject: data.subject || `Booking Request from ${data.name}`,
                     from_name: data.name,
                     from_email: data.email,

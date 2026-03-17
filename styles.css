@@ -81,20 +81,96 @@ p {
     padding: 0 24px;
 }
 
+/* Skip link (accessibility) */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-orange);
+    color: var(--bg-dark);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 12px;
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+/* Focus visible for keyboard users */
+.nav-brand:focus-visible,
+.nav-link:focus-visible,
+.nav-cta:focus-visible,
+.press-tab:focus-visible,
+.carousel-btn:focus-visible,
+.hamburger:focus-visible,
+.btn:focus-visible,
+.project-card:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 2px;
+}
+
 /* Shows Banner */
 .shows-banner {
     background: var(--accent-orange);
-    text-align: center;
     padding: 0.6rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-.shows-banner a {
+.shows-banner-label {
     color: var(--bg-dark);
-    text-decoration: none;
-    font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+    text-transform: uppercase;
+    font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.shows-banner-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.shows-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--bg-dark);
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    color: var(--bg-dark);
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.shows-banner-btn.primary {
+    background: var(--bg-dark);
+    color: var(--accent-orange);
+}
+
+.shows-banner-btn:hover {
+    background: var(--bg-dark);
+    color: var(--accent-orange);
 }
 
 /* Sticky Header: name left, nav right */
@@ -146,21 +222,23 @@ p {
 
 .hero .hero-name {
     text-align: center;
-    padding: 2rem 2rem 1rem;
-    overflow: hidden;
+    padding: 2rem 1.5rem 1rem;
+    max-width: 100%;
+    overflow: visible;
 }
 
 .hero .hero-title {
     font-family: 'Lilita One', 'Inter', cursive;
-    font-size: clamp(2.5rem, 9.5vw, 9rem);
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--text-primary);
     margin: 0;
-    white-space: nowrap;
+    white-space: normal;
     width: 100%;
+    max-width: 100%;
     text-align: center;
     text-shadow: 4px 4px 0 var(--accent-orange);
     animation: fadeInUp 0.8s ease-out forwards;
@@ -319,7 +397,8 @@ p {
     position: relative;
     width: 100%;
     max-width: 100vw;
-    height: 85vh;
+    height: 65vh;
+    max-height: 720px;
     overflow: hidden;
 }
 
@@ -348,7 +427,7 @@ p {
 }
 
 .hero-img-left img {
-    object-position: center 15%;
+    object-position: center 20%;
 }
 
 .hero-img-right {
@@ -358,25 +437,7 @@ p {
 }
 
 .hero-img-right img {
-    object-position: center 20%;
-}
-
-.hero-wave-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    z-index: 2;
-}
-
-.hero-wave-bottom svg {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 80px;
-    transform: scaleX(-1);
+    object-position: center 25%;
 }
 
 /* Entry Animations */
@@ -393,32 +454,32 @@ p {
 
 .hero-title {
     font-family: 'Lilita One', 'Inter', cursive;
-    font-size: clamp(2.5rem, 9.5vw, 9rem);
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--text-primary);
     margin: 0;
-    white-space: nowrap;
+    white-space: normal;
     width: 100%;
     text-align: center;
     text-shadow: 4px 4px 0 var(--accent-orange);
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Social Bar — floats over bottom of hero image */
+/* Social Bar — fixed at center bottom as you scroll */
 .social-bar {
-    position: absolute;
-    bottom: 5rem;
-    left: 0;
-    right: 0;
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
-    z-index: 3;
+    z-index: 999;
 }
 
 .social-bar-mini-special {
@@ -2182,6 +2243,13 @@ p {
     box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
 }
 
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 2px;
+}
+
 .form-group textarea {
     resize: vertical;
 }
@@ -2266,6 +2334,19 @@ p {
     color: white;
 }
 
+.footer-substack-link {
+    display: block;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--accent-orange);
+    text-decoration: none;
+}
+
+.footer-substack-link:hover {
+    text-decoration: underline;
+}
+
 .social-links-footer {
     display: flex;
     flex-direction: column;
@@ -2334,17 +2415,18 @@ p {
         letter-spacing: 0.05em;
     }
 
+    .hero-image-container {
+        height: 60vh;
+        max-height: 520px;
+    }
+
     .hero-name {
         padding: 1.5rem 1rem 0.5rem;
     }
 
     .hero-title {
-        font-size: clamp(2rem, 9vw, 4rem);
-        white-space: nowrap;
-    }
-
-    .hero-image-container {
-        height: 58vh;
+        font-size: clamp(1.35rem, 4.5vw, 2.5rem);
+        white-space: normal;
     }
 
     /* Keep two photos side-by-side on mobile; gentle diagonal so heads stay in frame */
@@ -2363,10 +2445,6 @@ p {
     .hero-img-left img,
     .hero-img-right img {
         object-position: center 22%;
-    }
-
-    .hero-wave-bottom svg {
-        height: 50px;
     }
 
     .about-content {
@@ -2436,10 +2514,10 @@ p {
         padding-right: 16px;
     }
 
-    .shows-banner a {
-        font-size: 0.65rem;
-        letter-spacing: 0.06em;
-        word-spacing: 0.02em;
+    .shows-banner {
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
     }
 
     #sticky-header .header-inner {
@@ -2451,7 +2529,7 @@ p {
     }
 
     .hero-title {
-        font-size: clamp(1.5rem, 8vw, 2.5rem);
+        font-size: clamp(1.1rem, 4vw, 1.6rem);
         white-space: normal;
         word-break: break-word;
     }

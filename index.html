@@ -26,7 +26,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <link rel="stylesheet" href="styles.css?v=31">
+    <link rel="stylesheet" href="styles.css?v=32">
     <link rel="preload" as="image" href="hero-desktop.jpg" imagesrcset="hero-mobile.jpg 1200w, hero-desktop.jpg 2000w" imagesizes="100vw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,11 +58,37 @@
         "knowsAbout": ["Stand-Up Comedy", "Comedy Writing", "Musical Theatre", "Producing"]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CreativeWork",
+                "name": "Luigi the Musical",
+                "url": "https://luigithemusical.info",
+                "description": "A satirical prison musical. Writer and original executive producer: Caleb Zeringue.",
+                "author": { "@type": "Person", "name": "Caleb Zeringue" }
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "The Drill Master",
+                "url": "https://thedrillmaster.gay",
+                "description": "The mostly true story of America's most fabulous gay general. Co-written by Caleb Zeringue and Jenny Zigrino.",
+                "author": [{ "@type": "Person", "name": "Caleb Zeringue" }, { "@type": "Person", "name": "Jenny Zigrino" }]
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Shows Banner -->
     <div class="shows-banner">
-        <a href="#shows">UPCOMING PERFORMANCES — GET TICKETS</a>
+        <span class="shows-banner-label">Upcoming performances</span>
+        <div class="shows-banner-actions">
+            <a href="#shows" class="shows-banner-btn primary">Get tickets</a>
+            <a href="https://substack.com/@calebzeringue?utm_campaign=profile&utm_medium=profile-page" target="_blank" rel="noopener noreferrer" class="shows-banner-btn">Stay in the loop</a>
+        </div>
     </div>
 
     <!-- Header: name left, nav right -->
@@ -76,7 +102,6 @@
                     <li><a href="#videos" class="nav-link">Videos</a></li>
                     <li><a href="#press" class="nav-link">Press</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
                     <li><a href="#contact" class="nav-link nav-cta">Contact</a></li>
                 </ul>
                 <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
@@ -88,13 +113,12 @@
         </div>
     </header>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-name">
-            <h1 class="hero-title">Caleb Zeringue</h1>
+            <h1 class="hero-title">Comic, writer, corgi enthusiast</h1>
             <p class="hero-tagline">Like Meringue with a Z! (no relation)</p>
-            <p class="hero-booking-line">Featured at NYC Queer Comedy Finals, Edinburgh Fringe, LGBTLolFest, Vice City Comedy Festival</p>
-            <p class="hero-featured-mobile">As featured in The New York Times, NPR, The Hollywood Reporter</p>
         </div>
         <div class="hero-image-container">
             <div class="hero-img-split">
@@ -108,11 +132,6 @@
                 <div class="hero-img-wrap hero-img-right">
                     <img src="hero-backstage.png" alt="Caleb Zeringue backstage" fetchpriority="high" loading="eager">
                 </div>
-            </div>
-            <div class="hero-wave-bottom">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="var(--bg-dark)"></path>
-                </svg>
             </div>
             <div class="social-bar">
                 <div class="social-bar-inner">
@@ -137,31 +156,31 @@
             <!-- Add new press: duplicate a press-logo block below, update href + img src + alt + label -->
             <div class="press-logos">
                 <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="press-logo">
-                    <img src="logos/nytimes-logo.png" alt="The New York Times" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <img src="logos/nytimes-logo.png" alt="The New York Times" class="press-logo-img" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">The New York Times</span>
                 </a>
                 <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" rel="noopener noreferrer" class="press-logo">
-                    <img src="logos/hollywood-reporter-logo.png" alt="The Hollywood Reporter" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <img src="logos/hollywood-reporter-logo.png" alt="The Hollywood Reporter" class="press-logo-img" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">The Hollywood Reporter</span>
                 </a>
                 <a href="https://www.the-independent.com/news/world/americas/luigi-mangione-unitedhealthcare-musical-premier-san-francisco-b2770019.html" target="_blank" rel="noopener noreferrer" class="press-logo">
-                    <img src="logos/independent-logo.png" alt="The Independent" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <img src="logos/independent-logo.png" alt="The Independent" class="press-logo-img" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">The Independent</span>
                 </a>
                 <a href="https://www.foxnews.com/media/luigi-mangione-musical-opening-san-francisco" target="_blank" rel="noopener noreferrer" class="press-logo">
-                    <img src="logos/fox-news-logo.png" alt="FOX News" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <img src="logos/fox-news-logo.png" alt="FOX News" class="press-logo-img" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">FOX News</span>
                 </a>
                 <a href="https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en" target="_blank" rel="noopener noreferrer" class="press-logo">
-                    <img src="logos/cnn-logo.png" alt="CNN" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <img src="logos/cnn-logo.png" alt="CNN" class="press-logo-img" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">CNN</span>
                 </a>
                 <a href="https://thehill.com" target="_blank" rel="noopener noreferrer" class="press-logo">
-                    <img src="logos/the-hill-logo.png" alt="The Hill" class="press-logo-img" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
+                    <img src="logos/the-hill-logo.png" alt="The Hill" class="press-logo-img" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('press-logo-text');">
                     <span class="press-logo-text-label">The Hill</span>
                 </a>
                 <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" rel="noopener noreferrer" class="press-logo press-logo-npr">
-                    <img src="logos/npr-logo.svg" alt="NPR" class="press-logo-img npr-logo-img" width="105" height="35">
+                    <img src="logos/npr-logo.svg" alt="NPR" class="press-logo-img npr-logo-img" width="105" height="35" loading="lazy">
                     <span class="press-logo-text-label">NPR</span>
                 </a>
             </div>
@@ -173,7 +192,7 @@
         <p class="special-label">Mini Special</p>
         <a href="https://youtu.be/u4Bhc3dAc4U?si=SEImchCvOaINes0_" target="_blank" rel="noopener noreferrer" class="special-card">
             <div class="special-card-frame">
-                <img src="titty-monster-thumbnail.png" alt="Caleb Zeringue - Titty Monster Mini Special" class="special-thumb">
+                <img src="titty-monster-thumbnail.png" alt="Caleb Zeringue - Titty Monster Mini Special" class="special-thumb" loading="lazy" width="640" height="360">
             </div>
             <div class="special-watch-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -186,30 +205,29 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
-            <p class="section-subtitle">Original works with real traction</p>
             <div class="projects-grid">
                 <a href="https://luigithemusical.info" target="_blank" rel="noopener noreferrer" class="project-card">
                     <div class="project-card-img-wrap">
-                        <img src="https://luigithemusical.info/lovable-uploads/bbb08552-6d18-4b85-8967-0dfa2011e118.png" alt="Luigi the Musical" class="project-card-img" onerror="this.style.display='none'">
+                        <img src="https://luigithemusical.info/lovable-uploads/bbb08552-6d18-4b85-8967-0dfa2011e118.png" alt="Luigi the Musical" class="project-card-img" loading="lazy" onerror="this.style.display='none'">
                     </div>
                     <div class="project-card-content">
-                        <span class="project-card-label">Writer, Original Exec Producer</span>
+                        <span class="project-card-label">Co-creator, (original) exec producer</span>
                         <h3 class="project-card-title">Luigi the Musical</h3>
                         <p class="project-card-desc">A tale of love, murder, and hashbrowns. Satirical prison musical — sold-out runs, NYT, NPR, Stephen Colbert.</p>
                         <div class="project-card-logos">
-                            <img src="logos/nytimes-logo.png" alt="The New York Times" class="project-logo">
-                            <img src="logos/npr-logo.svg" alt="NPR" class="project-logo npr-logo-img" width="60" height="20">
-                            <img src="logos/hollywood-reporter-logo.png" alt="The Hollywood Reporter" class="project-logo">
+                            <img src="logos/nytimes-logo.png" alt="" class="project-logo" loading="lazy" width="80" height="22">
+                            <img src="logos/npr-logo.svg" alt="" class="project-logo npr-logo-img" width="60" height="20" loading="lazy">
+                            <img src="logos/hollywood-reporter-logo.png" alt="" class="project-logo" loading="lazy" width="80" height="22">
                         </div>
                         <span class="project-card-link">luigithemusical.info →</span>
                     </div>
                 </a>
                 <a href="https://thedrillmaster.gay" target="_blank" rel="noopener noreferrer" class="project-card">
                     <div class="project-card-img-wrap">
-                        <img src="drillmaster-card.png" alt="The Drill Master" class="project-card-img">
+                        <img src="drillmaster-card.png" alt="The Drill Master" class="project-card-img" loading="lazy">
                     </div>
                     <div class="project-card-content">
-                        <span class="project-card-label">New Project</span>
+                        <span class="project-card-label">Co-creator</span>
                         <h3 class="project-card-title">The Drill Master</h3>
                         <p class="project-card-desc">It's giving founding daddy energy. The mostly true story of America's most fabulous gay general. Created by Jenny Zigrino, co-written by Caleb Zeringue.</p>
                         <span class="project-card-link">thedrillmaster.gay →</span>
@@ -227,15 +245,7 @@
                     <span class="drill-master-badge">New Play</span>
                     <h2 class="drill-master-title">The Drill Master</h2>
                     <p class="drill-master-tagline">It's giving founding daddy energy.</p>
-                    <p class="drill-master-hook">The mostly true story of America's most fabulous gay general — for the 250th anniversary. A new play by Jenny Zigrino, co-written by Caleb Zeringue.</p>
-                    <div class="drill-master-cast">
-                        <h4>Featuring</h4>
-                        <ul>
-                            <li>Bobcat Goldthwait</li>
-                            <li>Cameron Esposito</li>
-                            <li>Gianmarco Soresi</li>
-                        </ul>
-                    </div>
+                    <p class="drill-master-hook">A new play conceived by Jenny Zigrino, co-created by Caleb Zeringue.</p>
                     <div class="drill-master-dates">
                         <h4>Readings</h4>
                         <p>April 1 at The Eagle · May 3 at The Elysian (Netflix is a Joke) · San Francisco reading</p>
@@ -243,7 +253,7 @@
                     <a href="https://thedrillmaster.gay" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Learn more & tickets</a>
                 </div>
                 <div class="drill-master-visual">
-                    <img src="drillmaster-card.png" alt="The Drill Master" class="drill-master-img">
+                    <img src="drillmaster-card.png" alt="The Drill Master" class="drill-master-img" loading="lazy">
                 </div>
             </div>
         </div>
@@ -269,6 +279,19 @@
             
             <!-- Featured Videos -->
             <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe 
+                            src="https://www.youtube.com/embed/u4Bhc3dAc4U" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                        </iframe>
+                    </div>
+                    <h4>Mini Special: Titty Monster</h4>
+                    <p>My debut mini-special. Full set on YouTube.</p>
+                </div>
                 <div class="video-card">
                     <div class="video-thumbnail">
                         <iframe 
@@ -336,7 +359,7 @@
                         <div class="interview-card carousel-slide">
                             <div class="interview-header">
                                 <div class="interview-source">
-                                    <img src="logos/npr-logo.svg" alt="NPR" class="interview-logo" onerror="this.onerror=null; this.src='logos/npr-logo.png';">
+                                    <img src="logos/npr-logo.svg" alt="NPR" class="interview-logo" loading="lazy" onerror="this.onerror=null; this.src='logos/npr-logo.png';">
                                 </div>
                                 <h3 class="interview-title">A musical about Luigi Mangione sells out theaters — and raises eyebrows</h3>
                             </div>
@@ -349,7 +372,7 @@
                         <div class="interview-card carousel-slide">
                             <div class="interview-header">
                                 <div class="interview-source">
-                                    <img src="logos/cnn-logo-card.png" alt="CNN" class="interview-logo">
+                                    <img src="logos/cnn-logo-card.png" alt="CNN" class="interview-logo" loading="lazy">
                                 </div>
                                 <h3 class="interview-title">Luigi the Musical' creators say the play is not what you expect</h3>
                             </div>
@@ -366,12 +389,12 @@
                         <div class="interview-card carousel-slide">
                             <div class="interview-header">
                                 <div class="interview-source">
-                                    <img src="logos/broadway-world-logo.png" alt="Broadway World" class="interview-logo">
+                                    <img src="logos/broadway-world-logo.png" alt="Broadway World" class="interview-logo" loading="lazy">
                                 </div>
                                 <h3 class="interview-title">How LUIGI THE MUSICAL Is Pushing the Boundaries of Musical Theatre</h3>
                             </div>
                             <a href="https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813" target="_blank" rel="noopener noreferrer" class="interview-quote-image">
-                                <img src="logos/broadway-world-quote.jpg" alt="Caleb Zeringue quote about musicals and current events" class="quote-image" onerror="this.onerror=null; this.src='logos/broadway-world-quote.png';">
+                                <img src="logos/broadway-world-quote.jpg" alt="Caleb Zeringue quote about musicals and current events" class="quote-image" loading="lazy" onerror="this.onerror=null; this.src='logos/broadway-world-quote.png';">
                             </a>
                             <a href="https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Read it</a>
                         </div>
@@ -403,15 +426,11 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2 class="section-title">About Me</h2>
-                    <p>Caleb Zeringue is a stand-up comic, writer, and original executive producer & co-writer of <a href="https://luigithemusical.info/" target="_blank" rel="noopener noreferrer">Luigi the Musical</a> — a dark comedy that sold 3,000+ tickets across 13 sold-out shows and somehow earned coverage from The New York Times, The Hollywood Reporter, NPR's All Things Considered, and a mention from Stephen Colbert.</p>
-                    <p>As a stand-up, he's a NYC Queer Comedy Festival finalist, featured at Vice City Comedy Festival and LGBTLolFest, and has opened for national headliners including Jenny Zigrino and Lady Bushra — who STILL won't talk to him. He's performed at Cobb's, The Stand, Gotham, and Edinburgh Fringe.</p>
-                    <p>He grew up across 16 states (his dad insists he's not bipolar, why do you ask?!). His comedy is unapologetically queer and southern, with a suspicious amount of emotional vulnerability and "bless your heart" energy.</p>
-                    <p>He and Jenny Zigrino (Dropout.TV, Sirius XM) co-wrote <em>The Drill Master</em> — the mostly true story of America's most fabulous gay general, for the 250th anniversary. Staged readings: April 1 at The Eagle, May 3 at The Elysian (Netflix is a Joke Fest), and San Francisco. Featuring Bobcat Goldthwait, Cameron Esposito, and Gianmarco Soresi.</p>
+                    <p>Caleb Zeringue is a stand-up comic, writer, actor, producer and "big personality" best known as the original Executive Producer, original cast member and co-creator of the viral sensation <a href="https://luigithemusical.info/" target="_blank" rel="noopener noreferrer">Luigi: The Musical</a> which was covered in the New York Times, NPR's All Things Considered, and Washington Post just to name a few.</p>
+                    <p>As a stand-up, Caleb Zeringue is an NYC Queer Comedy Festival finalist, featured at Vice City Comedy Festival and LGBTLolFest, and has opened for national headliners including Jenny Zigrino and Lady Bushra — who STILL won't talk to him. He's performed at Cobb's, The Stand, Gotham, and the Edinburgh Fringe Festival.</p>
+                    <p>He grew up across 16 states (his dad insists he's not bipolar, why do you ask?!). His comedy is unapologetically queer with a suspicious amount of emotional vulnerability and "bless your heart" southern energy.</p>
+                    <p>He and Jenny Zigrino (Dropout.TV, Sirius XM) co-wrote <em>The Drill Master</em> — the mostly true story of America's most fabulous gay general, for the 250th anniversary. Staged readings: April 1 at The Eagle, May 3 at The Elysian (Netflix is a Joke Fest), and San Francisco.</p>
                     <p>Caleb recently discovered that Type B personalities exist, which — let's be honest — is a very Type A thing to do. He was also told he's a polymath, to which he replied: "but I'm bad at math."</p>
-                    <div class="about-booking-callout">
-                        <p>Available for clubs, festivals, corporate events & co-writing.</p>
-                        <a href="#contact" class="btn btn-primary">Contact</a>
-                    </div>
                     <div class="about-highlights">
                         <div class="highlight-item">
                             <strong>NYC Queer Comedy Festival</strong> - Finalist
@@ -424,9 +443,6 @@
                         </div>
                         <div class="highlight-item">
                             <strong>Vice City Comedy Festival</strong> - Featured Comic
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Netflix is a Joke Fest</strong> - The Elysian
                         </div>
                     </div>
 
@@ -441,7 +457,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="about-photo.jpg" alt="Caleb Zeringue" class="about-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="about-photo.jpg" alt="Caleb Zeringue" class="about-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="image-placeholder" style="display: none;">
                         <p>Your Photo Here</p>
                     </div>
@@ -508,6 +524,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <footer class="site-footer">
         <div class="container">
@@ -527,6 +544,9 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
                     </a>
                 </div>
+                <a href="https://substack.com/@calebzeringue?utm_campaign=profile&utm_medium=profile-page" target="_blank" rel="noopener noreferrer" class="footer-substack-link">
+                    Stay in the loop &mdash; get new shows and projects in your inbox
+                </a>
                 <p class="footer-copy">&copy; <script>document.write(new Date().getFullYear())</script> Caleb Zeringue. All rights reserved.</p>
             </div>
         </div>
