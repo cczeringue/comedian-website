@@ -13,7 +13,9 @@ export function getKvConfig() {
   }
 
   const envEntries = Object.entries(process.env);
-  const urlEntry = envEntries.find(([key, value]) => key.endsWith('_REST_API_URL') && value);
+  const urlEntry = envEntries.find(([key, value]) => {
+    return value && (key.endsWith('_REST_API_URL') || key.endsWith('_REST_URL'));
+  });
   if (!urlEntry) return null;
 
   const tokenKey = urlEntry[0].replace(/_URL$/, '_TOKEN');
@@ -28,6 +30,12 @@ export function getKvConfig() {
 
 function safeArray(input) {
   return Array.isArray(input) ? input : [];
+}
+
+async function readFileStore() {
+  const file = await fs.readFile(DATA_FILE, 'utf8');
+  const parsed = JSON.parse(file);
+  return safeArray(parsed).map(normalizeMediaItem);
 }
 
 function coerceDate(dateValue) {
@@ -77,14 +85,27 @@ export async function readMediaStore() {
         Authorization: `Bearer ${kv.token}`
       }
     });
+
+    if (!response.ok) {
+      return await readFileStore();
+    }
+
     const data = await response.json();
     const parsed = data.result ? JSON.parse(data.result) : [];
-    return safeArray(parsed).map(normalizeMediaItem);
+    const normalized = safeArray(parsed).map(normalizeMediaItem);
+
+    if (normalized.length > 0) {
+      return normalized;
+    }
+
+    try {
+      return await readFileStore();
+    } catch (_) {
+      return [];
+    }
   }
 
-  const file = await fs.readFile(DATA_FILE, 'utf8');
-  const parsed = JSON.parse(file);
-  return safeArray(parsed).map(normalizeMediaItem);
+  return await readFileStore();
 }
 
 export async function writeMediaStore(mediaItems) {
@@ -92,7 +113,7 @@ export async function writeMediaStore(mediaItems) {
   const kv = getKvConfig();
 
   if (kv) {
-    await fetch(`${kv.url}/set/${KV_KEY}`, {
+    const response = await fetch(`${kv.url}/set/${KV_KEY}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${kv.token}`,
@@ -100,6 +121,12 @@ export async function writeMediaStore(mediaItems) {
       },
       body: JSON.stringify({ value: JSON.stringify(normalized) })
     });
+
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(`KV write failed (${response.status}): ${body}`);
+    }
+
     return;
   }
 
