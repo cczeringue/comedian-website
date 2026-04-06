@@ -1,4 +1,4 @@
-import { normalizeMediaItem, readMediaStore, writeMediaStore } from './_media-store.js';
+import { getKvConfig, normalizeMediaItem, readMediaStore, writeMediaStore } from './_media-store.js';
 
 function getYoutubeId(url) {
   try {
@@ -44,6 +44,13 @@ export default async function handler(req, res) {
 
     if (!url) {
       return res.status(400).json({ error: 'URL is required' });
+    }
+
+    if (!getKvConfig()) {
+      return res.status(500).json({
+        error: 'Media storage is not configured on Vercel yet.',
+        details: 'Connect a Vercel Upstash Redis database so new media can be saved persistently.'
+      });
     }
 
     const mediaItems = await readMediaStore().catch(() => []);

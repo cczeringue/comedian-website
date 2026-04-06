@@ -4,6 +4,28 @@ import path from 'path';
 const KV_KEY = 'media_items';
 const DATA_FILE = path.join(process.cwd(), 'data', 'media.json');
 
+export function getKvConfig() {
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    return {
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN
+    };
+  }
+
+  const envEntries = Object.entries(process.env);
+  const urlEntry = envEntries.find(([key, value]) => key.endsWith('_REST_API_URL') && value);
+  if (!urlEntry) return null;
+
+  const tokenKey = urlEntry[0].replace(/_URL$/, '_TOKEN');
+  const tokenValue = process.env[tokenKey];
+  if (!tokenValue) return null;
+
+  return {
+    url: urlEntry[1],
+    token: tokenValue
+  };
+}
+
 function safeArray(input) {
   return Array.isArray(input) ? input : [];
 }
@@ -47,10 +69,12 @@ export function normalizeMediaItem(raw) {
 }
 
 export async function readMediaStore() {
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-    const response = await fetch(`${process.env.KV_REST_API_URL}/get/${KV_KEY}`, {
+  const kv = getKvConfig();
+
+  if (kv) {
+    const response = await fetch(`${kv.url}/get/${KV_KEY}`, {
       headers: {
-        Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`
+        Authorization: `Bearer ${kv.token}`
       }
     });
     const data = await response.json();
@@ -65,12 +89,13 @@ export async function readMediaStore() {
 
 export async function writeMediaStore(mediaItems) {
   const normalized = safeArray(mediaItems).map(normalizeMediaItem);
+  const kv = getKvConfig();
 
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-    await fetch(`${process.env.KV_REST_API_URL}/set/${KV_KEY}`, {
+  if (kv) {
+    await fetch(`${kv.url}/set/${KV_KEY}`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+        Authorization: `Bearer ${kv.token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ value: JSON.stringify(normalized) })
