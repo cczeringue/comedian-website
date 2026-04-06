@@ -14,7 +14,23 @@
       "use": "@vercel/static"
     },
     {
+      "src": "media.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "portal/add-media.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "script.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "media.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "media-admin.js",
       "use": "@vercel/static"
     },
     {
@@ -84,8 +100,28 @@
       "dest": "api/send-booking.js"
     },
     {
+      "src": "/api/media",
+      "dest": "api/media.js"
+    },
+    {
+      "src": "/api/fetch-media",
+      "dest": "api/fetch-media.js"
+    },
+    {
+      "src": "/api/add-media",
+      "dest": "api/add-media.js"
+    },
+    {
       "src": "/links",
       "dest": "/links.html"
+    },
+    {
+      "src": "/media",
+      "dest": "/media.html"
+    },
+    {
+      "src": "/portal/add-media",
+      "dest": "/portal/add-media.html"
     },
     {
       "src": "/(.*)",

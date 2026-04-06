@@ -1084,6 +1084,11 @@ button:focus-visible {
     display: none;
 }
 
+/* Anchor scroll target for ticket links (e.g. links page → Seated widget) */
+#seated-tickets {
+    scroll-margin-top: 1.25rem;
+}
+
 /* Seated widget responsive text sizing */
 #seated-55fdf2c0 {
     font-size: 1rem;

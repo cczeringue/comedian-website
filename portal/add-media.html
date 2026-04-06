@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Manager | Private Portal</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css?v=34">
+    <style>
+        .admin-page {
+            min-height: 100vh;
+            padding: 2.25rem 0 4rem;
+        }
+        .admin-shell {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 1.2rem;
+        }
+        .admin-title {
+            margin: 0 0 0.45rem;
+            font-family: var(--font-display);
+            color: var(--text-primary);
+        }
+        .admin-subtitle {
+            margin: 0 0 1rem;
+            color: var(--text-secondary);
+        }
+        .admin-form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 0.85rem;
+        }
+        .admin-form-row label {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+        .admin-input {
+            width: 100%;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.7rem 0.75rem;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+        }
+        .admin-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .admin-status {
+            margin-top: 0.9rem;
+            padding: 0.65rem 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-family: var(--font-ui);
+            color: var(--text-secondary);
+        }
+        .admin-status.error {
+            border-color: rgba(255, 120, 120, 0.45);
+            color: #ffb4b4;
+        }
+        .admin-status.success {
+            border-color: rgba(147, 230, 152, 0.45);
+            color: #b8f5bb;
+        }
+        .preview-card {
+            margin-top: 1rem;
+            background: var(--bg-darker);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .preview-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+        }
+        .preview-content {
+            padding: 0.8rem;
+        }
+        .preview-title {
+            margin: 0 0 0.4rem;
+            font-family: var(--font-display);
+            color: var(--text-primary);
+        }
+        .preview-text {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <main class="admin-page">
+        <div class="container">
+            <section class="admin-shell" id="lockScreen">
+                <h1 class="admin-title">Private Media Manager</h1>
+                <p class="admin-subtitle">Enter your admin key to unlock this portal.</p>
+                <div class="admin-form-row">
+                    <label for="adminKeyInput">Admin key</label>
+                    <input id="adminKeyInput" class="admin-input" type="password" autocomplete="off" placeholder="Your MEDIA_ADMIN_KEY">
+                </div>
+                <div class="admin-actions">
+                    <button type="button" class="btn btn-primary" id="unlockBtn">Unlock</button>
+                </div>
+                <div id="lockStatus" class="admin-status" hidden></div>
+            </section>
+
+            <section class="admin-shell" id="managerPanel" hidden>
+                <h2 class="admin-title">Add media</h2>
+                <p class="admin-subtitle">Paste a YouTube or podcast URL, fetch metadata, then save.</p>
+
+                <div class="admin-form-row">
+                    <label for="mediaUrlInput">Media URL</label>
+                    <input id="mediaUrlInput" class="admin-input" type="url" placeholder="https://youtube.com/... or podcast URL">
+                </div>
+
+                <div class="admin-actions">
+                    <button type="button" class="btn btn-secondary" id="fetchBtn">Fetch Metadata</button>
+                    <button type="button" class="btn btn-primary" id="saveBtn" disabled>Save to Gallery</button>
+                    <button type="button" class="btn btn-tertiary" id="clearBtn">Clear</button>
+                </div>
+
+                <div id="managerStatus" class="admin-status" hidden></div>
+
+                <article id="previewCard" class="preview-card" hidden>
+                    <img id="previewThumb" class="preview-thumb" alt="">
+                    <div class="preview-content">
+                        <h3 id="previewTitle" class="preview-title"></h3>
+                        <p id="previewMeta" class="preview-text"></p>
+                        <p id="previewDesc" class="preview-text" style="margin-top:0.5rem;"></p>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <script src="../media-admin.js"></script>
+</body>
+</html>

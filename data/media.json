@@ -1,0 +1,32 @@
+[
+  {
+    "id": "media_seed_titty_monster",
+    "type": "video",
+    "title": "Mini Special: Titty Monster",
+    "url": "https://youtu.be/u4Bhc3dAc4U?si=SEImchCvOaINes0_",
+    "thumbnail": "https://i.ytimg.com/vi/u4Bhc3dAc4U/hqdefault.jpg",
+    "description": "Debut mini-special. Full set on YouTube.",
+    "date": "2025-08-01T12:00:00.000Z",
+    "videoId": "u4Bhc3dAc4U"
+  },
+  {
+    "id": "media_seed_tight_five",
+    "type": "video",
+    "title": "My tight 5",
+    "url": "https://www.youtube.com/watch?v=JxfOLrBs6A0",
+    "thumbnail": "https://i.ytimg.com/vi/JxfOLrBs6A0/hqdefault.jpg",
+    "description": "Stand-up clip on YouTube.",
+    "date": "2025-09-01T12:00:00.000Z",
+    "videoId": "JxfOLrBs6A0"
+  },
+  {
+    "id": "media_seed_npr",
+    "type": "podcast",
+    "title": "NPR: A musical about Luigi Mangione sells out theaters",
+    "url": "https://www.npr.org/2025/08/14/arts/luigi-mangione-musical-murder.html",
+    "thumbnail": "og-image.jpg",
+    "description": "NPR interview coverage featuring Luigi the Musical.",
+    "date": "2025-08-14T12:00:00.000Z",
+    "videoId": ""
+  }
+]
