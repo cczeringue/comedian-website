@@ -8,17 +8,19 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Lilita+One&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-dark: #111111;
-            --bg-card: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent-orange: #ff6b35;
-            --border-light: rgba(255, 255, 255, 0.1);
+            --bg-dark: #FFFBF0;
+            --bg-card: #FFFCF7;
+            --text-primary: #1E1B4B;
+            --text-secondary: #4338CA;
+            --accent: #F43F5E;
+            --accent-orange: var(--accent);
+            --accent-2: #7C3AED;
+            --border-light: rgba(30, 27, 75, 0.12);
         }
 
         html { scroll-behavior: smooth; }
@@ -45,7 +47,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.04;
+            opacity: 0.032;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
@@ -153,8 +155,8 @@
         .links-trust img {
             height: 18px;
             width: auto;
-            filter: brightness(0) invert(1);
-            opacity: 0.45;
+            filter: brightness(0);
+            opacity: 0.4;
         }
 
         /* ── Social icons ── */
@@ -212,7 +214,7 @@
 
         .links-email-cta:hover {
             border-color: var(--accent-orange);
-            background: rgba(255, 107, 53, 0.08);
+            background: rgba(232, 80, 58, 0.06);
         }
 
         .links-email-cta-icon {
@@ -244,7 +246,7 @@
 
         .links-tab:hover {
             color: var(--text-primary);
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(0,0,0,0.15);
         }
 
         .links-tab.active {
@@ -311,7 +313,7 @@
         .link-button:hover {
             border-color: var(--accent-orange);
             transform: translateY(-2px);
-            background: rgba(255, 107, 53, 0.08);
+            background: rgba(232, 80, 58, 0.05);
         }
 
         /* ── Project cards ── */
@@ -335,7 +337,7 @@
         .links-project-card:hover {
             border-color: var(--accent-orange);
             transform: translateY(-2px);
-            background: rgba(255, 107, 53, 0.06);
+            background: rgba(232, 80, 58, 0.04);
         }
 
         .links-project-card-img-wrap {
@@ -408,14 +410,14 @@
             position: relative; display: flex; flex-direction: row; align-items: stretch;
             gap: 1rem; padding: 1.85rem 1.1rem 1rem; border-radius: 14px;
             border: 2px solid var(--accent-orange);
-            background: linear-gradient(135deg, rgba(255,107,53,0.18) 0%, var(--bg-card) 55%);
+            background: linear-gradient(135deg, rgba(232,80,58,0.08) 0%, var(--bg-card) 55%);
             text-decoration: none; color: var(--text-primary);
-            box-shadow: 0 0 0 1px rgba(255,107,53,0.25), 0 8px 24px rgba(0,0,0,0.35);
+            box-shadow: 0 0 0 1px rgba(232,80,58,0.2), 0 8px 24px rgba(0,0,0,0.08);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .links-next-show-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 0 1px rgba(255,107,53,0.45), 0 12px 28px rgba(0,0,0,0.4);
+            box-shadow: 0 0 0 1px rgba(232,80,58,0.35), 0 12px 28px rgba(0,0,0,0.12);
         }
         .links-next-show-badge {
             position: absolute; top: 0.65rem; left: 1.1rem;
@@ -425,7 +427,7 @@
         .links-next-show-datebox {
             flex-shrink: 0; width: 52px; min-height: 56px; display: flex;
             flex-direction: column; align-items: center; justify-content: center;
-            background: var(--accent-orange); color: var(--bg-dark); border-radius: 10px; line-height: 1.1;
+            background: var(--accent-orange); color: #fff; border-radius: 10px; line-height: 1.1;
         }
         .links-next-show-day { font-size: 1.35rem; font-weight: 800; }
         .links-next-show-month { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; }
@@ -438,8 +440,8 @@
         .links-next-show-cta { margin-top: 0.35rem; font-size: 0.8rem; font-weight: 700; color: var(--accent-orange); }
         .links-next-shows-row { display: flex; flex-direction: column; gap: 0.75rem; }
         .links-next-show-card--second {
-            border-width: 1px; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-            background: linear-gradient(135deg, rgba(255,107,53,0.08) 0%, var(--bg-card) 50%);
+            border-width: 1px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            background: linear-gradient(135deg, rgba(232,80,58,0.05) 0%, var(--bg-card) 50%);
         }
         .links-next-show-loading { font-size: 0.85rem; color: var(--text-secondary); margin: 0; padding: 0.25rem 0; }
 
@@ -464,19 +466,19 @@
             width: 100%;
             max-width: 520px;
             background: var(--accent-orange);
-            color: var(--bg-dark);
+            color: #fff;
             font-weight: 800;
             font-size: 1rem;
             padding: 0.9rem 1.5rem;
             border-radius: 50px;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.45);
+            box-shadow: 0 4px 16px rgba(232, 80, 58, 0.25);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .links-sticky-cta a:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(255, 107, 53, 0.6);
+            box-shadow: 0 6px 20px rgba(232, 80, 58, 0.35);
         }
 
         /* ── Back link ── */
@@ -545,14 +547,14 @@
             padding: 0.5rem 0.85rem;
             border-radius: 999px;
             border: 1px solid var(--border-light);
-            background: rgba(255, 255, 255, 0.03);
+            background: transparent;
             color: var(--text-secondary);
             cursor: pointer;
         }
 
         .media-filter-tab:hover:not(:disabled) {
             color: var(--text-primary);
-            border-color: rgba(255, 255, 255, 0.22);
+            border-color: rgba(0, 0, 0, 0.2);
         }
 
         .media-filter-tab[aria-selected="true"] {
@@ -780,7 +782,7 @@
                     <h2 class="links-section-title">Media by project</h2>
                     <p class="links-recent-subtitle">Stand-up, The Drill Master, and Luigi—scroll the row. Full gallery on the site.</p>
                 </div>
-                <a href="/media" class="links-email-cta links-media-cta">View more</a>
+                <a href="media.html" class="links-email-cta links-media-cta">View more</a>
             </div>
             <div class="media-carousel" data-media-carousel data-carousel-limit="12">
                 <div class="media-carousel-tablist" role="tablist" aria-label="Filter media by project">
@@ -905,7 +907,7 @@
             } catch (e) {}
         })();
     </script>
-    <script src="media.js?v=9"></script>
+    <script src="media.js?v=10"></script>
     <script src="https://widget.seated.com/app.js"></script>
     <script src="links-shows.js?v=7"></script>
 </body>

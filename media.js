@@ -2,14 +2,12 @@
   'use strict';
 
   /* ── selectors ── */
-  const grid = document.getElementById('mediaGrid');
-  const loadingEl = document.getElementById('mediaLoading');
-  const emptyEl = document.getElementById('mediaEmpty');
   const previewGrids = Array.from(document.querySelectorAll('[data-appearances-grid]'));
   const previewSection = document.querySelector('[data-appearances-section]');
   const carousels = Array.from(document.querySelectorAll('[data-media-carousel]'));
   const carouselSections = Array.from(document.querySelectorAll('[data-carousel-section]'));
   const pressGridSection = document.querySelector('[data-press-grid-section]');
+  const mediaPageSection = document.querySelector('[data-media-page-section]');
 
   /* ── constants ── */
   const CAROUSEL_TRACKS = ['standup', 'drillmaster', 'luigi'];
@@ -227,9 +225,9 @@
       const items = (byTrack[track] || []).slice(0, limit);
       if (!items.length) {
         const hint = featuredOnly && anyFeaturedGlobal
-          ? 'No featured clips in this tab. Mark items as featured in the <a href="/portal/add-media">media manager</a>, try another tab, or '
-          : 'Nothing in this category yet. Try another tab or <a href="/portal/add-media">add media</a>. ';
-        rail.innerHTML = `<p class="appearance-empty media-carousel-empty">${hint}see <a href="/media">all media</a>.</p>`;
+          ? 'No featured clips in this tab. Mark items as featured in the <a href="portal/add-media.html">media manager</a>, try another tab, or '
+          : 'Nothing in this category yet. Try another tab or <a href="portal/add-media.html">add media</a>. ';
+        rail.innerHTML = `<p class="appearance-empty media-carousel-empty">${hint}see <a href="media.html">all media</a>.</p>`;
         return;
       }
       rail.innerHTML = items.map(carouselSlideMarkup).join('');
@@ -382,7 +380,7 @@
     });
   }
 
-  function initPressGrid(section, galleryMedia) {
+  function initPressGrid(section, galleryMedia, opts) {
     const gridEl = section.querySelector('[data-press-media-grid]');
     const tabs = Array.from(section.querySelectorAll('[data-press-tab]'));
     const tablist = section.querySelector('[role="tablist"]');
@@ -392,10 +390,16 @@
     let mergedItems = [];
     let active = 'all';
 
-    const PRESS_GRID_LIMIT = 3;
+    const PRESS_GRID_LIMIT = (opts && opts.limit) || Infinity;
+    const sortDateFirst = !!(opts && opts.sortDateFirst);
 
     function rankItems(items) {
       return [...items].sort((a, b) => {
+        if (sortDateFirst) {
+          const da = new Date(a.date || 0).getTime();
+          const db = new Date(b.date || 0).getTime();
+          if (da !== db) return db - da;
+        }
         const ao = Number.isFinite(a._pressOrder) ? a._pressOrder : 9999;
         const bo = Number.isFinite(b._pressOrder) ? b._pressOrder : 9999;
         if (ao !== bo) return ao - bo;
@@ -520,35 +524,32 @@
         );
       }
 
+      const pressConfig = await fetchPressConfig();
+
       if (pressGridSection) {
-        const pressConfig = await fetchPressConfig();
-        const hydrate = initPressGrid(pressGridSection, sorted);
+        const hydrate = initPressGrid(pressGridSection, sorted, { limit: 3 });
         if (hydrate) await hydrate(pressConfig);
       }
 
-      if (!grid) return;
-      loadingEl.hidden = true;
-      if (!sorted.length) { emptyEl.hidden = false; return; }
-      grid.innerHTML = sorted.map(cardMarkup).join('');
-    } catch (error) {
-      if (grid) {
-        loadingEl.hidden = true;
-        emptyEl.hidden = false;
-        emptyEl.textContent = 'Could not load media right now.';
+      if (mediaPageSection) {
+        const hydrate = initPressGrid(mediaPageSection, sorted, { limit: Infinity, sortDateFirst: true });
+        if (hydrate) await hydrate(pressConfig);
       }
+    } catch (error) {
       previewGrids.forEach((n) => {
         n.innerHTML = '<p class="appearance-empty">Could not load recent appearances right now.</p>';
       });
       if (carousels.length) { revealCarouselSections(); setCarouselError('Could not load media right now.'); }
-      if (pressGridSection) {
-        const g = pressGridSection.querySelector('[data-press-media-grid]');
+      [pressGridSection, mediaPageSection].forEach((s) => {
+        if (!s) return;
+        const g = s.querySelector('[data-press-media-grid]');
         if (g) g.innerHTML = '<p class="appearance-empty">Could not load media right now.</p>';
-      }
+      });
       console.error('media load error:', error);
     }
   }
 
-  if (grid || previewGrids.length || carousels.length || pressGridSection) {
+  if (previewGrids.length || carousels.length || pressGridSection || mediaPageSection) {
     loadMedia();
   }
 })();

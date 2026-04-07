@@ -4,132 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media | Caleb Zeringue</title>
-    <meta name="description" content="Media appearances, clips, and podcast features for Caleb Zeringue.">
+    <meta name="description" content="Press, podcast appearances, interviews, and clips for Caleb Zeringue.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css?v=34">
+    <link rel="stylesheet" href="styles.css?v=47">
     <style>
         .media-page {
             min-height: 100vh;
             padding: 2rem 0 4rem;
         }
-        .media-header {
-            margin-bottom: 1.5rem;
+        .media-page .proof-shell {
+            max-width: var(--container-width);
         }
-        .media-header .section-title {
-            margin-bottom: 0.5rem;
-        }
-        .media-subtitle {
-            color: var(--text-secondary);
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto;
-        }
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.1rem;
-            margin-top: 2rem;
-        }
-        .media-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .media-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-orange);
-        }
-        .media-thumb-wrap {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            background: var(--bg-darker);
-            overflow: hidden;
-        }
-        .media-thumb {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .media-pill {
-            position: absolute;
-            top: 0.6rem;
-            left: 0.6rem;
-            padding: 0.25rem 0.55rem;
-            border-radius: 999px;
-            background: var(--accent-orange);
-            color: var(--dm-on-accent);
-            font-family: var(--font-ui);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 700;
-        }
-        .media-card-body {
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-            padding: 0.95rem 1rem 1rem;
-            flex: 1;
-        }
-        .media-title {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            line-height: 1.1;
-            margin: 0;
-            color: var(--text-primary);
-        }
-        .media-date {
-            font-family: var(--font-ui);
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin: 0;
-        }
-        .media-desc {
-            margin: 0;
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            line-height: 1.5;
-        }
-        .media-empty,
-        .media-loading {
-            text-align: center;
-            color: var(--text-secondary);
-            padding: 1.25rem;
-            border: 1px dashed var(--border-light);
-            border-radius: 10px;
-            margin-top: 1.5rem;
-        }
-        .media-actions {
-            margin-top: auto;
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+        .media-page .press-media-grid {
+            margin-top: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <main class="media-page">
+    <main class="media-page proof-section">
         <div class="container">
-            <header class="media-header">
-                <h1 class="section-title">Media</h1>
-                <p class="media-subtitle">Podcast appearances, interviews, and clips. New items are managed privately via your admin portal.</p>
-            </header>
-
-            <div id="mediaLoading" class="media-loading">Loading media...</div>
-            <div id="mediaEmpty" class="media-empty" hidden>No media items yet. Add your first one in the admin portal.</div>
-            <section id="mediaGrid" class="media-grid" aria-live="polite"></section>
+            <div class="proof-shell">
+                <div class="proof-intro">
+                    <div>
+                        <p class="proof-kicker">Press & Media</p>
+                        <h1 class="proof-title">All sightings</h1>
+                        <p class="proof-subtitle" style="margin-top:0.5rem;color:var(--text-secondary);font-size:0.95rem;">Podcast appearances, interviews, articles, and clips.</p>
+                    </div>
+                    <div class="proof-actions">
+                        <a href="index.html" class="btn btn-primary">&larr; Home</a>
+                    </div>
+                </div>
+                <div class="press-grid-section" data-media-page-section>
+                    <div class="media-carousel-tablist" role="tablist" aria-label="Filter media by project">
+                        <button type="button" class="media-filter-tab" role="tab" id="media-tab-all" aria-selected="true" aria-controls="media-page-panel" data-press-tab="all" tabindex="0">All</button>
+                        <button type="button" class="media-filter-tab" role="tab" id="media-tab-standup" aria-selected="false" aria-controls="media-page-panel" data-press-tab="standup" tabindex="-1">Stand-Up</button>
+                        <button type="button" class="media-filter-tab" role="tab" id="media-tab-drillmaster" aria-selected="false" aria-controls="media-page-panel" data-press-tab="drillmaster" tabindex="-1">The Drill Master</button>
+                        <button type="button" class="media-filter-tab" role="tab" id="media-tab-luigi" aria-selected="false" aria-controls="media-page-panel" data-press-tab="luigi" tabindex="-1">Luigi the Musical</button>
+                    </div>
+                    <div id="media-page-panel" role="tabpanel" aria-labelledby="media-tab-all" tabindex="0">
+                        <div class="press-media-grid" data-press-media-grid>
+                            <p class="appearance-empty">Loading press &amp; media&hellip;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <script src="media.js?v=9"></script>
+    <script src="media.js?v=10"></script>
 </body>
 </html>

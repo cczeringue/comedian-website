@@ -25,7 +25,7 @@ const handleScroll = () => {
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('DOMContentLoaded', handleScroll);
 
-const cards = document.querySelectorAll('.video-card, .project-feature, .press-media-card');
+const cards = document.querySelectorAll('.project-feature, .press-media-card');
 cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();

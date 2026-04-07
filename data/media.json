@@ -8,7 +8,8 @@
     "description": "Debut mini-special. Full set on YouTube.",
     "date": "2025-08-01T12:00:00.000Z",
     "videoId": "u4Bhc3dAc4U",
-    "track": "standup"
+    "track": "standup",
+    "featured": true
   },
   {
     "id": "media_seed_tight_five",
@@ -19,7 +20,20 @@
     "description": "Stand-up clip on YouTube.",
     "date": "2025-09-01T12:00:00.000Z",
     "videoId": "JxfOLrBs6A0",
-    "track": "standup"
+    "track": "standup",
+    "featured": true
+  },
+  {
+    "id": "media_seed_lady_bushra",
+    "type": "video",
+    "title": "Opening for Lady Bushra",
+    "url": "https://www.youtube.com/watch?v=gwEjvz4pZW4",
+    "thumbnail": "https://i.ytimg.com/vi/gwEjvz4pZW4/hqdefault.jpg",
+    "description": "Hosting for BBC Comic Lady Bushra.",
+    "date": "2025-07-15T12:00:00.000Z",
+    "videoId": "gwEjvz4pZW4",
+    "track": "standup",
+    "featured": true
   },
   {
     "id": "media_seed_npr",
