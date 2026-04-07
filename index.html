@@ -26,7 +26,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <link rel="stylesheet" href="styles.css?v=32">
+    <link rel="stylesheet" href="styles.css?v=34">
     <link rel="preload" as="image" href="hero-desktop.jpg" imagesrcset="hero-mobile.jpg 1200w, hero-desktop.jpg 2000w" imagesizes="100vw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -202,17 +202,61 @@
         </a>
     </div>
 
-    <section class="recent-appearances" data-appearances-section hidden>
+    <section id="press" class="proof-section">
         <div class="container">
-            <div class="recent-appearances-header">
-                <div>
-                    <p class="recent-appearances-kicker">Recent Appearances</p>
-                    <h2 class="section-title">Recent appearances (not including sniffies)</h2>
-                    <p class="section-subtitle recent-appearances-subtitle">The latest podcasts, interviews, and clips that make you feel good about booking me for a stage, screen, conference, or corporate room.</p>
+            <div class="proof-shell">
+                <div class="proof-intro">
+                    <div>
+                        <p class="proof-kicker">Press & Appearances</p>
+                        <h2 class="proof-title">Seen, heard, and easy to book.</h2>
+                        <p class="proof-subtitle">Recent clips and spots by project—scroll the row, or open the full gallery. (Not including sniffies.)</p>
+                    </div>
+                    <div class="proof-actions">
+                        <a href="#contact" class="btn btn-primary">Book Caleb</a>
+                    </div>
                 </div>
-                <a href="/media" class="btn btn-tertiary recent-appearances-viewall">View all media</a>
+                <div class="media-carousel" data-media-carousel data-carousel-featured-only data-carousel-limit="12">
+                    <div class="media-carousel-tablist" role="tablist" aria-label="Filter media by project">
+                        <button type="button" class="media-filter-tab" role="tab" id="press-tab-standup" aria-selected="true" aria-controls="press-carousel-panel" data-carousel-tab="standup" tabindex="0">Stand-Up</button>
+                        <button type="button" class="media-filter-tab" role="tab" id="press-tab-drillmaster" aria-selected="false" aria-controls="press-carousel-panel" data-carousel-tab="drillmaster" tabindex="-1">The Drill Master</button>
+                        <button type="button" class="media-filter-tab" role="tab" id="press-tab-luigi" aria-selected="false" aria-controls="press-carousel-panel" data-carousel-tab="luigi" tabindex="-1">Luigi the Musical</button>
+                    </div>
+                    <div class="media-carousel-rail-outer" id="press-carousel-panel" role="tabpanel" data-carousel-tabpanel aria-labelledby="press-tab-standup" tabindex="0">
+                        <div class="media-carousel-rail" data-carousel-rail>
+                            <p class="appearance-empty media-carousel-loading">Loading clips…</p>
+                        </div>
+                    </div>
+                    <div class="media-carousel-footer">
+                        <a href="/media" class="btn btn-tertiary">View more</a>
+                    </div>
+                </div>
+                <div class="proof-press-below">
+                    <div class="proof-column-header">
+                        <h3>Latest press</h3>
+                        <p>Coverage that signals reach, taste, and cultural relevance.</p>
+                    </div>
+                    <div class="proof-press-list">
+                        <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="proof-press-card">
+                            <p class="proof-press-source">The New York Times</p>
+                            <h4 class="proof-press-title">Luigi the Musical becomes a national story.</h4>
+                            <p class="proof-press-copy">National coverage on the work, the satire, and why people kept talking about it.</p>
+                            <span class="proof-press-cta">Read coverage →</span>
+                        </a>
+                        <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" rel="noopener noreferrer" class="proof-press-card">
+                            <p class="proof-press-source">NPR</p>
+                            <h4 class="proof-press-title">Broadcast attention for a sold-out cultural moment.</h4>
+                            <p class="proof-press-copy">Proof that the work travels beyond comedy clubs into broader media and conversation.</p>
+                            <span class="proof-press-cta">Listen on NPR →</span>
+                        </a>
+                        <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" rel="noopener noreferrer" class="proof-press-card">
+                            <p class="proof-press-source">The Hollywood Reporter</p>
+                            <h4 class="proof-press-title">Industry press for a sellout run.</h4>
+                            <p class="proof-press-copy">Useful social proof for bookers, brands, and partners who want signal before they reach out.</p>
+                            <span class="proof-press-cta">Read feature →</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="recent-appearances-grid" data-appearances-grid data-appearances-limit="3"></div>
         </div>
     </section>
 
@@ -354,79 +398,6 @@
                             </section>
                         </blockquote>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Press Section -->
-    <section id="press" class="press">
-        <div class="container">
-            <h2 class="section-title">Latest Press & Interviews</h2>
-            <div class="press-tabs" role="tablist">
-                <button type="button" class="press-tab active" role="tab" aria-selected="true" data-press-tab="luigi">Luigi the Musical</button>
-                <button type="button" class="press-tab" role="tab" aria-selected="false" data-press-tab="drillmaster">The Drill Master</button>
-            </div>
-
-            <!-- Luigi the Musical panel -->
-            <div class="press-panel active" id="press-panel-luigi" role="tabpanel">
-            <div class="media-interviews-carousel">
-                <div class="carousel-container">
-                    <div class="carousel-track" id="mediaCarousel">
-                        <div class="interview-card carousel-slide">
-                            <div class="interview-header">
-                                <div class="interview-source">
-                                    <img src="logos/npr-logo.svg" alt="NPR" class="interview-logo" loading="lazy" onerror="this.onerror=null; this.src='logos/npr-logo.png';">
-                                </div>
-                                <h3 class="interview-title">A musical about Luigi Mangione sells out theaters — and raises eyebrows</h3>
-                            </div>
-                            <p class="interview-preview">The UnitedHealthcare CEO's alleged killer was in the same Brooklyn jail as Diddy and Sam Bankman-Fried. A satirical comedy about their jailhouse vibe is selling out theaters — and raising eyebrows.</p>
-                            <div class="interview-embed">
-                                <iframe src="https://www.npr.org/player/embed/nx-s1-5507977-e1/nx-s1-9445207" width="100%" height="200" frameborder="0" scrolling="no" title="NPR embedded audio player"></iframe>
-                            </div>
-                            <a href="https://www.npr.org/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Listen</a>
-                        </div>
-                        <div class="interview-card carousel-slide">
-                            <div class="interview-header">
-                                <div class="interview-source">
-                                    <img src="logos/cnn-logo-card.png" alt="CNN" class="interview-logo" loading="lazy">
-                                </div>
-                                <h3 class="interview-title">Luigi the Musical' creators say the play is not what you expect</h3>
-                            </div>
-                            <p class="interview-preview">A musical satire about Luigi Manion, Sam Bankman-Fried, and Diddy Combs locked up together in a Brooklyn prison, explores violence in society.</p>
-                            <div class="interview-embed tiktok-embed-container">
-                                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cnn/video/7515576120205462830" data-video-id="7515576120205462830" style="max-width: 100%; min-width: 325px;">
-                                    <section>
-                                        <a target="_blank" href="https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en" title="@cnn">@cnn</a>
-                                    </section>
-                                </blockquote>
-                            </div>
-                            <a href="https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Watch</a>
-                        </div>
-                        <div class="interview-card carousel-slide">
-                            <div class="interview-header">
-                                <div class="interview-source">
-                                    <img src="logos/broadway-world-logo.png" alt="Broadway World" class="interview-logo" loading="lazy">
-                                </div>
-                                <h3 class="interview-title">How LUIGI THE MUSICAL Is Pushing the Boundaries of Musical Theatre</h3>
-                            </div>
-                            <a href="https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813" target="_blank" rel="noopener noreferrer" class="interview-quote-image">
-                                <img src="logos/broadway-world-quote.jpg" alt="Caleb Zeringue quote about musicals and current events" class="quote-image" loading="lazy" onerror="this.onerror=null; this.src='logos/broadway-world-quote.png';">
-                            </a>
-                            <a href="https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Read it</a>
-                        </div>
-                    </div>
-                    <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous slide">‹</button>
-                    <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next slide">›</button>
-                </div>
-                <div class="carousel-dots" id="carouselDots"></div>
-            </div>
-            </div>
-
-            <!-- The Drill Master panel -->
-            <div class="press-panel" id="press-panel-drillmaster" role="tabpanel" hidden>
-                <div class="press-placeholder">
-                    <p>More coverage coming soon. <a href="https://thedrillmaster.gay" target="_blank" rel="noopener noreferrer">The Drill Master</a> — table read April 1 in San Francisco (The Eagle); staged reading May 3 at The Elysian (Netflix is a Joke), Los Angeles.</p>
                 </div>
             </div>
         </div>
@@ -587,7 +558,7 @@
         </div>
     </div>
     
-        <script src="media.js?v=2"></script>
+        <script src="media.js?v=5"></script>
         <script src="script.js?v=13"></script>
         <script src="https://widget.seated.com/app.js"></script>
         <script async src="//www.instagram.com/embed.js"></script>

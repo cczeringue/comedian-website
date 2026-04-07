@@ -7,7 +7,8 @@
     "thumbnail": "https://i.ytimg.com/vi/u4Bhc3dAc4U/hqdefault.jpg",
     "description": "Debut mini-special. Full set on YouTube.",
     "date": "2025-08-01T12:00:00.000Z",
-    "videoId": "u4Bhc3dAc4U"
+    "videoId": "u4Bhc3dAc4U",
+    "track": "standup"
   },
   {
     "id": "media_seed_tight_five",
@@ -17,7 +18,8 @@
     "thumbnail": "https://i.ytimg.com/vi/JxfOLrBs6A0/hqdefault.jpg",
     "description": "Stand-up clip on YouTube.",
     "date": "2025-09-01T12:00:00.000Z",
-    "videoId": "JxfOLrBs6A0"
+    "videoId": "JxfOLrBs6A0",
+    "track": "standup"
   },
   {
     "id": "media_seed_npr",
@@ -27,6 +29,7 @@
     "thumbnail": "og-image.jpg",
     "description": "NPR interview coverage featuring Luigi the Musical.",
     "date": "2025-08-14T12:00:00.000Z",
-    "videoId": ""
+    "videoId": "",
+    "track": "luigi"
   }
 ]

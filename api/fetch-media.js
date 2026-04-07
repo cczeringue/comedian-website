@@ -105,11 +105,34 @@ export default async function handler(req, res) {
 
     let title = getMeta(html, 'og:title') || getTitleFallback(html);
     let thumbnail = getMeta(html, 'og:image');
-    const description = getMeta(html, 'og:description') || getMeta(html, 'description') || '';
+    let description = getMeta(html, 'og:description') || getMeta(html, 'description') || '';
     const type = inferType(finalUrl);
 
-    if (youtubeId && !thumbnail) {
-      thumbnail = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+    if (youtubeId) {
+      const watchUrl = `https://www.youtube.com/watch?v=${youtubeId}`;
+      try {
+        const oembedRes = await fetch(
+          `https://www.youtube.com/oembed?url=${encodeURIComponent(watchUrl)}&format=json`,
+          { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DrillmasterMediaBot/1.0)' } }
+        );
+        if (oembedRes.ok) {
+          const oembed = await oembedRes.json();
+          if (oembed.title && typeof oembed.title === 'string') {
+            title = oembed.title.trim();
+          }
+          if (oembed.author_name && (!description || description.length < 20)) {
+            description = `${oembed.author_name} on YouTube`.trim();
+          }
+          if (oembed.thumbnail_url && typeof oembed.thumbnail_url === 'string') {
+            thumbnail = oembed.thumbnail_url;
+          }
+        }
+      } catch (_) {
+        /* keep HTML meta */
+      }
+      if (!thumbnail) {
+        thumbnail = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+      }
     }
 
     if (!title) title = 'Untitled media item';

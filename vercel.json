@@ -80,6 +80,10 @@
     {
       "src": "drillmaster-card.png",
       "use": "@vercel/static"
+    },
+    {
+      "src": "data/media.json",
+      "use": "@vercel/static"
     }
   ],
   "routes": [

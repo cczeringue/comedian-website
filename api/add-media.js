@@ -62,7 +62,9 @@ export default async function handler(req, res) {
     const normalized = normalizeMediaItem({
       ...payload,
       url,
-      videoId: payload.videoId || getYoutubeId(url)
+      videoId: payload.videoId || getYoutubeId(url),
+      track: payload.track,
+      featured: payload.featured
     });
 
     mediaItems.push(normalized);

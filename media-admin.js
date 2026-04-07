@@ -19,11 +19,33 @@
 
   const previewCard = document.getElementById('previewCard');
   const previewThumb = document.getElementById('previewThumb');
-  const previewTitle = document.getElementById('previewTitle');
   const previewMeta = document.getElementById('previewMeta');
-  const previewDesc = document.getElementById('previewDesc');
+  const editTitle = document.getElementById('editTitle');
+  const editDesc = document.getElementById('editDesc');
+  const editFeatured = document.getElementById('editFeatured');
 
   let draftMedia = null;
+
+  function inferTrackFromDraft(item) {
+    const hay = `${item.url || ''} ${item.title || ''}`.toLowerCase();
+    if (hay.includes('luigithemusical')) return 'luigi';
+    if (hay.includes('luigi') && (hay.includes('musical') || hay.includes('mangione'))) return 'luigi';
+    if (hay.includes('drillmaster') || hay.includes('thedrillmaster')) return 'drillmaster';
+    return 'standup';
+  }
+
+  function setTrackRadios(track) {
+    const allowed = ['standup', 'drillmaster', 'luigi'];
+    const value = allowed.includes(track) ? track : 'standup';
+    document.querySelectorAll('input[name="mediaTrack"]').forEach((input) => {
+      input.checked = input.value === value;
+    });
+  }
+
+  function getSelectedTrack() {
+    const checked = document.querySelector('input[name="mediaTrack"]:checked');
+    return checked ? checked.value : 'standup';
+  }
 
   function getAdminKey() {
     return sessionStorage.getItem(STORAGE_KEY) || '';
@@ -59,15 +81,19 @@
     previewCard.hidden = false;
     previewThumb.src = item.thumbnail || '../drillmaster-card.png';
     previewThumb.alt = item.title || 'Media thumbnail';
-    previewTitle.textContent = item.title || 'Untitled';
+    editTitle.value = item.title || '';
+    editDesc.value = item.description || '';
+    editFeatured.checked = false;
     previewMeta.textContent = `${(item.type || 'video').toUpperCase()} • ${new Date(item.date).toLocaleString()}`;
-    previewDesc.textContent = item.description || 'No description available.';
   }
 
   function resetDraft() {
     draftMedia = null;
     previewCard.hidden = true;
     saveBtn.disabled = true;
+    editTitle.value = '';
+    editDesc.value = '';
+    editFeatured.checked = false;
   }
 
   async function handleFetch() {
@@ -95,6 +121,7 @@
       }
       draftMedia = data.media;
       setPreview(draftMedia);
+      setTrackRadios(inferTrackFromDraft(draftMedia));
       saveBtn.disabled = false;
       setStatus(managerStatus, 'Metadata loaded. Review and click Save.', 'success');
     } catch (error) {
@@ -128,7 +155,13 @@
           'Content-Type': 'application/json',
           Authorization: `Bearer ${adminKey}`
         },
-        body: JSON.stringify(draftMedia)
+        body: JSON.stringify({
+          ...draftMedia,
+          title: (editTitle.value || '').trim() || draftMedia.title || 'Untitled appearance',
+          description: (editDesc.value || '').trim(),
+          track: getSelectedTrack(),
+          featured: editFeatured.checked
+        })
       });
       const data = await response.json();
       if (!response.ok) {
@@ -185,6 +218,12 @@
       urlInput.value = '';
       resetDraft();
     });
+
+    if (editTitle) {
+      editTitle.addEventListener('input', function () {
+        previewThumb.alt = editTitle.value.trim() || 'Media thumbnail';
+      });
+    }
   }
 
   boot();

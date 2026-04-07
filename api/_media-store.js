@@ -62,6 +62,25 @@ function normalizeType(type, url = '') {
   return 'video';
 }
 
+const TRACK_VALUES = new Set(['standup', 'drillmaster', 'luigi']);
+
+export function inferMediaTrack(raw = {}) {
+  const explicit = String(raw.track || '')
+    .toLowerCase()
+    .trim();
+  if (TRACK_VALUES.has(explicit)) return explicit;
+
+  const hay = `${raw.url || ''} ${raw.title || ''}`.toLowerCase();
+  if (hay.includes('luigithemusical')) return 'luigi';
+  if (hay.includes('luigi') && (hay.includes('musical') || hay.includes('mangione'))) return 'luigi';
+  if (hay.includes('drillmaster') || hay.includes('thedrillmaster')) return 'drillmaster';
+  return 'standup';
+}
+
+function coerceFeatured(value) {
+  return value === true || value === 'true' || value === 1 || value === '1';
+}
+
 export function normalizeMediaItem(raw) {
   const item = raw || {};
   return {
@@ -72,7 +91,9 @@ export function normalizeMediaItem(raw) {
     thumbnail: item.thumbnail ? String(item.thumbnail) : '',
     description: item.description ? String(item.description) : '',
     date: coerceDate(item.date),
-    videoId: item.videoId ? String(item.videoId) : ''
+    videoId: item.videoId ? String(item.videoId) : '',
+    track: inferMediaTrack(item),
+    featured: coerceFeatured(item.featured)
   };
 }
 

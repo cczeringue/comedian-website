@@ -43,6 +43,34 @@
             color: var(--text-secondary);
             font-weight: 700;
         }
+        .admin-track-label {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+        .admin-track-radios {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem 1.1rem;
+        }
+        .admin-track-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .admin-track-option input {
+            accent-color: var(--accent-orange);
+        }
         .admin-input {
             width: 100%;
             border: 1px solid var(--border-light);
@@ -51,6 +79,16 @@
             background: var(--bg-darker);
             color: var(--text-primary);
             font-family: var(--font-ui);
+        }
+        .admin-textarea {
+            min-height: 5.5rem;
+            resize: vertical;
+            line-height: 1.5;
+        }
+        .admin-featured-row {
+            margin-top: 0.65rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-light);
         }
         .admin-actions {
             display: flex;
@@ -119,11 +157,20 @@
 
             <section class="admin-shell" id="managerPanel" hidden>
                 <h2 class="admin-title">Add media</h2>
-                <p class="admin-subtitle">Paste a YouTube or podcast URL, fetch metadata, then save.</p>
+                <p class="admin-subtitle">Paste a URL, fetch metadata, fix the title or description if needed, then save. Use “Feature on homepage” for the Press section carousel.</p>
 
                 <div class="admin-form-row">
                     <label for="mediaUrlInput">Media URL</label>
                     <input id="mediaUrlInput" class="admin-input" type="url" placeholder="https://youtube.com/... or podcast URL">
+                </div>
+
+                <div class="admin-form-row" aria-label="Project or category">
+                    <span class="admin-track-label">Show under</span>
+                    <div class="admin-track-radios" role="radiogroup" aria-label="Gallery category">
+                        <label class="admin-track-option"><input type="radio" name="mediaTrack" value="standup" checked> Stand-Up</label>
+                        <label class="admin-track-option"><input type="radio" name="mediaTrack" value="drillmaster"> The Drill Master</label>
+                        <label class="admin-track-option"><input type="radio" name="mediaTrack" value="luigi"> Luigi the Musical</label>
+                    </div>
                 </div>
 
                 <div class="admin-actions">
@@ -137,9 +184,19 @@
                 <article id="previewCard" class="preview-card" hidden>
                     <img id="previewThumb" class="preview-thumb" alt="">
                     <div class="preview-content">
-                        <h3 id="previewTitle" class="preview-title"></h3>
+                        <div class="admin-form-row">
+                            <label for="editTitle">Title</label>
+                            <input id="editTitle" class="admin-input" type="text" autocomplete="off" maxlength="500">
+                        </div>
+                        <div class="admin-form-row">
+                            <label for="editDesc">Description</label>
+                            <textarea id="editDesc" class="admin-input admin-textarea" maxlength="2000" rows="4"></textarea>
+                        </div>
                         <p id="previewMeta" class="preview-text"></p>
-                        <p id="previewDesc" class="preview-text" style="margin-top:0.5rem;"></p>
+                        <label class="admin-track-option admin-featured-row">
+                            <input type="checkbox" id="editFeatured" name="editFeatured">
+                            Feature on homepage (Press carousel)
+                        </label>
                     </div>
                 </article>
             </section>
