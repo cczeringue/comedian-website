@@ -1,0 +1,75 @@
+[
+  {
+    "url": "https://www.ebar.com/story/164527/Arts%20%26%20Culture/Theater/",
+    "source": "Bay Area Reporter",
+    "title": "The Drill Master sneak peek at the SF Eagle",
+    "description": "Comedian Jenny Zigrino and Caleb Zeringue debut their gay history comedy about America\u2019s most fabulous general.",
+    "thumbnail": "/drillmaster-card.png",
+    "kind": "article",
+    "tracks": ["drillmaster"],
+    "featured": false
+  },
+  {
+    "url": "https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en",
+    "source": "CNN",
+    "title": "CNN interview on Luigi the Musical",
+    "description": "CNN covers the viral phenomenon behind Luigi the Musical.",
+    "thumbnail": "/images/press/cnn-tiktok.jpg",
+    "kind": "article",
+    "tracks": ["luigi"],
+    "featured": true,
+    "featuredBadge": true
+  },
+  {
+    "url": "https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html",
+    "source": "The New York Times",
+    "title": "The battle to define Luigi Mangione takes center stage",
+    "description": "In \u201cLuigi: The Musical\u201d and across the internet, artists, journalists and supporters vie to shape the murder suspect\u2019s symbolic reputation.",
+    "thumbnail": "https://static01.nyt.com/images/2025/07/01/arts/cul-luigi-notebook-promo/cul-luigi-notebook-promo-facebookJumbo.jpg",
+    "kind": "article",
+    "tracks": ["luigi"],
+    "featured": true,
+    "featuredBadge": true
+  },
+  {
+    "url": "https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows",
+    "source": "NPR",
+    "title": "A musical about Luigi Mangione sells out theaters and raises eyebrows",
+    "description": "Broadcast attention for a sold-out cultural moment.",
+    "thumbnail": "https://media.npr.org/include/images/facebook-default-wide-s1400-c85.jpg",
+    "kind": "podcast",
+    "tracks": ["luigi"],
+    "featured": true
+  },
+  {
+    "url": "https://youtu.be/LuOwLJz753o?si=-FZt1dt2qKTdIQJw",
+    "source": "Radio",
+    "title": "Radio interview",
+    "description": "Radio appearance.",
+    "thumbnail": "https://i.ytimg.com/vi/LuOwLJz753o/hqdefault.jpg",
+    "kind": "audio",
+    "tracks": ["standup"],
+    "featured": false,
+    "fromGallery": true
+  },
+  {
+    "url": "https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/",
+    "source": "The Hollywood Reporter",
+    "title": "Industry press for a sellout run",
+    "description": "Useful social proof for bookers, brands, and partners who want signal before they reach out.",
+    "thumbnail": "https://www.hollywoodreporter.com/wp-content/uploads/2025/07/94a7e2_2d6532bb9c2d412da4bd23e1b001bf9dmv2-H-2025.jpg?w=1296&h=730&crop=1",
+    "kind": "article",
+    "tracks": ["luigi"],
+    "featured": false
+  },
+  {
+    "url": "https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813",
+    "source": "BroadwayWorld",
+    "title": "How Luigi the Musical is pushing the boundaries of musical theatre",
+    "description": "Interview with the creative team behind the satirical prison musical sensation.",
+    "thumbnail": "https://cloudimages.broadwayworld.com/columnpiccloud/Interview-LUIGI-1755094713.jpg",
+    "kind": "article",
+    "tracks": ["luigi"],
+    "featured": false
+  }
+]

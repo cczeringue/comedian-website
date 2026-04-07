@@ -84,6 +84,14 @@
     {
       "src": "data/media.json",
       "use": "@vercel/static"
+    },
+    {
+      "src": "data/press-grid.json",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -114,6 +122,10 @@
     {
       "src": "/api/add-media",
       "dest": "api/add-media.js"
+    },
+    {
+      "src": "/api/unfurl",
+      "dest": "api/unfurl.js"
     },
     {
       "src": "/links",

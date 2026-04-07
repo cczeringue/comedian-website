@@ -805,106 +805,123 @@ button:focus-visible {
     align-items: center;
 }
 
-.proof-grid {
+
+/* ── unified press+media grid ── */
+.press-grid-section {
+    margin-top: 0.35rem;
+}
+
+.press-media-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.95fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 
-.proof-column {
-    min-width: 0;
+@media (min-width: 520px) {
+    .press-media-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
-.proof-column-header {
-    margin-bottom: 0.85rem;
-}
-
-.proof-column-header h3 {
-    margin: 0;
-    color: var(--text-primary);
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    text-transform: uppercase;
-}
-
-.proof-column-header p {
-    margin: 0.35rem 0 0;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.proof-appearances-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-.proof-press-below {
-    margin-top: 1.75rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-light);
-}
-
-.proof-press-list {
-    display: grid;
-    gap: 0.85rem;
-}
-
-@media (min-width: 768px) {
-    .proof-press-below .proof-press-list {
+@media (min-width: 900px) {
+    .press-media-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
-.proof-press-card {
-    display: block;
-    padding: 1rem 1.05rem;
+.press-media-card {
+    background: var(--bg-card);
     border: 1px solid var(--border-light);
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.02);
-    text-decoration: none;
-    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    overflow: hidden;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
-.proof-press-card:hover {
-    transform: translateY(-2px);
+.press-media-card:hover {
+    transform: translateY(-3px);
     border-color: var(--accent-orange);
-    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.26);
 }
 
-.proof-press-source {
+.press-media-card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.press-card-thumb-wrap {
+    position: relative;
+    background: var(--bg-darker);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.press-card-badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    max-width: calc(100% - 1.5rem);
+}
+
+.press-card-badges .appearance-pill {
+    position: static;
+}
+
+.appearance-pill--featured {
+    background: transparent;
+    color: var(--accent-orange);
+    border: 1px solid rgba(255, 136, 51, 0.85);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.press-card-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.press-card-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+}
+
+.press-card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.press-card-source {
     margin: 0;
     color: var(--accent-orange);
     font-family: var(--font-ui);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
-.proof-press-title {
-    margin: 0.35rem 0 0;
+.press-card-title {
+    margin: 0;
     color: var(--text-primary);
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    line-height: 1.12;
+    font-size: 1.05rem;
+    line-height: 1.15;
     text-wrap: balance;
 }
 
-.proof-press-copy {
-    margin: 0.45rem 0 0;
+.press-card-desc {
+    margin: 0;
     color: var(--text-secondary);
+    font-size: 0.88rem;
     line-height: 1.5;
-    text-wrap: pretty;
-}
-
-.proof-press-cta {
-    display: inline-block;
-    margin-top: 0.75rem;
-    color: var(--accent-orange);
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
 }
 
 .appearance-card {
@@ -1090,6 +1107,10 @@ button:focus-visible {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem;
+}
+
+.press-grid-section .media-carousel-footer {
+    justify-content: center;
 }
 
 .media-carousel-empty a {
@@ -2853,13 +2874,6 @@ button:focus-visible {
         align-items: flex-start;
     }
 
-    .proof-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .proof-appearances-grid {
-        grid-template-columns: 1fr;
-    }
 
     .project-card-content,
     .drill-master-content {

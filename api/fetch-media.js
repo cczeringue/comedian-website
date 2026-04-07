@@ -49,7 +49,7 @@ function getYoutubeId(url) {
 
 function inferType(url) {
   const lc = String(url).toLowerCase();
-  if (lc.includes('youtube.com') || lc.includes('youtu.be') || lc.includes('vimeo.com')) return 'video';
+  if (lc.includes('youtube.com') || lc.includes('youtu.be') || lc.includes('vimeo.com') || lc.includes('tiktok.com')) return 'video';
   if (
     lc.includes('podcast') ||
     lc.includes('spotify.com/show') ||
@@ -61,6 +61,13 @@ function inferType(url) {
     return 'podcast';
   }
   return 'video';
+}
+
+function getTiktokVideoId(url) {
+  try {
+    const match = url.match(/tiktok\.com\/@[^/]+\/video\/(\d+)/);
+    return match ? match[1] : '';
+  } catch (_) { return ''; }
 }
 
 export default async function handler(req, res) {
@@ -88,11 +95,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'URL is required' });
     }
 
+    const UA_BOT = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
+
     const response = await fetch(url, {
       redirect: 'follow',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; DrillmasterMediaBot/1.0)'
-      }
+      headers: { 'User-Agent': UA_BOT }
     });
 
     if (!response.ok) {
@@ -102,6 +109,7 @@ export default async function handler(req, res) {
     const html = await response.text();
     const finalUrl = response.url || url;
     const youtubeId = getYoutubeId(finalUrl) || getYoutubeId(url);
+    const tiktokId = getTiktokVideoId(finalUrl) || getTiktokVideoId(url);
 
     let title = getMeta(html, 'og:title') || getTitleFallback(html);
     let thumbnail = getMeta(html, 'og:image');
@@ -113,7 +121,7 @@ export default async function handler(req, res) {
       try {
         const oembedRes = await fetch(
           `https://www.youtube.com/oembed?url=${encodeURIComponent(watchUrl)}&format=json`,
-          { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DrillmasterMediaBot/1.0)' } }
+          { headers: { 'User-Agent': UA_BOT } }
         );
         if (oembedRes.ok) {
           const oembed = await oembedRes.json();
@@ -132,6 +140,25 @@ export default async function handler(req, res) {
       }
       if (!thumbnail) {
         thumbnail = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+      }
+    }
+
+    if (tiktokId) {
+      try {
+        const oembedRes = await fetch(
+          `https://www.tiktok.com/oembed?url=${encodeURIComponent(finalUrl)}`,
+          { headers: { 'User-Agent': UA_BOT } }
+        );
+        if (oembedRes.ok) {
+          const oembed = await oembedRes.json();
+          if (oembed.title) title = oembed.title.trim();
+          if (oembed.thumbnail_url) thumbnail = oembed.thumbnail_url;
+          if (oembed.author_name && (!description || description.length < 20)) {
+            description = `${oembed.author_name} on TikTok`.trim();
+          }
+        }
+      } catch (_) {
+        /* keep HTML meta */
       }
     }
 
