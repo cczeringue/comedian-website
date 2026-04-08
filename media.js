@@ -521,7 +521,7 @@
     };
 
     const fromApi = async () => {
-      const response = await fetch('/api/media');
+      const response = await fetch('/api/media', { cache: 'no-store' });
       if (!response.ok) throw new Error(`API HTTP ${response.status}`);
       const data = await parseApiResponse(response);
       return Array.isArray(data.media) ? data.media : [];
