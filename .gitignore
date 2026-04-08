@@ -17,6 +17,9 @@ Thumbs.db
 .classpath
 .settings/
 
+# Dependencies
+node_modules/
+
 # Logs
 *.log
 npm-debug.log*

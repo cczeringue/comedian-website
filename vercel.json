@@ -46,6 +46,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "hero-performance.jpg",
+      "use": "@vercel/static"
+    },
+    {
       "src": "hero-mobile.jpg",
       "use": "@vercel/static"
     },

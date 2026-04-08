@@ -132,11 +132,107 @@ const sectionFadeObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll(
-    '.section-title, .section-subtitle, .about-content, .standup-featured, .standup-clips, .booking-form-element, .contact-layout, .trust-bar .press-logos, .projects-showcase, .proof-shell'
+    '.section-title, .section-subtitle, .about-content, .standup-featured, .standup-clips, .booking-form-element, .contact-layout, .trust-bar .press-logos, .projects-showcase, .proof-shell, .testimonials-rotator'
 ).forEach(el => {
     el.classList.add('fade-in-section');
     sectionFadeObserver.observe(el);
 });
+
+/* Testimonials rotator — add entries to TESTIMONIALS to enable auto-rotate + dots */
+const TESTIMONIALS = [
+    {
+        quote: 'Smart, weird, and genuinely unpredictable. Caleb Zeringue is doing something fresh and it shows.',
+        name: 'Lady Bushra',
+        nameUrl: 'https://www.instagram.com/lady.bushra/',
+        credential: 'shortlisted BBC Comic'
+    }
+];
+
+function escapeTestimonialHtml(str) {
+    return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function initTestimonialsRotator() {
+    const root = document.querySelector('[data-testimonials-rotator]');
+    const track = root?.querySelector('[data-testimonials-track]');
+    if (!root || !track || !TESTIMONIALS.length) return;
+
+    track.innerHTML = TESTIMONIALS.map((t, i) => {
+        const nameLink = `<a href="${escapeTestimonialHtml(t.nameUrl)}" target="_blank" rel="noopener noreferrer">${escapeTestimonialHtml(t.name)}</a>`;
+        const cred = t.credential ? `, ${escapeTestimonialHtml(t.credential)}` : '';
+        return `<blockquote class="testimonial-slide${i === 0 ? ' is-active' : ''}" data-testimonial-index="${i}" aria-hidden="${i !== 0}">
+            <p class="testimonial-quote">${escapeTestimonialHtml(t.quote)}</p>
+            <footer class="testimonial-attribution">&mdash; <cite class="testimonial-cite">${nameLink}${cred}</cite></footer>
+        </blockquote>`;
+    }).join('');
+    track.hidden = false;
+
+    const slides = () => [...track.querySelectorAll('.testimonial-slide')];
+    if (slides().length <= 1) return;
+
+    const dotsWrap = root.querySelector('[data-testimonials-dots]');
+    const controls = root.querySelector('[data-testimonials-controls]');
+    const prevBtn = root.querySelector('[data-testimonials-prev]');
+    const nextBtn = root.querySelector('[data-testimonials-next]');
+    let index = 0;
+    let timer;
+
+    const show = (next) => {
+        const list = slides();
+        const n = ((next % list.length) + list.length) % list.length;
+        list.forEach((el, i) => {
+            el.classList.toggle('is-active', i === n);
+            el.setAttribute('aria-hidden', String(i !== n));
+        });
+        dotsWrap?.querySelectorAll('.testimonials-dot').forEach((btn, i) => {
+            btn.setAttribute('aria-selected', String(i === n));
+            btn.classList.toggle('is-active', i === n);
+        });
+        index = n;
+    };
+
+    controls.hidden = false;
+    dotsWrap.innerHTML = TESTIMONIALS.map((_, i) =>
+        `<button type="button" class="testimonials-dot${i === 0 ? ' is-active' : ''}" role="tab" aria-selected="${i === 0}" aria-label="Testimonial ${i + 1} of ${TESTIMONIALS.length}" data-dot="${i}"></button>`
+    ).join('');
+
+    dotsWrap.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-dot]');
+        if (!b) return;
+        show(Number.parseInt(b.dataset.dot, 10));
+        resetTimer();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+        show(index - 1);
+        resetTimer();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+        show(index + 1);
+        resetTimer();
+    });
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ROTATE_MS = 9000;
+
+    function resetTimer() {
+        clearInterval(timer);
+        if (!prefersReduced) {
+            timer = setInterval(() => show(index + 1), ROTATE_MS);
+        }
+    }
+
+    resetTimer();
+    root.addEventListener('mouseenter', () => clearInterval(timer));
+    root.addEventListener('mouseleave', () => resetTimer());
+}
+
+initTestimonialsRotator();
 
 document.querySelectorAll('.btn, .social-link').forEach(button => {
     button.addEventListener('click', () => {
