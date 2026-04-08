@@ -189,8 +189,31 @@ button:focus-visible {
     top: 0;
     z-index: 1000;
     background: var(--bg-dark);
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
     width: 100%;
+}
+
+/*
+ * Mobile / tablet: fixed header so the bar background is flush to the physical top of the screen
+ * (edge-to-edge behind the status bar / Dynamic Island). Sticky alone left visible hero/orange gaps on iOS.
+ */
+@media (max-width: 1024px) {
+    #sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    /* Offset page content by full header height (safe area + brand row) */
+    #main-content {
+        padding-top: calc(env(safe-area-inset-top, 0px) + 3.5rem);
+    }
+
+    .hero-split {
+        padding-top: clamp(0.5rem, 2vw, 1rem);
+    }
 }
 
 #sticky-header .header-inner {
@@ -543,7 +566,10 @@ button:focus-visible {
     max-width: min(100vw, 22rem);
     height: 100vh;
     height: 100dvh;
-    padding: 4.75rem 1.5rem 2rem;
+    padding-top: max(4.75rem, calc(3.25rem + env(safe-area-inset-top, 0px)));
+    padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
+    padding-right: 1.5rem;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
     transition: left 0.3s ease;
     gap: 0.25rem;
@@ -4036,5 +4062,12 @@ button:focus-visible {
 @media (max-width: 520px) {
     .epk-stat-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* EPK main uses shorthand padding; restore fixed-header top inset on phones */
+@media (max-width: 1024px) {
+    main#main-content.epk-page {
+        padding-top: calc(env(safe-area-inset-top, 0px) + 3.5rem + clamp(1.5rem, 4vw, 3rem));
     }
 }
