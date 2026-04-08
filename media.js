@@ -306,7 +306,8 @@
     return null;
   }
 
-  function mergePressAndMedia(pressEntries, galleryMedia) {
+  function mergePressAndMedia(pressEntries, galleryMedia, mergeOpts) {
+    const includeAllGallery = !!(mergeOpts && mergeOpts.includeAllGallery);
     const urlIndex = new Map();
     galleryMedia.forEach((item) => { urlIndex.set(normalizeUrl(item.url), item); });
 
@@ -364,21 +365,24 @@
 
     let galleryPressOrder = 0;
     galleryMedia.forEach((item) => {
-      if (!usedUrls.has(normalizeUrl(item.url)) && isFeaturedItem(item)) {
-        const gKind = pressKindForGalleryItem(item);
-        merged.push({
-          ...item,
-          _pressKind: gKind,
-          _pressOrder: 1000 + galleryPressOrder,
-          _mediaPagePin: null,
-          _showFeaturedBadge: false,
-          _source: '',
-          _tracks: [normalizeTrack(item)],
-          _curated: false,
-          _featured: true
-        });
-        galleryPressOrder += 1;
-      }
+      const nUrl = normalizeUrl(item.url);
+      if (usedUrls.has(nUrl)) return;
+      const allow = includeAllGallery || isFeaturedItem(item);
+      if (!allow) return;
+      const gKind = pressKindForGalleryItem(item);
+      merged.push({
+        ...item,
+        _pressKind: gKind,
+        _pressOrder: 1000 + galleryPressOrder,
+        _mediaPagePin: null,
+        _showFeaturedBadge: false,
+        _source: '',
+        _tracks: [normalizeTrack(item)],
+        _curated: false,
+        _featured: isFeaturedItem(item)
+      });
+      usedUrls.add(nUrl);
+      galleryPressOrder += 1;
     });
 
     return merged;
@@ -489,7 +493,7 @@
     }
 
     return async function hydrate(pressConfig) {
-      mergedItems = mergePressAndMedia(pressConfig, galleryMedia);
+      mergedItems = mergePressAndMedia(pressConfig, galleryMedia, opts);
       activateTab(active);
 
       const needUnfurl = mergedItems.filter((i) => i._needsUnfurl);
@@ -570,7 +574,11 @@
       }
 
       if (mediaPageSection) {
-        const hydrate = initPressGrid(mediaPageSection, sorted, { limit: Infinity, sortDateFirst: true });
+        const hydrate = initPressGrid(mediaPageSection, sorted, {
+          limit: Infinity,
+          sortDateFirst: true,
+          includeAllGallery: true
+        });
         if (hydrate) await hydrate(pressConfig);
       }
     } catch (error) {
