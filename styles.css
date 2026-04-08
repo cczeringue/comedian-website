@@ -1792,6 +1792,33 @@ button:focus-visible {
     color: #fff;
 }
 
+.contact-epk-note {
+    margin: 2rem auto 0;
+    max-width: 900px;
+    padding-top: 1.5rem;
+    border-top: 1px dashed rgba(255, 251, 245, 0.22);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: rgba(255, 251, 245, 0.78);
+    text-align: center;
+}
+
+.contact-epk-link {
+    font-weight: 700;
+    color: var(--p-amber-500);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.contact-epk-link:hover {
+    color: #fff;
+}
+
+.contact-epk-hint {
+    font-weight: 500;
+    color: rgba(255, 251, 245, 0.72);
+}
+
 .contact .form-group label {
     color: rgba(255, 251, 245, 0.92);
 }
