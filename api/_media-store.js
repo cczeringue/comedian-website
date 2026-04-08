@@ -32,10 +32,42 @@ function safeArray(input) {
   return Array.isArray(input) ? input : [];
 }
 
+/** Upstash SET via POST expects the raw value as the body, not `{"value":...}`. Normalize GET result to an array. */
+function parseKvMediaResult(raw) {
+  if (raw == null || raw === '') return [];
+  if (Array.isArray(raw)) return raw;
+  if (typeof raw === 'string') {
+    try {
+      const inner = JSON.parse(raw);
+      return parseKvMediaResult(inner);
+    } catch {
+      return [];
+    }
+  }
+  if (typeof raw === 'object' && raw && typeof raw.value === 'string') {
+    return parseKvMediaResult(raw.value);
+  }
+  return [];
+}
+
 async function readFileStore() {
   const file = await fs.readFile(DATA_FILE, 'utf8');
   const parsed = JSON.parse(file);
-  return safeArray(parsed).map(normalizeMediaItem);
+  const arr = Array.isArray(parsed) ? parsed : parsed && Array.isArray(parsed.media) ? parsed.media : [];
+  return safeArray(arr).map(normalizeMediaItem);
+}
+
+function mergeMediaByUrlPreferKv(kvItems, fileItems) {
+  const byUrl = new Map();
+  fileItems.forEach((item) => {
+    const u = String(item.url || '').trim();
+    if (u) byUrl.set(u, item);
+  });
+  kvItems.forEach((item) => {
+    const u = String(item.url || '').trim();
+    if (u) byUrl.set(u, item);
+  });
+  return [...byUrl.values()];
 }
 
 function coerceDate(dateValue) {
@@ -112,18 +144,21 @@ export async function readMediaStore() {
     }
 
     const data = await response.json();
-    const parsed = data.result ? JSON.parse(data.result) : [];
-    const normalized = safeArray(parsed).map(normalizeMediaItem);
+    const parsed = parseKvMediaResult(data.result);
+    const fromKv = safeArray(parsed).map(normalizeMediaItem);
 
-    if (normalized.length > 0) {
-      return normalized;
-    }
-
+    let fromFile = [];
     try {
-      return await readFileStore();
+      fromFile = await readFileStore();
     } catch (_) {
-      return [];
+      fromFile = [];
     }
+
+    if (fromKv.length > 0 || fromFile.length > 0) {
+      return mergeMediaByUrlPreferKv(fromKv, fromFile);
+    }
+
+    return [];
   }
 
   return await readFileStore();
@@ -134,13 +169,14 @@ export async function writeMediaStore(mediaItems) {
   const kv = getKvConfig();
 
   if (kv) {
+    const payload = JSON.stringify(normalized);
     const response = await fetch(`${kv.url}/set/${KV_KEY}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${kv.token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ value: JSON.stringify(normalized) })
+      body: payload
     });
 
     if (!response.ok) {
