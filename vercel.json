@@ -18,6 +18,18 @@
       "use": "@vercel/static"
     },
     {
+      "src": "epk.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "robots.txt",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "sitemap.xml",
+      "use": "@vercel/static"
+    },
+    {
       "src": "portal/add-media.html",
       "use": "@vercel/static"
     },
@@ -58,6 +70,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "headshot.jpg",
+      "use": "@vercel/static"
+    },
+    {
       "src": "logos/**",
       "use": "@vercel/static"
     },
@@ -95,6 +111,10 @@
     },
     {
       "src": "images/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "press/**",
       "use": "@vercel/static"
     }
   ],
@@ -138,6 +158,10 @@
     {
       "src": "/media",
       "dest": "/media.html"
+    },
+    {
+      "src": "/epk",
+      "dest": "/epk.html"
     },
     {
       "src": "/portal/add-media",

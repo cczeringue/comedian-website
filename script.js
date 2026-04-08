@@ -40,24 +40,41 @@ cards.forEach(card => {
     });
 });
 
+function setNavDrawerOpen(open) {
+    if (window.innerWidth < 1025) {
+        document.body.style.overflow = open ? 'hidden' : '';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
 window.addEventListener('resize', () => {
     const mobileSticky = document.getElementById('mobileStickyCta');
     if (mobileSticky && window.innerWidth > 1024) {
         mobileSticky.classList.remove('visible');
     }
-});
-
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
-
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
+    if (hamburger && navMenu && window.innerWidth >= 1025) {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
-    });
+        document.body.style.overflow = '';
+    }
 });
+
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        setNavDrawerOpen(navMenu.classList.contains('active'));
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            setNavDrawerOpen(false);
+        });
+    });
+}
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
