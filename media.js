@@ -299,6 +299,13 @@
     } catch (_) { return null; }
   }
 
+  function normalizeMediaPagePin(entry) {
+    const p = entry && entry.mediaPagePin;
+    if (p === 0) return 0;
+    if (typeof p === 'number' && Number.isFinite(p) && p >= 0) return p;
+    return null;
+  }
+
   function mergePressAndMedia(pressEntries, galleryMedia) {
     const urlIndex = new Map();
     galleryMedia.forEach((item) => { urlIndex.set(normalizeUrl(item.url), item); });
@@ -314,11 +321,14 @@
 
       const configThumb = entry.thumbnail || '';
 
+      const pagePin = normalizeMediaPagePin(entry);
+
       if (galleryItem) {
         merged.push({
           ...galleryItem,
           _pressKind: pressKind,
           _pressOrder: pressIndex,
+          _mediaPagePin: pagePin,
           _showFeaturedBadge: !!entry.featuredBadge,
           _source: entry.source || '',
           _tracks: tracks,
@@ -326,7 +336,8 @@
           _featured: !!(entry.featured),
           title: galleryItem.title && galleryItem.title !== 'Untitled appearance' ? galleryItem.title : entry.title,
           description: galleryItem.description || entry.description,
-          thumbnail: galleryItem.thumbnail || configThumb
+          thumbnail: galleryItem.thumbnail || configThumb,
+          date: entry.date || galleryItem.date || ''
         });
       } else {
         merged.push({
@@ -334,11 +345,12 @@
           title: entry.title || '',
           description: entry.description || '',
           thumbnail: configThumb,
-          date: '',
+          date: entry.date || '',
           type: pressKind === 'podcast' ? 'podcast' : 'video',
           track: tracks[0] === 'all' ? 'standup' : tracks[0],
           _pressKind: pressKind,
           _pressOrder: pressIndex,
+          _mediaPagePin: pagePin,
           _showFeaturedBadge: !!entry.featuredBadge,
           _source: entry.source || '',
           _tracks: tracks,
@@ -358,6 +370,7 @@
           ...item,
           _pressKind: gKind,
           _pressOrder: 1000 + galleryPressOrder,
+          _mediaPagePin: null,
           _showFeaturedBadge: false,
           _source: '',
           _tracks: [normalizeTrack(item)],
@@ -393,12 +406,37 @@
     const PRESS_GRID_LIMIT = (opts && opts.limit) || Infinity;
     const sortDateFirst = !!(opts && opts.sortDateFirst);
 
+    function parseItemDateMs(item) {
+      if (!item || item.date == null) return null;
+      const s = String(item.date).trim();
+      if (!s) return null;
+      const t = new Date(s).getTime();
+      if (!Number.isFinite(t)) return null;
+      return t;
+    }
+
+    function mediaPagePinKey(item) {
+      const p = item._mediaPagePin;
+      if (p === 0) return 0;
+      if (typeof p === 'number' && Number.isFinite(p) && p >= 0) return p;
+      return 100000;
+    }
+
     function rankItems(items) {
       return [...items].sort((a, b) => {
         if (sortDateFirst) {
-          const da = new Date(a.date || 0).getTime();
-          const db = new Date(b.date || 0).getTime();
-          if (da !== db) return db - da;
+          const pa = mediaPagePinKey(a);
+          const pb = mediaPagePinKey(b);
+          if (pa !== pb) return pa - pb;
+          const ta = parseItemDateMs(a);
+          const tb = parseItemDateMs(b);
+          if (ta != null && tb != null && ta !== tb) return tb - ta;
+          if (ta != null && tb == null) return -1;
+          if (ta == null && tb != null) return 1;
+          const ao = Number.isFinite(a._pressOrder) ? a._pressOrder : -1;
+          const bo = Number.isFinite(b._pressOrder) ? b._pressOrder : -1;
+          if (ao !== bo) return bo - ao;
+          return String(b.url || '').localeCompare(String(a.url || ''));
         }
         const ao = Number.isFinite(a._pressOrder) ? a._pressOrder : 9999;
         const bo = Number.isFinite(b._pressOrder) ? b._pressOrder : 9999;

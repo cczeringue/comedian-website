@@ -7,7 +7,10 @@
     <meta name="description" content="Press, podcast appearances, interviews, and clips for Caleb Zeringue.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css?v=51">
+    <link rel="stylesheet" href="styles.css?v=52">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Lilita+One&display=swap" rel="stylesheet">
     <style>
         .media-page {
             min-height: 100vh;
@@ -22,7 +25,31 @@
     </style>
 </head>
 <body>
-    <main class="media-page proof-section">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header id="sticky-header">
+        <div class="header-inner container">
+            <a href="index.html#home" class="nav-brand">Caleb Zeringue</a>
+            <nav class="navbar" id="navbar">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                    <li><a href="index.html#press" class="nav-link">Press</a></li>
+                    <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
+                    <li><a href="index.html#standup" class="nav-link">Stand-Up</a></li>
+                    <li><a href="index.html#shows" class="nav-link">Shows</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link nav-cta">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="media-page proof-section">
         <div class="container">
             <div class="proof-shell">
                 <div class="proof-intro">
@@ -52,6 +79,7 @@
         </div>
     </main>
 
-    <script src="media.js?v=10"></script>
+    <script src="script.js?v=15"></script>
+    <script src="media.js?v=12"></script>
 </body>
 </html>

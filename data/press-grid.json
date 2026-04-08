@@ -1,6 +1,7 @@
 [
   {
     "url": "https://www.tiktok.com/@cnn/video/7515576120205462830?lang=en",
+    "date": "2025-07-05T12:00:00.000Z",
     "source": "CNN",
     "title": "CNN interview on Luigi the Musical",
     "description": "CNN covers the viral phenomenon behind Luigi the Musical.",
@@ -12,6 +13,7 @@
   },
   {
     "url": "https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html",
+    "date": "2025-08-14T12:00:00.000Z",
     "source": "The New York Times",
     "title": "The battle to define Luigi Mangione takes center stage",
     "description": "In \u201cLuigi: The Musical\u201d and across the internet, artists, journalists and supporters vie to shape the murder suspect\u2019s symbolic reputation.",
@@ -22,7 +24,20 @@
     "featuredBadge": true
   },
   {
+    "url": "https://www.ebar.com/story/164527/Arts%20%26%20Culture/Theater/",
+    "date": "2025-05-20T12:00:00.000Z",
+    "source": "Bay Area Reporter",
+    "title": "The Drill Master sneak peek at the SF Eagle",
+    "description": "Comedian Jenny Zigrino and Caleb Zeringue debut their gay history comedy about America\u2019s most fabulous general.",
+    "thumbnail": "/drillmaster-card.png",
+    "kind": "article",
+    "tracks": ["drillmaster"],
+    "featured": false,
+    "mediaPagePin": 0
+  },
+  {
     "url": "https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows",
+    "date": "2025-09-09T12:00:00.000Z",
     "source": "NPR",
     "title": "A musical about Luigi Mangione sells out theaters and raises eyebrows",
     "description": "Broadcast attention for a sold-out cultural moment.",
@@ -33,6 +48,7 @@
   },
   {
     "url": "https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/",
+    "date": "2025-07-25T12:00:00.000Z",
     "source": "The Hollywood Reporter",
     "title": "Industry press for a sellout run",
     "description": "Useful social proof for bookers, brands, and partners who want signal before they reach out.",
@@ -43,6 +59,7 @@
   },
   {
     "url": "https://www.broadwayworld.com/article/Interview-How-LUIGI-THE-MUSICAL-Is-Pushing-the-Boundaries-of-Musical-Theatre-20250813",
+    "date": "2025-08-13T12:00:00.000Z",
     "source": "BroadwayWorld",
     "title": "How Luigi the Musical is pushing the boundaries of musical theatre",
     "description": "Interview with the creative team behind the satirical prison musical sensation.",
@@ -53,6 +70,7 @@
   },
   {
     "url": "https://www.the-independent.com/news/world/americas/luigi-mangione-unitedhealthcare-musical-premier-san-francisco-b2770019.html",
+    "date": "2025-08-10T12:00:00.000Z",
     "source": "The Independent",
     "title": "Luigi Mangione musical premieres in San Francisco",
     "description": "The Independent covers the premiere of the satirical musical sensation.",
@@ -63,6 +81,7 @@
   },
   {
     "url": "https://www.foxnews.com/media/luigi-mangione-musical-opening-san-francisco",
+    "date": "2025-08-12T12:00:00.000Z",
     "source": "FOX News",
     "title": "Luigi Mangione musical opening in San Francisco",
     "description": "FOX News covers the controversial musical\u2019s sold-out opening.",
@@ -72,17 +91,8 @@
     "featured": false
   },
   {
-    "url": "https://www.ebar.com/story/164527/Arts%20%26%20Culture/Theater/",
-    "source": "Bay Area Reporter",
-    "title": "The Drill Master sneak peek at the SF Eagle",
-    "description": "Comedian Jenny Zigrino and Caleb Zeringue debut their gay history comedy about America\u2019s most fabulous general.",
-    "thumbnail": "/drillmaster-card.png",
-    "kind": "article",
-    "tracks": ["drillmaster"],
-    "featured": false
-  },
-  {
     "url": "https://youtu.be/LuOwLJz753o?si=-FZt1dt2qKTdIQJw",
+    "date": "2025-06-10T12:00:00.000Z",
     "source": "Radio",
     "title": "Radio interview",
     "description": "Radio appearance.",
@@ -90,10 +100,12 @@
     "kind": "audio",
     "tracks": ["standup"],
     "featured": false,
-    "fromGallery": true
+    "fromGallery": true,
+    "mediaPagePin": 1
   },
   {
     "url": "https://www.youtube.com/watch?v=gwEjvz4pZW4",
+    "date": "2025-07-15T12:00:00.000Z",
     "source": "YouTube",
     "title": "Opening for Lady Bushra",
     "description": "Hosting for BBC Comic Lady Bushra.",

@@ -278,6 +278,26 @@ button:focus-visible {
     font-weight: 800;
 }
 
+.hero-cred-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(255, 251, 247, 0.55);
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-cred-link:hover {
+    text-decoration-color: var(--text-on-bold);
+    color: var(--p-amber-900);
+}
+
+.hero-cred-link:focus-visible {
+    outline: 2px solid var(--text-on-bold);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
 .hero-value {
     font-family: 'Inter', sans-serif;
     font-size: clamp(0.92rem, 3.5vw, 1.06rem);
