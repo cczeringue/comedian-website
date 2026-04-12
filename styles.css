@@ -198,6 +198,10 @@ button:focus-visible {
  * (edge-to-edge behind the status bar / Dynamic Island). Sticky alone left visible hero/orange gaps on iOS.
  */
 @media (max-width: 1024px) {
+    html {
+        --site-header-offset: calc(env(safe-area-inset-top, 0px) + 3.85rem);
+    }
+
     #sticky-header {
         position: fixed;
         top: 0;
@@ -206,13 +210,8 @@ button:focus-visible {
         width: 100%;
     }
 
-    /* Offset page content by full header height (safe area + brand row) */
     #main-content {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 3.5rem);
-    }
-
-    .hero-split {
-        padding-top: clamp(0.5rem, 2vw, 1rem);
+        padding-top: var(--site-header-offset);
     }
 }
 
@@ -3288,6 +3287,18 @@ button:focus-visible {
         padding-right: max(1rem, env(safe-area-inset-right, 0px));
     }
 
+    /* Solid bar when scrolled — avoid glass / orange bleed-through over hero */
+    #sticky-header.scrolled {
+        background: var(--bg-dark);
+        backdrop-filter: none;
+        box-shadow: 0 1px 0 var(--border-light);
+    }
+
+    /* Wins over base .hero-split (later + higher specificity) — tight gap under fixed header */
+    .hero .hero-split {
+        padding-top: clamp(0.35rem, 1.5vw, 0.75rem);
+    }
+
     .nav-brand {
         font-size: 1.25rem;
     }
@@ -4068,6 +4079,6 @@ button:focus-visible {
 /* EPK main uses shorthand padding; restore fixed-header top inset on phones */
 @media (max-width: 1024px) {
     main#main-content.epk-page {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 3.5rem + clamp(1.5rem, 4vw, 3rem));
+        padding-top: calc(var(--site-header-offset) + clamp(1.5rem, 4vw, 3rem));
     }
 }

@@ -81,7 +81,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerPad = 120;
+            const headerPad = 128;
             window.scrollTo({ top: target.offsetTop - headerPad, behavior: 'smooth' });
         }
     });
