@@ -213,6 +213,16 @@ button:focus-visible {
     #main-content {
         padding-top: var(--site-header-offset);
     }
+
+    /*
+     * Main’s top padding is transparent, so iOS showed body (--bg-dark) between the fixed header
+     * and the hero orange — reads as a “gap” while scrolling / rubber-banding. Pull the hero’s
+     * paint box up into that band and re-add the same offset as padding on .hero.
+     */
+    main#main-content > section.hero:first-of-type {
+        margin-top: calc(-1 * var(--site-header-offset));
+        padding-top: var(--site-header-offset);
+    }
 }
 
 #sticky-header .header-inner {
@@ -3487,6 +3497,9 @@ button:focus-visible {
 
     .mobile-sticky-cta.visible {
         display: flex;
+        /* iOS Safari: promote compositing layer to reduce 1px seams when the chrome UI resizes */
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
 
     .mobile-sticky-btn {

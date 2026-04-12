@@ -2,6 +2,37 @@ const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 
+/** Match #main-content / hero offset to real fixed header height (iOS: rem/safe-area vs layout). */
+function syncSiteHeaderOffset() {
+    const header = document.getElementById('sticky-header');
+    if (!header) return;
+    if (window.innerWidth > 1024) {
+        document.documentElement.style.removeProperty('--site-header-offset');
+        return;
+    }
+    const h = header.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--site-header-offset', `${Math.round(h * 100) / 100}px`);
+}
+
+function initSiteHeaderOffset() {
+    syncSiteHeaderOffset();
+    const header = document.getElementById('sticky-header');
+    if (header && typeof ResizeObserver !== 'undefined') {
+        const ro = new ResizeObserver(() => syncSiteHeaderOffset());
+        ro.observe(header);
+    }
+}
+
+window.addEventListener('resize', syncSiteHeaderOffset);
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncSiteHeaderOffset);
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSiteHeaderOffset);
+} else {
+    initSiteHeaderOffset();
+}
+
 const handleScroll = () => {
     const stickyHeader = document.getElementById('sticky-header');
     const heroSection = document.querySelector('.hero');
@@ -81,8 +112,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerPad = 128;
-            window.scrollTo({ top: target.offsetTop - headerPad, behavior: 'smooth' });
+            const header = document.getElementById('sticky-header');
+            const headerPad =
+                header && window.innerWidth <= 1024
+                    ? header.getBoundingClientRect().height + 6
+                    : 120;
+            const y = target.getBoundingClientRect().top + window.scrollY - headerPad;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
         }
     });
 });
