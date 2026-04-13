@@ -30,6 +30,12 @@ npm-debug.log*
 
 .vercel
 
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
 # Secrets (never commit)
 .env
 .env.local
