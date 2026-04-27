@@ -32,9 +32,8 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            min-height: 100vh;
-            padding: 0;
-            padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); /* room for sticky CTA + home indicator */
+            min-height: 100dvh;
+            padding: 0 max(1rem, env(safe-area-inset-left, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-right, 0px));
             line-height: 1.6;
         }
 
@@ -53,17 +52,18 @@
 
         .links-page {
             width: 100%;
-            max-width: 520px;
-            padding: 0 1.5rem 2rem;
+            max-width: 42rem;
+            padding: 0 clamp(1rem, 4vw, 1.5rem) 2rem;
         }
 
         /* ── Hero ── */
         .links-hero {
-            width: calc(100% + 3rem);
-            margin-left: -1.5rem;
+            width: calc(100% + (2 * clamp(1rem, 4vw, 1.5rem)));
+            margin-left: calc(-1 * clamp(1rem, 4vw, 1.5rem));
             position: relative;
             aspect-ratio: 4/5;
             overflow: hidden;
+            border-radius: 0 0 1.5rem 1.5rem;
         }
 
         .links-hero img {
@@ -101,38 +101,56 @@
             font-size: clamp(2.5rem, 11vw, 3.5rem);
             font-weight: 400;
             text-transform: uppercase;
-            color: var(--text-primary);
-            text-shadow: 3px 3px 0 var(--accent-orange), 0 2px 12px rgba(0,0,0,0.7);
+            color: #fff7ef;
+            text-shadow:
+                0 3px 0 rgba(23, 18, 46, 0.96),
+                3px 3px 0 rgba(23, 18, 46, 0.96),
+                0 0 20px rgba(23, 18, 46, 0.18);
             line-height: 1;
         }
 
         /* ── Bio + city ── */
         .links-bio-row {
             display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.9rem;
             margin: 1rem 0 1rem;
+            padding: 1rem 1rem 0.9rem;
+            background: rgba(255, 254, 251, 0.88);
+            border: 1px solid var(--border-light);
+            border-radius: 1rem;
         }
 
         .links-tagline {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            line-height: 1.5;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.45;
             flex: 1;
+            text-wrap: pretty;
+        }
+
+        .links-bio-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
         }
 
         .links-city-badge {
-            flex-shrink: 0;
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
-            font-size: 0.75rem;
+            gap: 0.4rem;
+            font-size: 0.82rem;
             font-weight: 700;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
             white-space: nowrap;
-            margin-top: 0.1rem;
+            padding: 0.55rem 0.75rem;
+            background: color-mix(in srgb, var(--accent) 7%, white);
+            border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border-light));
+            border-radius: 999px;
         }
 
         .links-city-badge svg {
@@ -140,23 +158,83 @@
             flex-shrink: 0;
         }
 
+        .links-city-badge--button {
+            border: 0;
+            background: var(--text-primary);
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .links-city-badge--button svg {
+            color: #fff;
+        }
+
+        .links-city-badge--button:hover {
+            transform: translateY(-1px);
+            opacity: 0.97;
+        }
+
         /* ── Press logos (moved up) ── */
         .links-trust {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.25rem;
+            gap: 1rem 1.25rem;
             justify-content: flex-start;
             align-items: center;
-            padding: 0.75rem 0 1rem;
-            margin-bottom: 0.5rem;
+            padding: 0.9rem 0 1rem;
+            margin-bottom: 0.75rem;
             border-bottom: 1px solid var(--border-light);
         }
 
+        .links-trust-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 1.75rem;
+            color: rgba(23, 18, 46, 0.62);
+            text-decoration: none;
+            transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .links-trust-link:hover {
+            color: rgba(23, 18, 46, 0.88);
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
         .links-trust img {
-            height: 18px;
+            height: 20px;
             width: auto;
-            filter: brightness(0);
-            opacity: 0.4;
+            display: block;
+            filter: grayscale(1) saturate(0);
+            opacity: 0.72;
+        }
+
+        .links-trust-logo {
+            display: block;
+            height: 20px;
+            width: auto;
+        }
+
+        .links-trust-logo--nyt {
+            height: 18px;
+        }
+
+        .links-trust-logo--wapo {
+            height: 19px;
+        }
+
+        .links-trust-logo--thr {
+            height: 18px;
+        }
+
+        .links-trust-logo--cnn {
+            height: 19px;
+        }
+
+        .links-trust .links-trust-logo-npr {
+            height: 18px;
         }
 
         /* ── Social icons ── */
@@ -219,6 +297,212 @@
 
         .links-email-cta-icon {
             font-size: 1.1rem;
+        }
+
+        .links-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            padding: max(1rem, env(safe-area-inset-top, 0px)) 0 0;
+            background: rgba(23, 18, 46, 0.42);
+        }
+
+        .links-modal.is-open {
+            display: flex;
+        }
+
+        .links-modal__backdrop {
+            position: absolute;
+            inset: 0;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .links-modal__sheet {
+            position: relative;
+            width: min(100%, 42rem);
+            max-height: min(86dvh, 54rem);
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem clamp(1rem, 4vw, 1.5rem) calc(1.2rem + env(safe-area-inset-bottom, 0px));
+            border-radius: 1.5rem 1.5rem 0 0;
+            background: var(--bg-card);
+            box-shadow: 0 -18px 48px rgba(23, 18, 46, 0.2);
+            transform: translateY(14px);
+            opacity: 0;
+            transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+        }
+
+        .links-modal.is-open .links-modal__sheet {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .links-modal__grabber {
+            width: 3rem;
+            height: 0.3rem;
+            border-radius: 999px;
+            margin: 0 auto 1rem;
+            background: rgba(23, 18, 46, 0.14);
+        }
+
+        .links-modal__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .links-modal__title {
+            margin: 0;
+            font-family: 'Lilita One', 'Inter', cursive;
+            font-size: 1.55rem;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .links-modal__subtitle {
+            margin: 0.35rem 0 0;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.45;
+            text-wrap: pretty;
+        }
+
+        .links-modal__close {
+            flex-shrink: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid var(--border-light);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--text-primary);
+            font: inherit;
+            font-size: 1.3rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .links-contact-form {
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .links-form-grid {
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .links-form-field {
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        .links-form-field label {
+            color: var(--text-primary);
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+
+        .links-form-field input,
+        .links-form-field textarea {
+            width: 100%;
+            border: 1px solid rgba(23, 18, 46, 0.14);
+            border-radius: 0.95rem;
+            background: #fff;
+            color: var(--text-primary);
+            font: inherit;
+            font-size: 1rem;
+            padding: 0.9rem 1rem;
+            outline: none;
+        }
+
+        .links-form-field textarea {
+            min-height: 8rem;
+            resize: vertical;
+        }
+
+        .links-form-field input:focus,
+        .links-form-field textarea:focus {
+            border-color: color-mix(in srgb, var(--accent) 38%, rgba(23, 18, 46, 0.18));
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+        }
+
+        .links-form-help {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .links-contact-actions {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .links-contact-submit {
+            width: 100%;
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent-orange);
+            color: #fff;
+            font: inherit;
+            font-size: 1rem;
+            font-weight: 800;
+            padding: 1rem 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 26px color-mix(in srgb, var(--accent) 22%, transparent);
+        }
+
+        .links-contact-direct {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.75rem;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.84rem;
+            text-align: center;
+        }
+
+        .links-contact-direct a {
+            color: var(--text-primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .links-form-message {
+            display: none;
+            border-radius: 0.9rem;
+            padding: 0.85rem 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .links-form-message.sending {
+            display: block;
+            background: rgba(96, 157, 255, 0.12);
+            color: #234063;
+        }
+
+        .links-form-message.success {
+            display: block;
+            background: rgba(29, 155, 103, 0.12);
+            color: #185438;
+        }
+
+        .links-form-message.error {
+            display: block;
+            background: rgba(190, 57, 57, 0.12);
+            color: #7c2323;
         }
 
         /* ── Tab bar ── */
@@ -711,6 +995,15 @@
         }
 
         @media (max-width: 640px) {
+            .links-bio-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .links-city-badge {
+                align-self: flex-start;
+            }
+
             .links-recent-header {
                 flex-direction: column;
                 align-items: stretch;
@@ -721,6 +1014,44 @@
             }
         }
 
+        @media (max-width: 420px) {
+            .links-page {
+                padding-left: 0.9rem;
+                padding-right: 0.9rem;
+            }
+
+            .links-hero {
+                width: calc(100% + 1.8rem);
+                margin-left: -0.9rem;
+                border-radius: 0 0 1.2rem 1.2rem;
+            }
+
+            .links-hero-name-overlay {
+                left: 1rem;
+                right: 1rem;
+            }
+
+            .links-name {
+                font-size: clamp(2.1rem, 11vw, 3rem);
+            }
+
+            .links-tagline {
+                font-size: 0.93rem;
+            }
+
+            .links-trust {
+                gap: 0.8rem 1rem;
+            }
+
+            .links-trust img {
+                height: 17px;
+            }
+
+            .links-modal__sheet {
+                border-radius: 1.25rem 1.25rem 0 0;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -728,7 +1059,7 @@
 
         <!-- Hero with name overlay -->
         <div class="links-hero">
-            <img src="hero-desktop.jpg" alt="Caleb Zeringue">
+            <img src="hero-performance.jpg" alt="Caleb Zeringue performing stand-up comedy">
             <div class="links-hero-name-overlay">
                 <h1 class="links-name">Caleb Zeringue</h1>
             </div>
@@ -741,19 +1072,39 @@
 
         <!-- Bio + city -->
         <div class="links-bio-row">
-            <p class="links-tagline">(Like Meringue, with a Z) Professional dumbass, co-creator of Luigi the Musical and The Drillmaster. Fountain pen whore.</p>
-            <span class="links-city-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                Books nationwide
-            </span>
+            <p class="links-tagline">(Like Meringue, with a Z) Queer comic and writer behind sharp, viral, deeply unserious things: Luigi the Musical, The Drill Master, and stand-up for rooms that like a little bite.</p>
+            <div class="links-bio-actions">
+                <span class="links-city-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Books nationwide
+                </span>
+                <a href="epk.html" class="links-city-badge">
+                    EPK / Press Kit
+                </a>
+                <button type="button" class="links-city-badge links-city-badge--button" id="linksContactTrigger">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.01L12 13l8-6.99V6H4zm16 12V8.49l-7.4 6.47a1 1 0 0 1-1.2 0L4 8.49V18h16z"/></svg>
+                    Contact / Booking
+                </button>
+            </div>
         </div>
 
         <!-- Press logos (social proof, early) -->
         <div class="links-trust">
-            <img src="logos/nytimes-logo.png" alt="The New York Times">
-            <img src="logos/npr-logo.svg" alt="NPR">
-            <img src="logos/hollywood-reporter-logo.png" alt="The Hollywood Reporter">
-            <img src="logos/cnn-logo.png" alt="CNN">
+            <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the New York Times Luigi the Musical article">
+                <img src="logos/nytimes-logo.svg" alt="The New York Times" class="links-trust-logo links-trust-logo--nyt">
+            </a>
+            <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Listen to the NPR Luigi the Musical story">
+                <img src="logos/npr-logo.svg" alt="NPR" class="links-trust-logo links-trust-logo-npr">
+            </a>
+            <a href="https://www.washingtonpost.com/entertainment/theater/2025/08/16/luigi-mangione-musical-diddy-sam-bankman-fried/" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the Washington Post Luigi the Musical article">
+                <img src="logos/washington-post-logo.svg" alt="The Washington Post" class="links-trust-logo links-trust-logo--wapo">
+            </a>
+            <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the Hollywood Reporter Luigi the Musical article">
+                <img src="logos/hollywood-reporter-logo.svg" alt="The Hollywood Reporter" class="links-trust-logo links-trust-logo--thr">
+            </a>
+            <a href="https://www.tiktok.com/@cnn/video/7515576120205462830" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Watch CNN coverage of Luigi the Musical">
+                <img src="logos/cnn-logo.svg" alt="CNN" class="links-trust-logo links-trust-logo--cnn">
+            </a>
         </div>
 
         <!-- Social icons -->
@@ -768,6 +1119,9 @@
                 <a href="https://www.youtube.com/@calebzeringue" target="_blank" aria-label="YouTube">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
+                <a href="https://www.threads.com/@caleb.meringue?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+                    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="16" font-family="Inter, sans-serif" font-weight="800" fill="currentColor">@</text></svg>
+                </a>
             </div>
         </div>
 
@@ -780,7 +1134,7 @@
             <div class="links-recent-header">
                 <div>
                     <h2 class="links-section-title">Media by project</h2>
-                    <p class="links-recent-subtitle">Stand-up, The Drill Master, and Luigi—scroll the row. Full gallery on the site.</p>
+                    <p class="links-recent-subtitle">Stand-up, The Drill Master, and Luigi — proof for bookers, collaborators, and anyone deciding whether to click.</p>
                 </div>
                 <a href="media.html" class="links-email-cta links-media-cta">View more</a>
             </div>
@@ -840,7 +1194,7 @@
                 </a>
                 <a href="https://youtu.be/u4Bhc3dAc4U?si=SEImchCvOaINes0_" target="_blank" rel="noopener noreferrer" class="links-project-card">
                     <div class="links-project-card-img-wrap">
-                        <img src="titty-monster-thumbnail.png" alt="Titty Monster Mini Special" class="links-project-card-img">
+                        <img src="hero-performance.jpg" alt="Titty Monster Mini Special" class="links-project-card-img">
                     </div>
                     <div class="links-project-card-body">
                         <span class="featured-label">Mini Special</span>
@@ -861,6 +1215,7 @@
             <h2 class="links-section-title">Press</h2>
             <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" class="link-button">The New York Times</a>
             <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" class="link-button">NPR: All Things Considered</a>
+            <a href="https://www.washingtonpost.com/entertainment/theater/2025/08/16/luigi-mangione-musical-diddy-sam-bankman-fried/" target="_blank" class="link-button">The Washington Post</a>
             <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" class="link-button">The Hollywood Reporter</a>
 
             <h2 class="links-section-title">My Sets</h2>
@@ -878,6 +1233,50 @@
         <a href="#seated-tickets" onclick="document.querySelector('[data-tab=\'tour\']').click();">
             🎟 Get Tickets
         </a>
+    </div>
+
+    <div class="links-modal" id="linksContactModal" aria-hidden="true">
+        <button type="button" class="links-modal__backdrop" id="linksContactBackdrop" aria-label="Close contact form"></button>
+        <div class="links-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="linksContactTitle">
+            <div class="links-modal__grabber" aria-hidden="true"></div>
+            <div class="links-modal__header">
+                <div>
+                    <h2 class="links-modal__title" id="linksContactTitle">Contact Caleb</h2>
+                    <p class="links-modal__subtitle">Comedy, hosting, writing, panels, and project inquiries. Send the date, room, budget, or idea and I’ll get back to you.</p>
+                </div>
+                <button type="button" class="links-modal__close" id="linksContactClose" aria-label="Close contact form">×</button>
+            </div>
+
+            <form id="linksBookingForm" class="links-contact-form">
+                <div class="links-form-grid">
+                    <div class="links-form-field">
+                        <label for="links-name">Name *</label>
+                        <input type="text" id="links-name" name="name" autocomplete="name" required>
+                    </div>
+                    <div class="links-form-field">
+                        <label for="links-email">Email *</label>
+                        <input type="email" id="links-email" name="email" autocomplete="email" required>
+                    </div>
+                    <div class="links-form-field">
+                        <label for="links-subject">What’s this about?</label>
+                        <input type="text" id="links-subject" name="subject" placeholder="Booking, writing, corporate, college, etc.">
+                    </div>
+                    <div class="links-form-field">
+                        <label for="links-message">Message</label>
+                        <textarea id="links-message" name="message" placeholder="Tell me about the show, date, city, budget, or idea."></textarea>
+                    </div>
+                </div>
+                <p class="links-form-help">Best for event dates, venue details, budgets, and creative collaborations.</p>
+                <div id="links-form-message" class="links-form-message" aria-live="polite"></div>
+                <div class="links-contact-actions">
+                    <button type="submit" class="links-contact-submit">Send inquiry</button>
+                    <div class="links-contact-direct">
+                        <span>Or reach out directly:</span>
+                        <a href="mailto:calebzeringue@gmail.com">calebzeringue@gmail.com</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -905,6 +1304,86 @@
                 var saved = sessionStorage.getItem(tabKey);
                 if (saved && document.getElementById('panel-' + saved)) showPanel(saved);
             } catch (e) {}
+        })();
+
+        (function() {
+            var openBtn = document.getElementById('linksContactTrigger');
+            var modal = document.getElementById('linksContactModal');
+            var closeBtn = document.getElementById('linksContactClose');
+            var backdrop = document.getElementById('linksContactBackdrop');
+            var firstInput = document.getElementById('links-name');
+            var form = document.getElementById('linksBookingForm');
+            var formMessage = document.getElementById('links-form-message');
+
+            function setModalOpen(open) {
+                if (!modal) return;
+                modal.classList.toggle('is-open', open);
+                modal.setAttribute('aria-hidden', String(!open));
+                document.body.style.overflow = open ? 'hidden' : '';
+                if (open && firstInput) {
+                    setTimeout(function() { firstInput.focus(); }, 30);
+                }
+            }
+
+            if (openBtn) openBtn.addEventListener('click', function() { setModalOpen(true); });
+            if (closeBtn) closeBtn.addEventListener('click', function() { setModalOpen(false); });
+            if (backdrop) backdrop.addEventListener('click', function() { setModalOpen(false); });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) setModalOpen(false);
+            });
+
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    var submitButton = form.querySelector('button[type="submit"]');
+                    var originalButtonText = submitButton.textContent;
+                    var formData = new FormData(form);
+                    var data = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        subject: formData.get('subject'),
+                        message: formData.get('message')
+                    };
+
+                    formMessage.className = 'links-form-message sending';
+                    formMessage.textContent = 'Sending your inquiry...';
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+
+                    try {
+                        var response = await fetch('https://api.web3forms.com/submit', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                access_key: '7e877764-b77e-4963-aa66-269f5dc26ed2',
+                                subject: data.subject || ('Booking Request from ' + data.name),
+                                from_name: data.name,
+                                from_email: data.email,
+                                name: data.name,
+                                email: data.email,
+                                subject_field: data.subject,
+                                message: data.message
+                            })
+                        });
+                        var result = await response.json();
+                        if (response.ok && (result.success || response.status === 200)) {
+                            formMessage.className = 'links-form-message success';
+                            formMessage.textContent = 'Thank you! Your request has been sent.';
+                            form.reset();
+                            setTimeout(function() { setModalOpen(false); }, 1200);
+                        } else {
+                            throw new Error(result.message || 'Failed to send');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        formMessage.className = 'links-form-message error';
+                        formMessage.textContent = 'Sorry, there was an error. Please try again or email me directly.';
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                    }
+                });
+            }
         })();
     </script>
     <script src="media.js?v=14"></script>

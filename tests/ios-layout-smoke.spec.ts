@@ -55,13 +55,16 @@ test.describe('iOS layout smoke (Mobile WebKit)', () => {
         const menu = page.locator('#navMenu');
         const hamburger = page.locator('#hamburger');
         await expect(menu).not.toHaveClass(/active/);
+        await expect(hamburger).toHaveAttribute('aria-expanded', 'false');
         await hamburger.click();
         await expect(menu).toHaveClass(/active/);
+        await expect(hamburger).toHaveAttribute('aria-expanded', 'true');
         await page.locator('#navMenu a[href="#contact"]').first().click();
         await expect(menu).not.toHaveClass(/active/);
+        await expect(hamburger).toHaveAttribute('aria-expanded', 'false');
     });
 
-    test('sticky CTA visible: body reserves bottom padding (no content trapped)', async ({ page }) => {
+    test('sticky CTA visible: footer reserves space without trailing document gap', async ({ page }) => {
         await page.goto('/');
         const pastHeroY = await page.evaluate(() => {
             const el = document.querySelector('.hero');
@@ -72,12 +75,20 @@ test.describe('iOS layout smoke (Mobile WebKit)', () => {
         await page.evaluate((y) => window.scrollTo(0, y), pastHeroY);
         await expect(page.locator('#mobileStickyCta')).toHaveClass(/visible/);
 
-        const paddingBottomPx = await page.evaluate(() => {
-            const pad = getComputedStyle(document.body).paddingBottom;
-            const m = /^([\d.]+)px$/.exec(pad);
-            return m ? parseFloat(m[1]) : 0;
+        const { footerPaddingBottom, trailingGap } = await page.evaluate(() => {
+            const footer = document.querySelector('.site-footer') as HTMLElement | null;
+            if (!footer) return { footerPaddingBottom: 0, trailingGap: 999 };
+            const footerEnd = footer.offsetTop + footer.offsetHeight;
+            const scrollHeight = document.scrollingElement?.scrollHeight || document.documentElement.scrollHeight;
+            const pad = getComputedStyle(footer).paddingBottom;
+            const match = /^([\d.]+)px$/.exec(pad);
+            return {
+                footerPaddingBottom: match ? parseFloat(match[1]) : 0,
+                trailingGap: Math.abs(scrollHeight - footerEnd),
+            };
         });
-        expect(paddingBottomPx).toBeGreaterThan(32);
+        expect(footerPaddingBottom).toBeGreaterThan(96);
+        expect(trailingGap).toBeLessThanOrEqual(2);
     });
 
     test('viewport meta supports safe-area (viewport-fit=cover)', async ({ page }) => {
@@ -88,14 +99,54 @@ test.describe('iOS layout smoke (Mobile WebKit)', () => {
 
     test('hero pulls under header offset (no dead band regression)', async ({ page }) => {
         await page.goto('/');
-        const { marginTop, offset } = await page.evaluate(() => {
+        const { marginTop, offset, headerTop, headerBottom, heroTop } = await page.evaluate(() => {
+            const header = document.querySelector('#sticky-header');
             const hero = document.querySelector('main#main-content > section.hero:first-of-type');
             const off = getComputedStyle(document.documentElement).getPropertyValue('--site-header-offset').trim();
-            if (!hero) return { marginTop: '0', offset: off };
-            return { marginTop: getComputedStyle(hero).marginTop, offset: off };
+            if (!hero || !header) return { marginTop: '0', offset: off, headerTop: 999, headerBottom: 0, heroTop: 999 };
+            const headerRect = header.getBoundingClientRect();
+            const heroRect = hero.getBoundingClientRect();
+            return {
+                marginTop: getComputedStyle(hero).marginTop,
+                offset: off,
+                headerTop: headerRect.top,
+                headerBottom: headerRect.bottom,
+                heroTop: heroRect.top,
+            };
         });
         expect(offset).toMatch(/px$/);
         expect(marginTop).not.toBe('0px');
         expect(marginTop.startsWith('-')).toBe(true);
+        expect(headerTop).toBe(0);
+        expect(heroTop).toBeLessThanOrEqual(headerBottom + 1);
+    });
+
+    test('homepage local hero and logo images load', async ({ page }) => {
+        await page.goto('/');
+        const broken = await page.evaluate(() => {
+            const srcs = [...document.querySelectorAll<HTMLImageElement>('img[src^="logos/"], .hero-photo img, .project-feature img[src^="drillmaster-card"]')]
+                .map((img) => img.getAttribute('src'))
+                .filter(Boolean) as string[];
+            return Promise.all(srcs.map(async (src) => {
+                const res = await fetch(src);
+                return res.ok ? null : src;
+            })).then((results) => results.filter(Boolean));
+        });
+        expect(broken).toEqual([]);
+    });
+
+    test('links page local hero, logos, and cards load', async ({ page }) => {
+        await page.goto('/links.html');
+        const broken = await page.evaluate(() => {
+            const srcs = [...document.querySelectorAll<HTMLImageElement>('img')].filter((img) => {
+                const src = img.getAttribute('src') || '';
+                return src && !src.startsWith('http');
+            }).map((img) => img.getAttribute('src')).filter(Boolean) as string[];
+            return Promise.all(srcs.map(async (src) => {
+                const res = await fetch(src);
+                return res.ok ? null : src;
+            })).then((results) => results.filter(Boolean));
+        });
+        expect(broken).toEqual([]);
     });
 });

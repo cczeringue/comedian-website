@@ -16,6 +16,7 @@ function syncSiteHeaderOffset() {
 
 function initSiteHeaderOffset() {
     syncSiteHeaderOffset();
+    window.requestAnimationFrame(syncSiteHeaderOffset);
     const header = document.getElementById('sticky-header');
     if (header && typeof ResizeObserver !== 'undefined') {
         const ro = new ResizeObserver(() => syncSiteHeaderOffset());
@@ -72,11 +73,14 @@ cards.forEach(card => {
 });
 
 function setNavDrawerOpen(open) {
-    if (window.innerWidth < 1025) {
-        document.body.style.overflow = open ? 'hidden' : '';
-    } else {
-        document.body.style.overflow = '';
+    const shouldOpen = Boolean(open && window.innerWidth < 1025);
+    if (navMenu) navMenu.classList.toggle('active', shouldOpen);
+    if (hamburger) {
+        hamburger.classList.toggle('active', shouldOpen);
+        hamburger.setAttribute('aria-expanded', String(shouldOpen));
+        hamburger.setAttribute('aria-label', shouldOpen ? 'Close menu' : 'Open menu');
     }
+    document.body.style.overflow = shouldOpen ? 'hidden' : '';
 }
 
 window.addEventListener('resize', () => {
@@ -85,25 +89,26 @@ window.addEventListener('resize', () => {
         mobileSticky.classList.remove('visible');
     }
     if (hamburger && navMenu && window.innerWidth >= 1025) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = '';
+        setNavDrawerOpen(false);
     }
 });
 
 if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        setNavDrawerOpen(navMenu.classList.contains('active'));
+        setNavDrawerOpen(!navMenu.classList.contains('active'));
     });
 
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
             setNavDrawerOpen(false);
         });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            setNavDrawerOpen(false);
+            hamburger.focus();
+        }
     });
 }
 

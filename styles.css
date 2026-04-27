@@ -86,6 +86,7 @@
 
     --font-display: 'Lilita One', 'Inter', cursive;
     --font-handwritten: 'Caveat', cursive;
+    --site-header-offset: 0px;
 }
 
 html {
@@ -204,6 +205,7 @@ button:focus-visible {
 @media (max-width: 1024px) {
     html {
         --site-header-offset: calc(env(safe-area-inset-top, 0px) + 3.85rem);
+        scroll-padding-top: calc(var(--site-header-offset) + 0.5rem);
     }
 
     #sticky-header {
@@ -222,9 +224,9 @@ button:focus-visible {
     }
 
     /*
-     * Main’s top padding is transparent, so iOS showed body (--bg-dark) between the fixed header
-     * and the hero orange — reads as a “gap” while scrolling / rubber-banding. Pull the hero’s
-     * paint box up into that band and re-add the same offset as padding on .hero.
+     * Main's top padding is transparent, so iOS can show body color between the fixed header
+     * and hero. Pull the hero paint box into that band; JS replaces the fallback offset with
+     * the measured header height after layout settles.
      */
     main#main-content > section.hero:first-of-type {
         margin-top: calc(-1 * var(--site-header-offset));
@@ -557,6 +559,10 @@ button:focus-visible {
 }
 
 .hamburger {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: inherit;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -3502,11 +3508,6 @@ button:focus-visible {
         transform: translateZ(0);
     }
 
-    /* Reserve space so last sections aren’t hidden behind the fixed bar + home indicator */
-    body:has(.mobile-sticky-cta.visible) {
-        padding-bottom: calc(4.85rem + env(safe-area-inset-bottom, 0px));
-    }
-
     .mobile-sticky-cta.visible {
         display: flex;
     }
@@ -3552,6 +3553,12 @@ button:focus-visible {
     background: var(--bg-dark);
     padding: 3rem 0;
     border-top: 3px solid var(--accent);
+}
+
+@media (max-width: 1024px) {
+    .site-footer {
+        padding-bottom: calc(3rem + 4.85rem + env(safe-area-inset-bottom, 0px));
+    }
 }
 
 .site-footer .footer-content {

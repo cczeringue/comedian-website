@@ -8,12 +8,11 @@ The logo image files are missing from this directory. You need to add the actual
 
 Add these 6 image files to this `logos/` directory:
 
-1. `nytimes-logo.png` - The New York Times logo
-2. `hollywood-reporter-logo.png` - The Hollywood Reporter logo  
-3. `independent-logo.png` - The Independent logo
-4. `fox-news-logo.png` - FOX News logo
-5. `cnn-logo.png` - CNN logo
-6. `the-hill-logo.png` - The Hill logo
+1. `nytimes-logo.svg` - The New York Times logo
+2. `hollywood-reporter-logo.svg` - The Hollywood Reporter logo
+3. `washington-post-logo.svg` - The Washington Post logo
+4. `cnn-logo.svg` - CNN logo
+5. `npr-logo.svg` - NPR logo
 
 ## Image Requirements
 

@@ -54,15 +54,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "hero-desktop.jpg",
-      "use": "@vercel/static"
-    },
-    {
       "src": "hero-performance.jpg",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "hero-mobile.jpg",
       "use": "@vercel/static"
     },
     {
@@ -75,14 +67,6 @@
     },
     {
       "src": "logos/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "titty-monster-thumbnail.png",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "hero-backstage.png",
       "use": "@vercel/static"
     },
     {
