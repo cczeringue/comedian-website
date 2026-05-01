@@ -52,59 +52,94 @@
 
         .links-page {
             width: 100%;
-            max-width: 42rem;
-            padding: 0 clamp(1rem, 4vw, 1.5rem) 2rem;
+            max-width: 48rem;
+            padding: 0 clamp(0.85rem, 4vw, 1.5rem) 2rem;
         }
 
-        /* ── Hero ── */
+        /* ── Link-in-bio header ── */
+        .links-top-strip {
+            display: block;
+            width: calc(100% + (2 * clamp(0.85rem, 4vw, 1.5rem)));
+            margin-left: calc(-1 * clamp(0.85rem, 4vw, 1.5rem));
+            padding: max(0.8rem, env(safe-area-inset-top, 0px)) 1rem 0.85rem;
+            background: var(--text-primary);
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .links-top-strip span {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+
         .links-hero {
-            width: calc(100% + (2 * clamp(1rem, 4vw, 1.5rem)));
-            margin-left: calc(-1 * clamp(1rem, 4vw, 1.5rem));
+            width: calc(100% + (2 * clamp(0.85rem, 4vw, 1.5rem)));
+            margin-left: calc(-1 * clamp(0.85rem, 4vw, 1.5rem));
             position: relative;
-            aspect-ratio: 4/5;
-            overflow: hidden;
-            border-radius: 0 0 1.5rem 1.5rem;
+            margin-bottom: 1.35rem;
+            padding-bottom: 1.25rem;
+            overflow: visible;
+            background: var(--text-primary);
+            border-radius: 0 0 1.75rem 1.75rem;
+            box-shadow: 0 14px 34px rgba(23, 18, 46, 0.12);
         }
 
-        .links-hero img {
+        .links-cover {
+            aspect-ratio: 16 / 8.5;
+            overflow: hidden;
+            background: var(--accent);
+        }
+
+        .links-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center 28%;
             display: block;
         }
 
-        .links-hero-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            line-height: 0;
+        .links-profile {
+            display: grid;
+            justify-items: center;
+            margin-top: -4rem;
+            padding: 0 clamp(1rem, 4vw, 1.5rem);
+            text-align: center;
         }
 
-        .links-hero-wave svg {
+        .links-avatar {
             display: block;
-            width: 100%;
-            height: 40px;
+            width: clamp(7.75rem, 30vw, 11rem);
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center 16%;
+            border: 0.55rem solid var(--text-primary);
+            border-radius: 999px;
+            background: var(--bg-card);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
         }
 
-        .links-hero-name-overlay {
-            position: absolute;
-            bottom: 40px;
-            left: 1.5rem;
-            right: 1.5rem;
-            pointer-events: none;
+        .links-profile-kicker {
+            margin: 1rem 0 0.4rem;
+            color: #ffbe0b;
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
         .links-name {
             font-family: 'Lilita One', 'Inter', cursive;
-            font-size: clamp(2.5rem, 11vw, 3.5rem);
+            font-size: clamp(2.25rem, 10vw, 4.4rem);
             font-weight: 400;
             text-transform: uppercase;
             color: #fff7ef;
+            margin: 0;
             text-shadow:
-                0 3px 0 rgba(23, 18, 46, 0.96),
-                3px 3px 0 rgba(23, 18, 46, 0.96),
+                3px 3px 0 var(--accent),
                 0 0 20px rgba(23, 18, 46, 0.18);
             line-height: 1;
         }
@@ -242,7 +277,9 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
+            margin-top: 0.75rem;
             margin-bottom: 1.25rem;
         }
 
@@ -297,6 +334,116 @@
 
         .links-email-cta-icon {
             font-size: 1.1rem;
+        }
+
+        .links-feature-stack {
+            display: grid;
+            gap: 0.9rem;
+            margin: 1.25rem 0 1.75rem;
+        }
+
+        .links-feature-card,
+        .links-action-card {
+            position: relative;
+            display: grid;
+            gap: 0.45rem;
+            width: 100%;
+            padding: 1.15rem;
+            overflow: hidden;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            text-decoration: none;
+            background: var(--bg-card);
+            border: 2px solid var(--border-light);
+            border-radius: 22px 8px 26px 10px / 10px 26px 8px 22px;
+            box-shadow: 5px 5px 0 rgba(23, 18, 46, 0.1);
+            cursor: pointer;
+        }
+
+        .links-feature-card:hover,
+        .links-action-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        .links-feature-card--primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--text-primary);
+            box-shadow: 5px 5px 0 var(--text-primary);
+        }
+
+        .links-feature-card--primary .links-feature-kicker,
+        .links-feature-card--primary .links-feature-desc,
+        .links-feature-card--primary .links-feature-cta {
+            color: #fff;
+        }
+
+        .links-feature-kicker {
+            color: var(--accent-orange);
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .links-feature-title {
+            margin: 0;
+            color: inherit;
+            font-family: 'Lilita One', 'Inter', cursive;
+            font-size: clamp(1.35rem, 6vw, 2.25rem);
+            font-weight: 400;
+            line-height: 0.98;
+            text-transform: uppercase;
+        }
+
+        .links-feature-desc {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .links-feature-cta {
+            color: var(--accent-orange);
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .links-feature-card--media {
+            min-height: 13rem;
+            padding: 0;
+            grid-template-rows: minmax(10rem, auto) auto;
+        }
+
+        .links-feature-card--media img {
+            width: 100%;
+            height: 100%;
+            min-height: 12rem;
+            object-fit: cover;
+            display: block;
+        }
+
+        .links-feature-media-body {
+            display: grid;
+            gap: 0.4rem;
+            padding: 1rem 1.1rem 1.15rem;
+        }
+
+        .links-action-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .links-section-card {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255, 254, 251, 0.78);
+            border: 1px solid var(--border-light);
+            border-radius: 1.2rem;
         }
 
         .links-modal {
@@ -503,54 +650,6 @@
             display: block;
             background: rgba(190, 57, 57, 0.12);
             color: #7c2323;
-        }
-
-        /* ── Tab bar ── */
-        .links-tab-bar {
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .links-tab {
-            flex: 1;
-            padding: 0.6rem 0.5rem;
-            border: 1px solid var(--border-light);
-            border-radius: 6px;
-            background: transparent;
-            color: var(--text-secondary);
-            font-family: inherit;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .links-tab:hover {
-            color: var(--text-primary);
-            border-color: rgba(0,0,0,0.15);
-        }
-
-        .links-tab.active {
-            background: var(--accent-orange);
-            color: var(--bg-dark);
-            border-color: var(--accent-orange);
-        }
-
-        /* Make "Show dates" tab feel primary even when inactive */
-        .links-tab[data-tab="tour"] {
-            font-size: 0.85rem;
-            letter-spacing: 0.01em;
-        }
-
-        .links-tab-panel {
-            display: none;
-        }
-
-        .links-tab-panel.active {
-            display: block;
         }
 
         .links-section-title {
@@ -1026,9 +1125,9 @@
                 border-radius: 0 0 1.2rem 1.2rem;
             }
 
-            .links-hero-name-overlay {
-                left: 1rem;
-                right: 1rem;
+            .links-top-strip {
+                width: calc(100% + 1.8rem);
+                margin-left: -0.9rem;
             }
 
             .links-name {
@@ -1057,78 +1156,100 @@
 <body>
     <div class="links-page">
 
-        <!-- Hero with name overlay -->
-        <div class="links-hero">
-            <img src="hero-performance.jpg" alt="Caleb Zeringue performing stand-up comedy">
-            <div class="links-hero-name-overlay">
-                <h1 class="links-name">Caleb Zeringue</h1>
-            </div>
-            <div class="links-hero-wave">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#111111"></path>
-                </svg>
-            </div>
-        </div>
+        <a href="#seated-tickets" class="links-top-strip"><span>SF-based; bookable anywhere</span> — get tickets, dates, and booking info</a>
 
-        <!-- Bio + city -->
+        <header class="links-hero">
+            <div class="links-cover">
+                <img src="hero-performance.jpg" alt="Caleb Zeringue performing stand-up comedy">
+            </div>
+            <div class="links-profile">
+                <img src="headshot.jpg" alt="Caleb Zeringue headshot" class="links-avatar">
+                <p class="links-profile-kicker">Comic · Writer · Producer</p>
+                <h1 class="links-name">Caleb Zeringue</h1>
+                <div class="links-social-wrap">
+                    <div class="links-social">
+                        <a href="https://www.instagram.com/caleb.meringue/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@calebmeringue" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@calebzeringue" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="https://www.threads.com/@caleb.meringue?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+                            <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="16" font-family="Inter, sans-serif" font-weight="800" fill="currentColor">@</text></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <div class="links-bio-row">
-            <p class="links-tagline">(Like Meringue, with a Z) Queer comic and writer behind sharp, viral, deeply unserious things: Luigi the Musical, The Drill Master, and stand-up for rooms that like a little bite.</p>
+            <p class="links-tagline">(Like Meringue, with a Z. No relation.) Comic and writer behind sharp, viral, things: Luigi the Musical, The Drillmaster.</p>
             <div class="links-bio-actions">
                 <span class="links-city-badge">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                     SF-based; bookable anywhere
                 </span>
-                <a href="epk.html" class="links-city-badge">
-                    EPK / Press Kit
-                </a>
+                <a href="epk.html" class="links-city-badge">EPK / Press Kit</a>
                 <button type="button" class="links-city-badge links-city-badge--button" id="linksContactTrigger">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.01L12 13l8-6.99V6H4zm16 12V8.49l-7.4 6.47a1 1 0 0 1-1.2 0L4 8.49V18h16z"/></svg>
-                    Contact / Booking
+                    Booking / Contact
                 </button>
             </div>
         </div>
 
-        <!-- Press logos (social proof, early) -->
-        <div class="links-trust">
-            <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the New York Times Luigi the Musical article">
-                <img src="logos/nytimes-logo.svg" alt="The New York Times" class="links-trust-logo links-trust-logo--nyt">
+        <section class="links-feature-stack" aria-label="Featured links">
+            <a href="#seated-tickets" class="links-feature-card links-feature-card--primary">
+                <span class="links-feature-kicker">Catch me live</span>
+                <h2 class="links-feature-title">Get Tickets</h2>
+                <p class="links-feature-desc">Upcoming dates, ticket links, and added-show alerts.</p>
+                <span class="links-feature-cta">See shows ↓</span>
             </a>
-            <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Listen to the NPR Luigi the Musical story">
-                <img src="logos/npr-logo.svg" alt="NPR" class="links-trust-logo links-trust-logo-npr">
-            </a>
-            <a href="https://www.washingtonpost.com/entertainment/theater/2025/08/16/luigi-mangione-musical-diddy-sam-bankman-fried/" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the Washington Post Luigi the Musical article">
-                <img src="logos/washington-post-logo.svg" alt="The Washington Post" class="links-trust-logo links-trust-logo--wapo">
-            </a>
-            <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the Hollywood Reporter Luigi the Musical article">
-                <img src="logos/hollywood-reporter-logo.svg" alt="The Hollywood Reporter" class="links-trust-logo links-trust-logo--thr">
-            </a>
-            <a href="https://www.tiktok.com/@cnn/video/7515576120205462830" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Watch CNN coverage of Luigi the Musical">
-                <img src="logos/cnn-logo.svg" alt="CNN" class="links-trust-logo links-trust-logo--cnn">
-            </a>
-        </div>
 
-        <!-- Social icons -->
-        <div class="links-social-wrap">
-            <div class="links-social">
-                <a href="https://www.instagram.com/caleb.meringue/" target="_blank" aria-label="Instagram">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <div class="links-trust" aria-label="Press outlets">
+                <a href="https://www.nytimes.com/2025/08/14/arts/luigi-mangione-musical-murder.html" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the New York Times Luigi the Musical article">
+                    <img src="logos/nytimes-logo.svg" alt="The New York Times" class="links-trust-logo links-trust-logo--nyt">
                 </a>
-                <a href="https://www.tiktok.com/@calebmeringue" target="_blank" aria-label="TikTok">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+                <a href="https://www.npr.org/2025/09/09/nx-s1-5507977-e1/a-musical-about-luigi-mangione-sells-out-theaters-and-raises-eyebrows" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Listen to the NPR Luigi the Musical story">
+                    <img src="logos/npr-logo.svg" alt="NPR" class="links-trust-logo links-trust-logo-npr">
                 </a>
-                <a href="https://www.youtube.com/@calebzeringue" target="_blank" aria-label="YouTube">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <a href="https://www.washingtonpost.com/entertainment/theater/2025/08/16/luigi-mangione-musical-diddy-sam-bankman-fried/" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the Washington Post Luigi the Musical article">
+                    <img src="logos/washington-post-logo.svg" alt="The Washington Post" class="links-trust-logo links-trust-logo--wapo">
                 </a>
-                <a href="https://www.threads.com/@caleb.meringue?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
-                    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="16" font-family="Inter, sans-serif" font-weight="800" fill="currentColor">@</text></svg>
+                <a href="https://www.hollywoodreporter.com/lifestyle/arts/luigi-mangione-musical-sold-out-san-francisco-run-1236326151/" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Read the Hollywood Reporter Luigi the Musical article">
+                    <img src="logos/hollywood-reporter-logo.svg" alt="The Hollywood Reporter" class="links-trust-logo links-trust-logo--thr">
+                </a>
+                <a href="https://www.tiktok.com/@cnn/video/7515576120205462830" target="_blank" rel="noopener noreferrer" class="links-trust-link" aria-label="Watch CNN coverage of Luigi the Musical">
+                    <img src="logos/cnn-logo.svg" alt="CNN" class="links-trust-logo links-trust-logo--cnn">
                 </a>
             </div>
-        </div>
 
-        <!-- Email list -->
-        <a href="https://substack.com/@calebzeringue?utm_campaign=profile&utm_medium=profile-page" target="_blank" rel="noopener noreferrer" class="links-email-cta">
-            <span class="links-email-cta-icon">✉️</span> Don't miss a show — join the list
-        </a>
+            <a href="https://youtu.be/u4Bhc3dAc4U?si=SEImchCvOaINes0_" target="_blank" rel="noopener noreferrer" class="links-feature-card links-feature-card--media">
+                <img src="hero-performance.jpg" alt="Caleb Zeringue performing stand-up">
+                <span class="links-feature-media-body">
+                    <span class="links-feature-kicker">Mini special</span>
+                    <span class="links-feature-title">Titty Monster</span>
+                    <span class="links-feature-desc">Debut mini-special. Full set on YouTube.</span>
+                    <span class="links-feature-cta">Watch now →</span>
+                </span>
+            </a>
+
+            <a href="https://luigithemusical.info" target="_blank" rel="noopener noreferrer" class="links-feature-card">
+                <span class="links-feature-kicker">Co-writer / original exec producer</span>
+                <h2 class="links-feature-title">Luigi: The Musical</h2>
+                <p class="links-feature-desc">The viral satirical prison musical covered by NYT, NPR, WaPo, CNN, and more.</p>
+                <span class="links-feature-cta">Visit the show site →</span>
+            </a>
+
+            <a href="https://thedrillmaster.gay" target="_blank" rel="noopener noreferrer" class="links-feature-card">
+                <span class="links-feature-kicker">Co-writer with Jenny Zigrino</span>
+                <h2 class="links-feature-title">The Drill Master</h2>
+                <p class="links-feature-desc">The mostly true story of America's most fabulous gay general.</p>
+                <span class="links-feature-cta">Learn more →</span>
+            </a>
+        </section>
 
         <section class="links-recent-appearances" data-carousel-section hidden>
             <div class="links-recent-header">
@@ -1152,61 +1273,34 @@
             </div>
         </section>
 
-        <!-- Tab bar -->
-        <div class="links-tab-bar" role="tablist">
-            <button type="button" class="links-tab active" role="tab" aria-selected="true" data-tab="tour">🎟 Show dates</button>
-            <button type="button" class="links-tab" role="tab" aria-selected="false" data-tab="projects">Projects</button>
-            <button type="button" class="links-tab" role="tab" aria-selected="false" data-tab="press">Press</button>
-        </div>
-
-        <div class="links-tab-panel active" id="panel-tour" role="tabpanel">
-            <h2 class="links-section-title">Show dates</h2>
+        <section class="links-section-card" id="panel-tour" aria-labelledby="links-shows-heading">
+            <span class="links-feature-kicker">Live dates</span>
+            <h2 class="links-section-title" id="links-shows-heading">Show dates</h2>
             <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:0.5rem;">All dates & tickets</p>
             <div id="seated-tickets">
                 <div id="seated-55fdf2c0" data-artist-id="72b8121d-d4e5-43e3-a125-114056b90cce" data-css-version="3"></div>
             </div>
-        </div>
+        </section>
 
-        <div class="links-tab-panel" id="panel-projects" role="tabpanel">
-            <h2 class="links-section-title">Projects</h2>
-            <div class="links-project-cards">
-                <a href="https://luigithemusical.info" target="_blank" rel="noopener noreferrer" class="links-project-card">
-                    <div class="links-project-card-img-wrap">
-                        <img src="https://luigithemusical.info/lovable-uploads/bbb08552-6d18-4b85-8967-0dfa2011e118.png" alt="Luigi the Musical" class="links-project-card-img" onerror="this.style.display='none'">
-                    </div>
-                    <div class="links-project-card-body">
-                        <span class="featured-label">Writer, Original Exec Producer</span>
-                        <h3 class="links-project-card-title">Luigi the Musical</h3>
-                        <p class="links-project-card-desc">A tale of love, murder, and hashbrowns. Satirical prison musical — sold-out runs, NYT, NPR, Stephen Colbert.</p>
-                        <span class="links-project-card-cta">Visit site →</span>
-                    </div>
-                </a>
-                <a href="https://thedrillmaster.gay" target="_blank" rel="noopener noreferrer" class="links-project-card">
-                    <div class="links-project-card-img-wrap">
-                        <img src="drillmaster-card.png" alt="The Drillmaster — A New Play by Jenny Zigrino & Caleb Zeringue" class="links-project-card-img">
-                    </div>
-                    <div class="links-project-card-body">
-                        <span class="featured-label">Co-writer & Original Exec Producer</span>
-                        <h3 class="links-project-card-title">The Drillmaster</h3>
-                        <p class="links-project-card-desc">It's giving founding daddy energy. Table read San Francisco, April 1. Staged reading May 3.</p>
-                        <span class="links-project-card-cta">Get tickets →</span>
-                    </div>
-                </a>
-                <a href="https://youtu.be/u4Bhc3dAc4U?si=SEImchCvOaINes0_" target="_blank" rel="noopener noreferrer" class="links-project-card">
-                    <div class="links-project-card-img-wrap">
-                        <img src="hero-performance.jpg" alt="Titty Monster Mini Special" class="links-project-card-img">
-                    </div>
-                    <div class="links-project-card-body">
-                        <span class="featured-label">Mini Special</span>
-                        <h3 class="links-project-card-title">Titty Monster</h3>
-                        <p class="links-project-card-desc">My debut mini-special. Full set on YouTube.</p>
-                        <span class="links-project-card-cta">Watch now →</span>
-                    </div>
-                </a>
-            </div>
-        </div>
+        <section class="links-action-grid" aria-label="More ways to connect">
+            <a href="epk.html" class="links-action-card">
+                <span class="links-feature-kicker">Bookers & press</span>
+                <h2 class="links-feature-title">EPK / Press Kit</h2>
+                <p class="links-feature-desc">Bio, clips, photos, credits, and booking details.</p>
+            </a>
+            <button type="button" class="links-action-card" id="linksContactTriggerCard">
+                <span class="links-feature-kicker">Booking & creative work</span>
+                <span class="links-feature-title">Contact Caleb</span>
+                <span class="links-feature-desc">Comedy, hosting, writing, panels, and project inquiries.</span>
+            </button>
+            <a href="https://substack.com/@calebzeringue?utm_campaign=profile&utm_medium=profile-page" target="_blank" rel="noopener noreferrer" class="links-action-card">
+                <span class="links-feature-kicker">Show alerts</span>
+                <h2 class="links-feature-title">Join the List</h2>
+                <p class="links-feature-desc">Don&rsquo;t miss a show, project, or chaotic announcement.</p>
+            </a>
+        </section>
 
-        <div class="links-tab-panel" id="panel-press" role="tabpanel">
+        <section class="links-section-card" id="panel-press" aria-label="Press and clips">
             <h2 class="links-section-title">Watch & Listen</h2>
             <a href="https://youtu.be/u4Bhc3dAc4U?si=SEImchCvOaINes0_" target="_blank" class="link-button">Mini Special: Titty Monster</a>
             <a href="https://www.tiktok.com/@cnn/video/7515576120205462830" target="_blank" class="link-button">CNN: Luigi the Musical Debut</a>
@@ -1221,7 +1315,7 @@
             <h2 class="links-section-title">My Sets</h2>
             <a href="https://www.youtube.com/watch?v=JxfOLrBs6A0" target="_blank" class="link-button">My Tight 5</a>
             <a href="https://www.youtube.com/watch?v=gwEjvz4pZW4" target="_blank" class="link-button">Opening for Lady Bushra</a>
-        </div>
+        </section>
 
         <div class="links-back">
             <a href="https://calebzeringue.com">calebzeringue.com</a>
@@ -1230,7 +1324,7 @@
 
     <!-- Sticky ticket CTA (mobile) -->
     <div class="links-sticky-cta">
-        <a href="#seated-tickets" onclick="document.querySelector('[data-tab=\'tour\']').click();">
+        <a href="#seated-tickets">
             🎟 Get Tickets
         </a>
     </div>
@@ -1259,7 +1353,7 @@
                     </div>
                     <div class="links-form-field">
                         <label for="links-subject">What’s this about?</label>
-                        <input type="text" id="links-subject" name="subject" placeholder="Booking, writing, corporate, college, etc.">
+                        <input type="text" id="links-subject" name="subject" placeholder="Booking, writing, press, hosting, etc.">
                     </div>
                     <div class="links-form-field">
                         <label for="links-message">Message</label>
@@ -1281,33 +1375,8 @@
 
     <script>
         (function() {
-            var tabKey = 'linksActiveTab';
-            var tabs = document.querySelectorAll('.links-tab');
-            var panels = document.querySelectorAll('.links-tab-panel');
-            function showPanel(id) {
-                panels.forEach(function(p) {
-                    p.classList.toggle('active', p.id === 'panel-' + id);
-                });
-                tabs.forEach(function(t) {
-                    var isActive = t.getAttribute('data-tab') === id;
-                    t.classList.toggle('active', isActive);
-                    t.setAttribute('aria-selected', isActive);
-                });
-                try { sessionStorage.setItem(tabKey, id); } catch (e) {}
-            }
-            tabs.forEach(function(t) {
-                t.addEventListener('click', function() {
-                    showPanel(t.getAttribute('data-tab'));
-                });
-            });
-            try {
-                var saved = sessionStorage.getItem(tabKey);
-                if (saved && document.getElementById('panel-' + saved)) showPanel(saved);
-            } catch (e) {}
-        })();
-
-        (function() {
             var openBtn = document.getElementById('linksContactTrigger');
+            var openCard = document.getElementById('linksContactTriggerCard');
             var modal = document.getElementById('linksContactModal');
             var closeBtn = document.getElementById('linksContactClose');
             var backdrop = document.getElementById('linksContactBackdrop');
@@ -1326,6 +1395,7 @@
             }
 
             if (openBtn) openBtn.addEventListener('click', function() { setModalOpen(true); });
+            if (openCard) openCard.addEventListener('click', function() { setModalOpen(true); });
             if (closeBtn) closeBtn.addEventListener('click', function() { setModalOpen(false); });
             if (backdrop) backdrop.addEventListener('click', function() { setModalOpen(false); });
             document.addEventListener('keydown', function(e) {
